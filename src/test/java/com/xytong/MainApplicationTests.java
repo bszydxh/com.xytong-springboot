@@ -1,10 +1,10 @@
-package com.xytong.springboot;
+package com.xytong;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootTestApplicationTests {
+class MainApplicationTests {
 
     @Test
     void contextLoads() {
