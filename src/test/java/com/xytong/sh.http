@@ -1,0 +1,41 @@
+### 本地正确测试secondhand
+POST http://localhost:80/secondhand
+Content-Type: application/json
+
+{
+  "module": "secondhand",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": 1650098900
+}
+
+
+
+### 本地数量错误测试secondhand
+POST http://localhost:80/secondhand
+Content-Type: application/json
+
+{
+  "module": "secondhand",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 1,
+  "num_end": 9,
+  "timestamp": 1650098900
+}
+
+
+### 本地模式错误测试secondhand
+POST http://localhost:80/secondhand
+Content-Type: application/json
+
+{
+  "module": "secondhand",
+  "mode": "？？？",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": 1650098900
+}

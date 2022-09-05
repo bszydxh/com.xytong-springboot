@@ -1,0 +1,9 @@
+### 本地正确测试access
+POST http://localhost:80/access
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "username": "",
+  "password": ""
+}

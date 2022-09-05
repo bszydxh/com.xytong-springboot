@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xytong.data.mapper.ReMapper">
+
+    <resultMap id="BaseResultMap" type="com.xytong.data.json.domain.Re">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userFkey" column="user_fkey" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="text" column="text" jdbcType="VARCHAR"/>
+            <result property="timestamp" column="timestamp" jdbcType="TIMESTAMP"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_fkey,title,
+        text,timestamp,price
+    </sql>
+</mapper>

@@ -1,0 +1,41 @@
+### 本地正确测试run_errands
+POST http://localhost:80/run_errands
+Content-Type: application/json
+
+{
+  "module": "run_errands",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": 1650098900
+}
+
+
+
+### 本地数量错误测试run_errands
+POST http://localhost:80/run_errands
+Content-Type: application/json
+
+{
+  "module": "run_errands",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 1,
+  "num_end": 9,
+  "timestamp": 1650098900
+}
+
+
+### 本地模式错误测试run_errands
+POST http://localhost:80/run_errands
+Content-Type: application/json
+
+{
+  "module": "run_errands",
+  "mode": "？？？",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": 1650098900
+}
