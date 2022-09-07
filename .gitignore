@@ -33,4 +33,6 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/templates/
-/src/main/resources/assess/
+src/main/resources/access/
+src/main/resources/access/rsa_key.pub
+src/main/resources/access/rsa_key
