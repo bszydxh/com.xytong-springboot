@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 application.properties
+rsa_key
+rsa_key.pub
 ### STS ###
 .apt_generated
 .classpath
