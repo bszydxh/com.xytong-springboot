@@ -1,4 +1,4 @@
-package com.xytong.data.json.domain;
+package com.xytong.data.domain;
 
 import com.xytong.data.ReData;
 

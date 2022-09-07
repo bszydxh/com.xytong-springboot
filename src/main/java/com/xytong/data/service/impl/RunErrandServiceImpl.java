@@ -1,7 +1,7 @@
 package com.xytong.data.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xytong.data.json.domain.Re;
+import com.xytong.data.domain.Re;
 import com.xytong.data.mapper.ReMapper;
 import com.xytong.data.service.RunErrandService;
 import org.springframework.stereotype.Service;

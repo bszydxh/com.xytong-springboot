@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xytong.data.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.xytong.data.json.domain.User">
+    <resultMap id="BaseResultMap" type="com.xytong.data.domain.User">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <id property="name" column="name" jdbcType="VARCHAR"/>
             <id property="phone" column="phone" jdbcType="VARCHAR"/>

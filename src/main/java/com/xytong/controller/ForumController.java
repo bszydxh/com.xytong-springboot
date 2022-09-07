@@ -3,7 +3,7 @@ package com.xytong.controller;
 import com.xytong.data.ForumData;
 import com.xytong.data.json.ForumPostJson;
 import com.xytong.data.json.ForumRequestJson;
-import com.xytong.data.json.domain.Forum;
+import com.xytong.data.domain.Forum;
 import com.xytong.data.mapper.ForumMapper;
 import com.xytong.data.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,7 +1,7 @@
 package com.xytong.controller;
 
 import com.xytong.data.ReData;
-import com.xytong.data.json.domain.Re;
+import com.xytong.data.domain.Re;
 import com.xytong.data.json.RePostJson;
 import com.xytong.data.json.ReRequestJson;
 import com.xytong.data.mapper.ReMapper;

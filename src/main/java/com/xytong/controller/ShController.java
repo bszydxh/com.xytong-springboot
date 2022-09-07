@@ -3,7 +3,7 @@ package com.xytong.controller;
 import com.xytong.data.ShData;
 import com.xytong.data.json.ShPostJson;
 import com.xytong.data.json.ShRequestJson;
-import com.xytong.data.json.domain.Sh;
+import com.xytong.data.domain.Sh;
 import com.xytong.data.mapper.ShMapper;
 import com.xytong.data.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,7 +1,7 @@
 package com.xytong.data.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xytong.data.json.domain.Re;
+import com.xytong.data.domain.Re;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

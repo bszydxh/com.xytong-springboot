@@ -1,7 +1,7 @@
 package com.xytong.data.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xytong.data.json.domain.Sh;
+import com.xytong.data.domain.Sh;
 
 /**
 * @author bszydxh
