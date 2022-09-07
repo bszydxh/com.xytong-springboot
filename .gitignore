@@ -4,8 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 application.properties
-rsa_key
-rsa_key.pub
+
 ### STS ###
 .apt_generated
 .classpath
@@ -34,3 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/templates/
+/src/main/resources/assess/
