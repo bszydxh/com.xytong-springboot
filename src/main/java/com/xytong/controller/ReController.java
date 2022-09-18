@@ -1,11 +1,11 @@
 package com.xytong.controller;
 
-import com.xytong.data.ReData;
-import com.xytong.data.domain.Re;
-import com.xytong.data.json.RePostJson;
-import com.xytong.data.json.ReRequestJson;
-import com.xytong.data.mapper.ReMapper;
-import com.xytong.data.mapper.UserMapper;
+import com.xytong.model.controllerData.ReData;
+import com.xytong.model.entity.Re;
+import com.xytong.model.controllerData.json.RePostJson;
+import com.xytong.model.controllerData.json.ReRequestJson;
+import com.xytong.mapper.ReMapper;
+import com.xytong.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

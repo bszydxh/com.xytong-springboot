@@ -1,16 +1,15 @@
 package com.xytong.controller;
 
-import com.xytong.data.ForumData;
-import com.xytong.data.json.ForumPostJson;
-import com.xytong.data.json.ForumRequestJson;
-import com.xytong.data.domain.Forum;
-import com.xytong.data.mapper.ForumMapper;
-import com.xytong.data.mapper.UserMapper;
+import com.xytong.mapper.ForumMapper;
+import com.xytong.mapper.UserMapper;
+import com.xytong.model.controllerData.ForumData;
+import com.xytong.model.controllerData.json.ForumPostJson;
+import com.xytong.model.controllerData.json.ForumRequestJson;
+import com.xytong.service.ForumService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,48 +18,39 @@ public class ForumController {
     final ForumMapper forumMapper;
     final UserMapper userMapper;
 
-    public ForumController(ForumMapper forumMapper, UserMapper userMapper) {
+    public ForumController(ForumMapper forumMapper, UserMapper userMapper, ForumService forumService) {
         this.forumMapper = forumMapper;
         this.userMapper = userMapper;
+        this.forumService = forumService;
     }
+
+    final ForumService forumService;
 
     @RequestMapping(value = "/forums", produces = "application/json")
     public ForumPostJson forumData(@RequestBody ForumRequestJson forumRequestJson) {
         ForumPostJson forumPostJson = new ForumPostJson();
-        if(!Objects.equals(forumRequestJson.getModule(), "forums"))
-        {
+        if (!Objects.equals(forumRequestJson.getModule(), "forums")) {
             forumPostJson.setMode("module error");
             return forumPostJson;
         }
-        switch (forumRequestJson.getMode()) {
-            case ("newest"): {
-                int start = forumRequestJson.getNumStart();
-                int end = forumRequestJson.getNumEnd();
-                int num = forumRequestJson.getNeedNum();
-                if (start > end || end - start != num - 1) {
-                    forumPostJson.setMode("num error");
-                } else {
-                    forumPostJson.setMode(forumRequestJson.getMode());
-                    forumPostJson.setNumStart(start);
-                    forumPostJson.setNeedNum(num);
-                    forumPostJson.setNumEnd(end);
-                    forumPostJson.setTimestamp(System.currentTimeMillis());
-                    List<ForumData> forumList = new ArrayList<>();
-                    List<Forum> forums = forumMapper.selectList(null);
-                    for (Forum forum : forums) {
-                        int uid = forum.getUserFkey();
-                        forumList.add(forum.toForumDataWithUserData(userMapper.selectById(uid)));
-                    }
-                    forumPostJson.setForumData(forumList);
-                }
-                break;
-            }
-            default: {
+        int start = forumRequestJson.getNumStart();
+        int end = forumRequestJson.getNumEnd();
+        int num = forumRequestJson.getNeedNum();
+        if (start > end || end - start != num - 1) {
+            forumPostJson.setMode("num error");
+        } else {
+            forumPostJson.setMode(forumRequestJson.getMode());
+            forumPostJson.setNumStart(start);
+            forumPostJson.setNeedNum(num);
+            forumPostJson.setNumEnd(end);
+            forumPostJson.setTimestamp(System.currentTimeMillis());
+            try {
+                List<ForumData> forumList = forumService.getForumList(forumRequestJson.getMode(), start, end);
+                forumPostJson.setForumData(forumList);
+            } catch (Exception e) {
                 forumPostJson.setMode("mode error");
             }
         }
-
-
         return forumPostJson;
     }
 }

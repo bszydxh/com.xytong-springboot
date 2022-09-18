@@ -4,6 +4,36 @@ Content-Type: application/json
 
 {
   "timestamp": "123231232131",
-  "username": "",
-  "password": ""
+  "token": "",
+  "username": "bszydxh",
+  "password": "227695cd8ea3b7194e9c2cbd9eba4342"
+}
+### 本地不匹配测试access
+POST http://localhost:80/access
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "username": "bszydxh",
+  "password": "-1"
+}
+### 姓名null测试
+POST http://localhost:80/access
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "username": null,
+  "password": "-1"
+}
+
+### 换token成功测试
+POST http://localhost:80/access
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "token": "llNAD6kSarzal/wsRCRE8N9EM0u1RWQACrI+Xoxb53c9yVE0xR8w5dn2r5vH7gtc3JJ1PlIMFevOpirL89vtoQg3u+YepmxojU6oLTTQ7eMvpJNwfk98dhhscIdcs3lRg7WFxE7CG3Ho2TRO25tLjMw3lzYxsVwuOen3K6BSIpMXstYFfLJcMdxTnLJC7AAfiy0iBN7jW+trsZLN51FKGmj8lpu7NAj8vM9LDDp3PoTd7TQQjVldUsoubIa11FaJL25yLPHD4pVD795GAzsw4VwdQr6u8KMUFwvPbk4eG4rZIuKSVRq7P5SkqMAnaAxHlIgGahXw3FktmVxMvpG0fA==",
+  "username": null,
+  "password": "-1"
 }

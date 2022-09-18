@@ -10,12 +10,11 @@ import java.util.List;
 
 @Configuration
 public class FilterConfig {
-    @Bean
+    @Bean//bean是比对象更高级的抽象“对象”，交由Spring进行生命周期管理，bean 是由 Spring IoC 容器实例化、组装和管理的“对象”
     public FilterRegistrationBean<?> filterRegistrationBean() {//强制加入Content-Length返回头
         FilterRegistrationBean<Filter> filterBean = new FilterRegistrationBean<>();
         filterBean.setFilter(new ShallowEtagHeaderFilter());
         filterBean.setUrlPatterns(List.of("*"));
         return filterBean;
     }
-
 }
