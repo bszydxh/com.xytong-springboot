@@ -29,8 +29,8 @@ public class AccessTest {
     @Test
     public void fileReadTest() {
         Logger logger = LoggerFactory.getLogger(MainApplicationTests.class);
-        logger.info(readFile("classpath:access/rsa_key"));
-        assertNotNull(readFile("classpath:access/rsa_key"));
+        logger.info(readFile("classpath:access/rsa_token"));
+        assertNotNull(readFile("classpath:access/rsa_token"));
     }
 
     @Test
