@@ -83,18 +83,20 @@ public class AccessTest {
         String token = accessService.tokenMaker(userName, pwdMd5, System.currentTimeMillis());
         assertTrue(accessService.tokenChecker(token));
         String token_illegal = accessService.tokenMaker(userName + "_illegal", pwdMd5, System.currentTimeMillis());
-        assertFalse(accessService.tokenChecker(token_illegal));;
+        assertFalse(accessService.tokenChecker(token_illegal));
+        ;
     }
 
 
     @Test
     public void tokenRenewerTest() throws Exception {
         Logger logger = LoggerFactory.getLogger(MainApplicationTests.class);
-        String token = "YfURrAMoCbqehuyj7QJIGmmuFsei2LAePObZQZNzf4JYFiknhg+4C9/" +
-                "o5qgYOd7taYlcfUc5DzrriwSaX8/hoSgT8mePg7QR9pooq6h4YvhgdJ7sHG3E70uPhaN0Ua/kiaGK3bbiEaAnn/" +
-                "I7e+Evpf4VQ+8hFF/mWBZloGcWCz0idTNdA3Un5JeVsle2ONEnDR8Szjz/LliT4gvA3SBkQHVzxzw70qpb/" +
-                "33+P6WW3+A1drhfY5p6B5TtyGPSUMzcgy2g7jxcWxekwPDIbMExqvTklCbBZm62I8tMEM3pNYqpCkPvC6GqyZAZjWBY3J2Oskomy8QjoQbZ/aOfcV1a7Q==";
-        String newToken = accessService.tokenRenewer(token);
+        String oldToken = accessService.tokenMaker("bszydxh", "227695cd8ea3b7194e9c2cbd9eba4342",
+                System.currentTimeMillis());
+        logger.info(oldToken);
+        assertNotNull("oldToken");
+        String newToken = accessService.tokenRenewer(oldToken);
+        logger.info(newToken);
         assertNotNull(newToken);
         String json = rsaDecrypt(newToken, readFile("classpath:access/rsa_token"));
         ObjectMapper mapper = new ObjectMapper();

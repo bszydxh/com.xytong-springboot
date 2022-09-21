@@ -22,9 +22,8 @@ public class AccessController {
         this.userService = userService;
     }
 
-
     @RequestMapping(value = "/access", produces = "application/json")
-    public AccessPostJson forumData(@RequestBody AccessRequestJson accessRequestJson) {
+    public AccessPostJson accessRequestMapping(@RequestBody AccessRequestJson accessRequestJson) {
         AccessPostJson accessPostJson = new AccessPostJson();
         Logger logger = LoggerFactory.getLogger(this.getClass());
         if (accessRequestJson.getToken() == null || Objects.equals(accessRequestJson.getToken(), "")) {

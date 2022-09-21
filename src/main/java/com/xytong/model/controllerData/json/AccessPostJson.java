@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Data
 public class AccessPostJson {
+    String mode;
     String username;
     String token;
     long timestamp;
+
     public String getTimestamp() {
         return String.valueOf(timestamp);
     }
