@@ -1,7 +1,7 @@
 package com.xytong;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xytong.model.controllerData.json.AccessRequestJson;
+import com.xytong.model.DTO.AccessRequestDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.FileService;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class AccessTest {
-
     @Autowired
     AccessService accessService;
     @Autowired
@@ -70,9 +69,9 @@ public class AccessTest {
         String json = rsaDecrypt(token, readFile("classpath:access/rsa_token"));
         logger.info(json);
         ObjectMapper objectMapper = new ObjectMapper();
-        AccessRequestJson accessRequestJson = objectMapper.readValue(json, AccessRequestJson.class);
-        assertEquals(userName, accessRequestJson.getUsername());
-        assertEquals(pwdMd5, accessRequestJson.getPassword());
+        AccessRequestDTO accessRequestDTO = objectMapper.readValue(json, AccessRequestDTO.class);
+        assertEquals(userName, accessRequestDTO.getUsername());
+        assertEquals(pwdMd5, accessRequestDTO.getPassword());
     }
 
     @Test
@@ -100,9 +99,9 @@ public class AccessTest {
         assertNotNull(newToken);
         String json = rsaDecrypt(newToken, readFile("classpath:access/rsa_token"));
         ObjectMapper mapper = new ObjectMapper();
-        AccessRequestJson accessRequestJson = mapper.readValue(json, AccessRequestJson.class);
+        AccessRequestDTO accessRequestDTO = mapper.readValue(json, AccessRequestDTO.class);
         logger.info(newToken);
-        assertEquals("bszydxh", accessRequestJson.getUsername());
+        assertEquals("bszydxh", accessRequestDTO.getUsername());
 
     }
 }

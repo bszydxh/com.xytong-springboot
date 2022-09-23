@@ -1,6 +1,7 @@
-package com.xytong.model.entity;
+package com.xytong.model.PO;
 
-import com.xytong.model.controllerData.ReData;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.xytong.model.BO.ReBO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,7 +11,8 @@ import java.util.Date;
  * 
  * @TableName run_errand
  */
-public class Re implements Serializable {
+@TableName("re")
+public class RePO implements Serializable {
     /**
      * 
      */
@@ -138,7 +140,7 @@ public class Re implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Re other = (Re) that;
+        RePO other = (RePO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserFkey() == null ? other.getUserFkey() == null : this.getUserFkey().equals(other.getUserFkey()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
@@ -177,15 +179,15 @@ public class Re implements Serializable {
         return sb.toString();
     }
 
-    public ReData toReDataWithUserData(User user) {
-        ReData reData = new ReData();
+    public ReBO toReDataWithUserData(UserPO userPO) {
+        ReBO reData = new ReBO();
         reData.setId(id);
         reData.setTimestamp(timestamp.getTime());
-        if (user == null) {
-            user = new User();
+        if (userPO == null) {
+            userPO = new UserPO();
         }
-        reData.setUserName(user.getName());
-        reData.setUserAvatarUrl(user.getAvatar());
+        reData.setUserName(userPO.getName());
+        reData.setUserAvatarUrl(userPO.getAvatar());
         reData.setTitle(title);
         reData.setText(text);
         reData.setPrice(price.toString());

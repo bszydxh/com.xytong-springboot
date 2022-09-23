@@ -1,7 +1,7 @@
 package com.xytong.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xytong.model.entity.Forum;
+import com.xytong.model.PO.ForumPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 */
 @Mapper
 @Repository
-public interface ForumMapper extends BaseMapper<Forum> {
+public interface ForumMapper extends BaseMapper<ForumPO> {
 
 }

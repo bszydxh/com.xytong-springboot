@@ -1,10 +1,10 @@
-package com.xytong.model.controllerData;
+package com.xytong.model.BO;
 
 import lombok.Data;
 
 import java.io.Serializable;
 @Data
-public class UserData implements Serializable {
+public class UserBO implements Serializable {
     enum SEX {
         female,
         male

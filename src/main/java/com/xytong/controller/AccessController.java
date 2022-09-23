@@ -1,7 +1,7 @@
 package com.xytong.controller;
 
-import com.xytong.model.controllerData.json.AccessPostJson;
-import com.xytong.model.controllerData.json.AccessRequestJson;
+import com.xytong.model.DTO.AccessPostDTO;
+import com.xytong.model.DTO.AccessRequestDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.UserService;
 import org.slf4j.Logger;
@@ -23,24 +23,27 @@ public class AccessController {
     }
 
     @RequestMapping(value = "/access", produces = "application/json")
-    public AccessPostJson accessRequestMapping(@RequestBody AccessRequestJson accessRequestJson) {
-        AccessPostJson accessPostJson = new AccessPostJson();
+    public AccessPostDTO accessRequestMapping(@RequestBody AccessRequestDTO accessRequestDTO) {
+        AccessPostDTO accessPostDTO = new AccessPostDTO();
         Logger logger = LoggerFactory.getLogger(this.getClass());
-        if (accessRequestJson.getToken() == null || Objects.equals(accessRequestJson.getToken(), "")) {
-            if (userService.checkUser(accessRequestJson.getUsername(), accessRequestJson.getPassword())) {
-                accessPostJson.setToken(accessService.tokenMaker(
-                        accessRequestJson.getUsername(),
-                        accessRequestJson.getPassword(),
+        if (accessRequestDTO.getToken() == null || Objects.equals(accessRequestDTO.getToken(), "")) {//如果传入值没有token
+            if (userService.checkUser(accessRequestDTO.getUsername(), accessRequestDTO.getPassword())) {//进入密码鉴权
+                accessPostDTO.setToken(accessService.tokenMaker(
+                        accessRequestDTO.getUsername(),
+                        accessRequestDTO.getPassword(),
                         System.currentTimeMillis()));
+                accessPostDTO.setMode("");
+            } else {
+                accessPostDTO.setMode("username or password error");
             }
-            accessPostJson.setUsername(accessRequestJson.getUsername());
-            accessPostJson.setTimestamp(System.currentTimeMillis());
+            accessPostDTO.setUsername(accessRequestDTO.getUsername());
+            accessPostDTO.setTimestamp(System.currentTimeMillis());
         } else {
-            AccessRequestJson accessRequestJson_token = accessService.tokenParser(accessRequestJson.getToken());
-            accessPostJson.setToken(accessService.tokenRenewer(accessRequestJson.getToken()));
-            accessPostJson.setUsername(accessRequestJson_token.getUsername());
-            accessPostJson.setTimestamp(System.currentTimeMillis());
+            AccessRequestDTO accessRequestDTO_token = accessService.tokenParser(accessRequestDTO.getToken());
+            accessPostDTO.setToken(accessService.tokenRenewer(accessRequestDTO.getToken()));
+            accessPostDTO.setUsername(accessRequestDTO_token.getUsername());
+            accessPostDTO.setTimestamp(System.currentTimeMillis());
         }
-        return accessPostJson;
+        return accessPostDTO;
     }
 }

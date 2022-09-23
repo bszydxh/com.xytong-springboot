@@ -1,7 +1,7 @@
 package com.xytong.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xytong.model.entity.Sh;
+import com.xytong.model.PO.ShPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
 */
 @Mapper
 @Repository
-public interface ShMapper extends BaseMapper<Sh> {
+public interface ShMapper extends BaseMapper<ShPO> {
 }

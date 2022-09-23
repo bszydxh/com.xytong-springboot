@@ -1,13 +1,13 @@
-package com.xytong.model.controllerData.json;
+package com.xytong.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xytong.model.controllerData.ForumData;
+import com.xytong.model.BO.ForumBO;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class ForumPostJson {
+public class ForumPostDTO {
     String mode;
     @JsonProperty(value = "num_start")
     int numStart;
@@ -17,13 +17,13 @@ public class ForumPostJson {
     int numEnd;
     long timestamp;
     @JsonProperty(value = "forum_data")
-    List<ForumData> forumData;
+    List<ForumBO> forumData;
 
-    public void setForumData(List<ForumData> forumData) {
+    public void setForumData(List<ForumBO> forumData) {
         this.forumData = forumData;
     }
 
-    public List<ForumData> getForumData() {
+    public List<ForumBO> getForumData() {
         return forumData;
     }
 

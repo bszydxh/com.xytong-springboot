@@ -1,7 +1,7 @@
 package com.xytong.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xytong.model.controllerData.json.AccessRequestJson;
+import com.xytong.model.DTO.AccessRequestDTO;
 import com.xytong.service.FileService;
 import com.xytong.service.UserService;
 import com.xytong.utils.SecurityUtils;
@@ -20,12 +20,12 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     public String tokenMaker(String username, String password, Long timestamp) {
         String token = "";
         ObjectMapper postMapper = new ObjectMapper();
-        AccessRequestJson accessRequestJson = new AccessRequestJson();
-        accessRequestJson.setUsername(username);
-        accessRequestJson.setPassword(password);
-        accessRequestJson.setTimestamp(timestamp);
+        AccessRequestDTO accessRequestDTO = new AccessRequestDTO();
+        accessRequestDTO.setUsername(username);
+        accessRequestDTO.setPassword(password);
+        accessRequestDTO.setTimestamp(timestamp);
         try {
-            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(accessRequestJson),
+            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(accessRequestDTO),
                     fileService.readFile("classpath:access/rsa_token.pub"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,8 +43,8 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        AccessRequestJson accessRequestJson = tokenParser(token);
-        return userService.checkUser(accessRequestJson.getUsername(), accessRequestJson.getPassword());
+        AccessRequestDTO accessRequestDTO = tokenParser(token);
+        return userService.checkUser(accessRequestDTO.getUsername(), accessRequestDTO.getPassword());
     }
 
 
@@ -54,10 +54,10 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
             try {
                 String jsonStr = SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token"));
                 ObjectMapper objectMapper = new ObjectMapper();
-                AccessRequestJson accessRequestJson = objectMapper.readValue(jsonStr, AccessRequestJson.class);
+                AccessRequestDTO accessRequestDTO = objectMapper.readValue(jsonStr, AccessRequestDTO.class);
                 return tokenMaker(
-                        accessRequestJson.getUsername(),
-                        accessRequestJson.getPassword(),
+                        accessRequestDTO.getUsername(),
+                        accessRequestDTO.getPassword(),
                         System.currentTimeMillis()
                 );
             } catch (Exception e) {
@@ -68,16 +68,16 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     }
 
     @Override
-    public AccessRequestJson tokenParser(String token) {
+    public AccessRequestDTO tokenParser(String token) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(
                     SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token")),
-                    AccessRequestJson.class);
+                    AccessRequestDTO.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new AccessRequestJson();
+        return new AccessRequestDTO();
     }
 
 

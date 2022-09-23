@@ -1,4 +1,4 @@
-package com.xytong.model.controllerData;
+package com.xytong.model.BO;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,7 +9,7 @@ import lombok.Getter;
 
 import java.io.Serializable;
 @Data
-public class CardData implements Serializable {//数据传输层用
+public class CardBO implements Serializable {//数据传输层用
     @Getter(AccessLevel.NONE)
     @JsonIgnore
     private int id = -1;//主键

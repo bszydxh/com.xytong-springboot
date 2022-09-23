@@ -3,8 +3,8 @@ package com.xytong.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xytong.mapper.ForumMapper;
 import com.xytong.mapper.UserMapper;
-import com.xytong.model.controllerData.ForumData;
-import com.xytong.model.entity.Forum;
+import com.xytong.model.BO.ForumBO;
+import com.xytong.model.PO.ForumPO;
 import com.xytong.service.ForumService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @createDate 2022-09-03 01:13:25
  */
 @Service
-public class ForumServiceImpl extends ServiceImpl<ForumMapper, Forum>
+public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
         implements ForumService {
     final ForumMapper forumMapper;
     final UserMapper userMapper;
@@ -28,14 +28,14 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, Forum>
     }
 
     @Override
-    public List<ForumData> getForumList(String mode, int start, int end) {
-        List<ForumData> forumList = new ArrayList<>();
+    public List<ForumBO> getForumList(String mode, int start, int end) {
+        List<ForumBO> forumList = new ArrayList<>();
         switch (mode) {
             case "newest": {
-                List<Forum> forums = forumMapper.selectList(null);
-                for (Forum forum : forums) {
-                    int uid = forum.getUserFkey();
-                    forumList.add(forum.toForumDataWithUserData(userMapper.selectById(uid)));
+                List<ForumPO> forumPOList = forumMapper.selectList(null);
+                for (ForumPO forumPO : forumPOList) {
+                    int uid = forumPO.getUserFkey();
+                    forumList.add(forumPO.toForumDataWithUserData(userMapper.selectById(uid)));
                 }
             }
             break;

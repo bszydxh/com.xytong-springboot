@@ -1,9 +1,9 @@
 package com.xytong.controller;
 
-import com.xytong.model.controllerData.ShData;
-import com.xytong.model.controllerData.json.ShPostJson;
-import com.xytong.model.controllerData.json.ShRequestJson;
-import com.xytong.model.entity.Sh;
+import com.xytong.model.BO.ShBO;
+import com.xytong.model.DTO.ShPostDTO;
+import com.xytong.model.DTO.ShRequestDTO;
+import com.xytong.model.PO.ShPO;
 import com.xytong.mapper.ShMapper;
 import com.xytong.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,41 +25,41 @@ public class ShController {
     }
 
     @RequestMapping(value = "/secondhand", produces = "application/json")
-    public ShPostJson shData(@RequestBody ShRequestJson shRequestJson) {
-        ShPostJson shPostJson = new ShPostJson();
-        if (!Objects.equals(shRequestJson.getModule(), "secondhand")) {
-            shPostJson.setMode("module error");
-            return shPostJson;
+    public ShPostDTO shData(@RequestBody ShRequestDTO shRequestDTO) {
+        ShPostDTO shPostDTO = new ShPostDTO();
+        if (!Objects.equals(shRequestDTO.getModule(), "secondhand")) {
+            shPostDTO.setMode("module error");
+            return shPostDTO;
         }
-        switch (shRequestJson.getMode()) {
+        switch (shRequestDTO.getMode()) {
             case ("newest"): {
-                int start = shRequestJson.getNumStart();
-                int end = shRequestJson.getNumEnd();
-                int num = shRequestJson.getNeedNum();
+                int start = shRequestDTO.getNumStart();
+                int end = shRequestDTO.getNumEnd();
+                int num = shRequestDTO.getNeedNum();
                 if (start > end || end - start != num - 1) {
-                    shPostJson.setMode("num error");
+                    shPostDTO.setMode("num error");
                 } else {
-                    shPostJson.setMode(shRequestJson.getMode());
-                    shPostJson.setNumStart(start);
-                    shPostJson.setNeedNum(num);
-                    shPostJson.setNumEnd(end);
-                    shPostJson.setTimestamp(System.currentTimeMillis());
-                    List<ShData> shList = new ArrayList<>();
-                    List<Sh> shs = shMapper.selectList(null);
-                    for (Sh sh : shs) {
-                        int uid = sh.getUserFkey();
-                        shList.add(sh.toShDataWithUserData(userMapper.selectById(uid)));
+                    shPostDTO.setMode(shRequestDTO.getMode());
+                    shPostDTO.setNumStart(start);
+                    shPostDTO.setNeedNum(num);
+                    shPostDTO.setNumEnd(end);
+                    shPostDTO.setTimestamp(System.currentTimeMillis());
+                    List<ShBO> shList = new ArrayList<>();
+                    List<ShPO> shPOList = shMapper.selectList(null);
+                    for (ShPO shPO : shPOList) {
+                        int uid = shPO.getUserFkey();
+                        shList.add(shPO.toShDataWithUserData(userMapper.selectById(uid)));
                     }
-                    shPostJson.setShData(shList);
+                    shPostDTO.setShData(shList);
                 }
                 break;
             }
             default: {
-                shPostJson.setMode("mode error");
+                shPostDTO.setMode("mode error");
             }
         }
 
 
-        return shPostJson;
+        return shPostDTO;
     }
 }

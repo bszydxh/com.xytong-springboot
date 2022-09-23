@@ -1,9 +1,9 @@
 package com.xytong.controller;
 
-import com.xytong.model.controllerData.ReData;
-import com.xytong.model.entity.Re;
-import com.xytong.model.controllerData.json.RePostJson;
-import com.xytong.model.controllerData.json.ReRequestJson;
+import com.xytong.model.BO.ReBO;
+import com.xytong.model.PO.RePO;
+import com.xytong.model.DTO.RePostDTO;
+import com.xytong.model.DTO.ReRequestDTO;
 import com.xytong.mapper.ReMapper;
 import com.xytong.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,42 +25,42 @@ public class ReController {
     }
 
     @RequestMapping(value = "/run_errands", produces = "application/json")
-    public RePostJson reData(@RequestBody ReRequestJson reRequestJson) {
-        RePostJson rePostJson = new RePostJson();
-        if(!Objects.equals(reRequestJson.getModule(), "run_errands"))
+    public RePostDTO reData(@RequestBody ReRequestDTO reRequestDTO) {
+        RePostDTO rePostDTO = new RePostDTO();
+        if(!Objects.equals(reRequestDTO.getModule(), "run_errands"))
         {
-            rePostJson.setMode("module error");
-            return rePostJson;
+            rePostDTO.setMode("module error");
+            return rePostDTO;
         }
-        switch (reRequestJson.getMode()) {
+        switch (reRequestDTO.getMode()) {
             case ("newest"): {
-                int start = reRequestJson.getNumStart();
-                int end = reRequestJson.getNumEnd();
-                int num = reRequestJson.getNeedNum();
+                int start = reRequestDTO.getNumStart();
+                int end = reRequestDTO.getNumEnd();
+                int num = reRequestDTO.getNeedNum();
                 if (start > end || end - start != num - 1) {
-                    rePostJson.setMode("num error");
+                    rePostDTO.setMode("num error");
                 } else {
-                    rePostJson.setMode(reRequestJson.getMode());
-                    rePostJson.setNumStart(start);
-                    rePostJson.setNeedNum(num);
-                    rePostJson.setNumEnd(end);
-                    rePostJson.setTimestamp(System.currentTimeMillis());
-                    List<ReData> reList = new ArrayList<>();
-                    List<Re> res = reMapper.selectList(null);
-                    for (Re re : res) {
-                        int uid = re.getUserFkey();
-                        reList.add(re.toReDataWithUserData(userMapper.selectById(uid)));
+                    rePostDTO.setMode(reRequestDTO.getMode());
+                    rePostDTO.setNumStart(start);
+                    rePostDTO.setNeedNum(num);
+                    rePostDTO.setNumEnd(end);
+                    rePostDTO.setTimestamp(System.currentTimeMillis());
+                    List<ReBO> reList = new ArrayList<>();
+                    List<RePO> rePOList = reMapper.selectList(null);
+                    for (RePO rePO : rePOList) {
+                        int uid = rePO.getUserFkey();
+                        reList.add(rePO.toReDataWithUserData(userMapper.selectById(uid)));
                     }
-                    rePostJson.setReData(reList);
+                    rePostDTO.setReData(reList);
                 }
                 break;
             }
             default: {
-                rePostJson.setMode("mode error");
+                rePostDTO.setMode("mode error");
             }
         }
 
 
-        return rePostJson;
+        return rePostDTO;
     }
 }

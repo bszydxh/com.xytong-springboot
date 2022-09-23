@@ -1,7 +1,7 @@
 package com.xytong.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xytong.model.entity.Re;
+import com.xytong.model.PO.RePO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 */
 @Mapper
 @Repository
-public interface ReMapper extends BaseMapper<Re> {
+public interface ReMapper extends BaseMapper<RePO> {
 
 
 }

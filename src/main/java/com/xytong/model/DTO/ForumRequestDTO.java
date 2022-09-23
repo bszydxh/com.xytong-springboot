@@ -1,10 +1,10 @@
-package com.xytong.model.controllerData.json;
+package com.xytong.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class ForumRequestJson {
+public class ForumRequestDTO {
     String module;
     String mode;
     @JsonProperty(value = "num_start")

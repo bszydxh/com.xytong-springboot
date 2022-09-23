@@ -1,4 +1,4 @@
-package com.xytong.model.controllerData;
+package com.xytong.model.BO;
 
 
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ForumData extends CardData implements Serializable {
+public class ForumBO extends CardBO implements Serializable {
     private Integer likes = 0;
     private Integer comments = 0;
     private Integer forwarding = 0;

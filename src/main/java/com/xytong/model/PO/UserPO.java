@@ -1,219 +1,221 @@
-package com.xytong.model.entity;
+package com.xytong.model.PO;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
  * @TableName user
  */
-public class User implements Serializable {
+@TableName("user")
+public class UserPO implements Serializable {
     /**
-     * 
+     *
      */
     private Integer id;
 
     /**
-     * 
+     *
      */
     private String name;
 
     /**
-     * 
+     *
      */
     private String phone;
 
     /**
-     * 
+     *
      */
     private Date createTimestamp;
 
     /**
-     * 
+     *
      */
     private Object isAdmin;
 
     /**
-     * 
+     *
      */
     private String avatar;
 
     /**
-     * 
+     *
      */
     private String signature;
 
     /**
-     * 
+     *
      */
     private Object gender;
 
     /**
-     * 
+     *
      */
     private Date birthdayTimestamp;
 
     /**
-     * 
+     *
      */
     private String email;
 
     /**
-     * 
+     *
      */
     private String password;
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 
+     *
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * 
+     *
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
+     *
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 
+     *
      */
     public String getPhone() {
         return phone;
     }
 
     /**
-     * 
+     *
      */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
     /**
-     * 
+     *
      */
     public Date getCreateTimestamp() {
         return createTimestamp;
     }
 
     /**
-     * 
+     *
      */
     public void setCreateTimestamp(Date createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 
     /**
-     * 
+     *
      */
     public Object getIsAdmin() {
         return isAdmin;
     }
 
     /**
-     * 
+     *
      */
     public void setIsAdmin(Object isAdmin) {
         this.isAdmin = isAdmin;
     }
 
     /**
-     * 
+     *
      */
     public String getAvatar() {
         return avatar;
     }
 
     /**
-     * 
+     *
      */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
     /**
-     * 
+     *
      */
     public String getSignature() {
         return signature;
     }
 
     /**
-     * 
+     *
      */
     public void setSignature(String signature) {
         this.signature = signature;
     }
 
     /**
-     * 
+     *
      */
     public Object getGender() {
         return gender;
     }
 
     /**
-     * 
+     *
      */
     public void setGender(Object gender) {
         this.gender = gender;
     }
 
     /**
-     * 
+     *
      */
     public Date getBirthdayTimestamp() {
         return birthdayTimestamp;
     }
 
     /**
-     * 
+     *
      */
     public void setBirthdayTimestamp(Date birthdayTimestamp) {
         this.birthdayTimestamp = birthdayTimestamp;
     }
 
     /**
-     * 
+     *
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * 
+     *
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * 
+     *
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * 
+     *
      */
     public void setPassword(String password) {
         this.password = password;
@@ -230,18 +232,18 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        UserPO other = (UserPO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getCreateTimestamp() == null ? other.getCreateTimestamp() == null : this.getCreateTimestamp().equals(other.getCreateTimestamp()))
-            && (this.getIsAdmin() == null ? other.getIsAdmin() == null : this.getIsAdmin().equals(other.getIsAdmin()))
-            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
-            && (this.getSignature() == null ? other.getSignature() == null : this.getSignature().equals(other.getSignature()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getBirthdayTimestamp() == null ? other.getBirthdayTimestamp() == null : this.getBirthdayTimestamp().equals(other.getBirthdayTimestamp()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+                && (this.getCreateTimestamp() == null ? other.getCreateTimestamp() == null : this.getCreateTimestamp().equals(other.getCreateTimestamp()))
+                && (this.getIsAdmin() == null ? other.getIsAdmin() == null : this.getIsAdmin().equals(other.getIsAdmin()))
+                && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
+                && (this.getSignature() == null ? other.getSignature() == null : this.getSignature().equals(other.getSignature()))
+                && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
+                && (this.getBirthdayTimestamp() == null ? other.getBirthdayTimestamp() == null : this.getBirthdayTimestamp().equals(other.getBirthdayTimestamp()))
+                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
     }
 
     @Override
@@ -283,4 +285,5 @@ public class User implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
 }
