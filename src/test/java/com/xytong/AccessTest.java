@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Objects;
+
 import static com.xytong.utils.SecurityUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,13 +39,14 @@ public class AccessTest {
         String userName = "bszydxh";
         Logger logger = LoggerFactory.getLogger(MainApplicationTests.class);
         try {
-            assertEquals(userName, rsaDecrypt(rsaEncrypt(userName, readFile("classpath:access/rsa_key.pub"))
-                    , readFile("classpath:access/rsa_key")));//测试密钥配对性
-            logger.info(rsaEncrypt(userName, readFile("classpath:access/rsa_key.pub")));
+            assertEquals(userName, rsaDecrypt(rsaEncrypt(userName, readFile("classpath:access/rsa_token.pub"))
+                    , readFile("classpath:access/rsa_token")));//测试密钥配对性
+            logger.info(rsaEncrypt(userName, readFile("classpath:access/rsa_token.pub")));
             assertEquals(userName, rsaDecrypt(rsaEncrypt(userName, readFile("classpath:access/rsa_token.pub")), readFile("classpath:access/rsa_token")));
             logger.info(rsaEncrypt(userName, readFile("classpath:access/rsa_token.pub")));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
+            fail();
             e.printStackTrace();
         }
     }
@@ -83,7 +86,6 @@ public class AccessTest {
         assertTrue(accessService.tokenChecker(token));
         String token_illegal = accessService.tokenMaker(userName + "_illegal", pwdMd5, System.currentTimeMillis());
         assertFalse(accessService.tokenChecker(token_illegal));
-        ;
     }
 
 
@@ -93,7 +95,7 @@ public class AccessTest {
         String oldToken = accessService.tokenMaker("bszydxh", "227695cd8ea3b7194e9c2cbd9eba4342",
                 System.currentTimeMillis());
         logger.info(oldToken);
-        assertNotNull("oldToken");
+        assertNotNull(oldToken);
         String newToken = accessService.tokenRenewer(oldToken);
         logger.info(newToken);
         assertNotNull(newToken);

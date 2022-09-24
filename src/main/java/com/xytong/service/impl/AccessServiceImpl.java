@@ -34,15 +34,6 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     }
 
     public boolean tokenChecker(String token) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        try {
-//            AccessRequestJson accessRequestJson = objectMapper.readValue(
-//                    SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token")),
-//                    AccessRequestJson.class);
-//            return userService.checkUser(accessRequestJson.getUsername(), accessRequestJson.getPassword());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         AccessRequestDTO accessRequestDTO = tokenParser(token);
         return userService.checkUser(accessRequestDTO.getUsername(), accessRequestDTO.getPassword());
     }

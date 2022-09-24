@@ -48,7 +48,7 @@ public class ShController {
                     List<ShPO> shPOList = shMapper.selectList(null);
                     for (ShPO shPO : shPOList) {
                         int uid = shPO.getUserFkey();
-                        shList.add(shPO.toShDataWithUserData(userMapper.selectById(uid)));
+                        shList.add(new ShBO(shPO, userMapper.selectById(uid)));
                     }
                     shPostDTO.setShData(shList);
                 }

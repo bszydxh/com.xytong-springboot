@@ -121,21 +121,4 @@ public class ForumPO implements Serializable {//面向数据库
         sb.append("]");
         return sb.toString();
     }
-
-    public ForumBO toForumDataWithUserData(UserPO userPO) {
-        ForumBO forumData = new ForumBO();
-        forumData.setId(id);
-        forumData.setTimestamp(timestamp.getTime());
-        if (userPO == null) {
-            userPO = new UserPO();
-        }
-        forumData.setUserName(userPO.getName());
-        forumData.setUserAvatarUrl(userPO.getAvatar());
-        forumData.setTitle(title);
-        forumData.setText(text);
-        forumData.setForwarding(forwarding);
-        forumData.setComments(comments);
-        forumData.setLikes(likes);
-        return forumData;
-    }
 }

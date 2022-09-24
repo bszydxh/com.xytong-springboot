@@ -178,19 +178,4 @@ public class RePO implements Serializable {
         sb.append("]");
         return sb.toString();
     }
-
-    public ReBO toReDataWithUserData(UserPO userPO) {
-        ReBO reData = new ReBO();
-        reData.setId(id);
-        reData.setTimestamp(timestamp.getTime());
-        if (userPO == null) {
-            userPO = new UserPO();
-        }
-        reData.setUserName(userPO.getName());
-        reData.setUserAvatarUrl(userPO.getAvatar());
-        reData.setTitle(title);
-        reData.setText(text);
-        reData.setPrice(price.toString());
-        return reData;
-    }
 }

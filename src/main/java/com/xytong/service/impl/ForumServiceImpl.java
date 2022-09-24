@@ -35,7 +35,7 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
                 List<ForumPO> forumPOList = forumMapper.selectList(null);
                 for (ForumPO forumPO : forumPOList) {
                     int uid = forumPO.getUserFkey();
-                    forumList.add(forumPO.toForumDataWithUserData(userMapper.selectById(uid)));
+                    forumList.add(new ForumBO(forumPO, userMapper.selectById(uid)));
                 }
             }
             break;

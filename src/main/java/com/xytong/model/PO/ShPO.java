@@ -179,18 +179,5 @@ public class ShPO implements Serializable {
         return sb.toString();
     }
 
-    public ShBO toShDataWithUserData(UserPO userPO) {
-        ShBO shData = new ShBO();
-        shData.setId(id);
-        shData.setTimestamp(timestamp.getTime());
-        if (userPO == null) {
-            userPO = new UserPO();
-        }
-        shData.setUserName(userPO.getName());
-        shData.setUserAvatarUrl(userPO.getAvatar());
-        shData.setTitle(title);
-        shData.setText(text);
-        shData.setPrice(price.toString());
-        return shData;
-    }
+
 }

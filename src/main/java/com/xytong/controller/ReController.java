@@ -27,8 +27,7 @@ public class ReController {
     @RequestMapping(value = "/run_errands", produces = "application/json")
     public RePostDTO reData(@RequestBody ReRequestDTO reRequestDTO) {
         RePostDTO rePostDTO = new RePostDTO();
-        if(!Objects.equals(reRequestDTO.getModule(), "run_errands"))
-        {
+        if (!Objects.equals(reRequestDTO.getModule(), "run_errands")) {
             rePostDTO.setMode("module error");
             return rePostDTO;
         }
@@ -49,7 +48,7 @@ public class ReController {
                     List<RePO> rePOList = reMapper.selectList(null);
                     for (RePO rePO : rePOList) {
                         int uid = rePO.getUserFkey();
-                        reList.add(rePO.toReDataWithUserData(userMapper.selectById(uid)));
+                        reList.add(new ReBO(rePO, userMapper.selectById(uid)));
                     }
                     rePostDTO.setReData(reList);
                 }
