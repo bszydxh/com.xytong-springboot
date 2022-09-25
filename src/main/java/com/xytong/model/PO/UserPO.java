@@ -1,6 +1,7 @@
 package com.xytong.model.PO;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,11 +29,13 @@ public class UserPO implements Serializable {
     /**
      *
      */
+    @JsonProperty(value = "create_timestamp")
     private Date createTimestamp;
 
     /**
      *
      */
+    @JsonProperty(value = "is_admin")
     private Object isAdmin;
 
     /**
@@ -53,6 +56,7 @@ public class UserPO implements Serializable {
     /**
      *
      */
+    @JsonProperty(value = "birthday_timestamp")
     private Date birthdayTimestamp;
 
     /**

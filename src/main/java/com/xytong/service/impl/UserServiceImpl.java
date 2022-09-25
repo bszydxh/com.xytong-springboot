@@ -26,22 +26,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
         if (username == null || password == null) {
             return false;
         }
-        QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
-        queryWrapper
-                .ge("name", username);
-        Map<String, Object> map = getMap(queryWrapper);
-        return Objects.equals(map.get("password"), password);
+        return Objects.equals(findUserByName(username).getPassword(), password);
     }
 
     @Override
-    public UserBO findUserByName(String username) {
+    public UserPO findUserByName(String username) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.ge("name", username);
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> map = getMap(queryWrapper);
         UserPO userPO = objectMapper.convertValue(map, UserPO.class);
-        UserBO userBO = new UserBO();
-        userBO.setName(userPO.getName());
-        return userBO;
+        return userPO;
     }
 }

@@ -94,16 +94,17 @@ public class AccessTest {
         Logger logger = LoggerFactory.getLogger(MainApplicationTests.class);
         String oldToken = accessService.tokenMaker("bszydxh", "227695cd8ea3b7194e9c2cbd9eba4342",
                 System.currentTimeMillis());
-        logger.info(oldToken);
+        logger.info("oldToken:" + oldToken);
         assertNotNull(oldToken);
         String newToken = accessService.tokenRenewer(oldToken);
-        logger.info(newToken);
+        logger.info("newToken:" + newToken);
         assertNotNull(newToken);
+        String illegalToken = accessService.tokenRenewer("_illegal" + oldToken);
+        logger.info("illegalToken:" + illegalToken);
+        assertNull(illegalToken);
         String json = rsaDecrypt(newToken, readFile("classpath:access/rsa_token"));
         ObjectMapper mapper = new ObjectMapper();
         AccessRequestDTO accessRequestDTO = mapper.readValue(json, AccessRequestDTO.class);
-        logger.info(newToken);
         assertEquals("bszydxh", accessRequestDTO.getUsername());
-
     }
 }
