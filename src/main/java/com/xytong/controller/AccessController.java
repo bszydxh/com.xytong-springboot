@@ -1,7 +1,7 @@
 package com.xytong.controller;
 
-import com.xytong.model.DTO.AccessPostDTO;
-import com.xytong.model.DTO.AccessRequestDTO;
+import com.xytong.model.dto.AccessPostDTO;
+import com.xytong.model.dto.AccessRequestDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.UserService;
 import org.slf4j.Logger;

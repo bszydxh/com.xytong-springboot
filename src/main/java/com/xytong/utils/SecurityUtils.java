@@ -1,6 +1,8 @@
 package com.xytong.utils;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +16,9 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class SecurityUtils {
     public static String rsaEncrypt(String str, String publicKey) throws Exception {
+        publicKey = publicKey.replace("-----BEGIN PUBLIC KEY-----","");
+        publicKey = publicKey.replace("-----END PUBLIC KEY-----","");
+        publicKey = publicKey.strip();
         //base64编码的公钥
         byte[] decoded = Base64.decodeBase64(publicKey);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(decoded));
@@ -24,6 +29,9 @@ public class SecurityUtils {
     }
 
     public static String rsaDecrypt(String str, String privateKey) throws Exception {
+        privateKey = privateKey.replace("-----BEGIN PRIVATE KEY-----","");
+        privateKey = privateKey.replace("-----END PRIVATE KEY-----","");
+        privateKey = privateKey.strip();
         //64位解码加密后的字符串
         byte[] inputByte = Base64.decodeBase64(str.getBytes(StandardCharsets.UTF_8));
         //base64编码的私钥

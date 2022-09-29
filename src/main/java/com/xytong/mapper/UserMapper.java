@@ -1,7 +1,7 @@
 package com.xytong.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xytong.model.PO.UserPO;
+import com.xytong.model.po.UserPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

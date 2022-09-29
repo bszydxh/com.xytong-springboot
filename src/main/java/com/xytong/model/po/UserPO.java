@@ -1,4 +1,4 @@
-package com.xytong.model.PO;
+package com.xytong.model.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;

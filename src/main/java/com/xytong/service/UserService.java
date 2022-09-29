@@ -1,8 +1,7 @@
 package com.xytong.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xytong.model.BO.UserBO;
-import com.xytong.model.PO.UserPO;
+import com.xytong.model.po.UserPO;
 
 /**
  * @author bszydxh
@@ -11,6 +10,7 @@ import com.xytong.model.PO.UserPO;
  */
 public interface UserService extends IService<UserPO> {
     boolean checkUser(String username, String password);
-
     UserPO findUserByName(String username);
+    UserPO findUserById(Integer id);
+
 }

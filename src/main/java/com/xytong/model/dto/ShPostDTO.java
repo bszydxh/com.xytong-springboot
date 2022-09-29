@@ -1,7 +1,7 @@
-package com.xytong.model.DTO;
+package com.xytong.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xytong.model.BO.ShBO;
+import com.xytong.model.bo.ShBO;
 import lombok.Data;
 
 import java.util.List;
@@ -18,15 +18,6 @@ public class ShPostDTO {
     long timestamp;
     @JsonProperty(value = "sh_data")
     List<ShBO> shData;
-
-    public void setShData(List<ShBO> shData) {
-        this.shData = shData;
-    }
-
-    public List<ShBO> getShData() {
-        return shData;
-    }
-
     public String getTimestamp() {
         return String.valueOf(timestamp);
     }

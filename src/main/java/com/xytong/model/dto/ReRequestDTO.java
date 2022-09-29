@@ -1,4 +1,4 @@
-package com.xytong.model.DTO;
+package com.xytong.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,4 +1,4 @@
-package com.xytong;
+package com.xytong.serviceTest;
 
 
 import com.xytong.mapper.ForumMapper;

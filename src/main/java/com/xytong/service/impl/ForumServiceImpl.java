@@ -2,10 +2,10 @@ package com.xytong.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xytong.mapper.ForumMapper;
-import com.xytong.mapper.UserMapper;
-import com.xytong.model.BO.ForumBO;
-import com.xytong.model.PO.ForumPO;
+import com.xytong.model.bo.ForumBO;
+import com.xytong.model.po.ForumPO;
 import com.xytong.service.ForumService;
+import com.xytong.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,23 +19,24 @@ import java.util.List;
 @Service
 public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
         implements ForumService {
-    final ForumMapper forumMapper;
-    final UserMapper userMapper;
+    final UserService userService;
 
-    public ForumServiceImpl(ForumMapper forumMapper, UserMapper userMapper) {
-        this.forumMapper = forumMapper;
-        this.userMapper = userMapper;
+    public ForumServiceImpl(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public List<ForumBO> getForumList(String mode, int start, int end) {
+        if (start > end) {
+            throw new IllegalStateException("Unexpected value: " + start + end);
+        }
         List<ForumBO> forumList = new ArrayList<>();
         switch (mode) {
             case "newest": {
-                List<ForumPO> forumPOList = forumMapper.selectList(null);
+                List<ForumPO> forumPOList = list();
                 for (ForumPO forumPO : forumPOList) {
                     int uid = forumPO.getUserFkey();
-                    forumList.add(new ForumBO(forumPO, userMapper.selectById(uid)));
+                    forumList.add(ForumBO.init(forumPO, userService.findUserById(uid)));
                 }
             }
             break;

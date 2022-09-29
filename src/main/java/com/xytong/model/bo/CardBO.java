@@ -1,4 +1,4 @@
-package com.xytong.model.BO;
+package com.xytong.model.bo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,22 +8,23 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.io.Serializable;
+
 @Data
 public class CardBO implements Serializable {//数据传输层用
     @Getter(AccessLevel.NONE)
     @JsonIgnore
-    private int id = -1;//主键
+    private Integer id;//主键
     @JsonIgnore
-    private String uid = "null";//用户id，TODO
+    private String uid;//用户id，TODO
     @JsonIgnore
-    private String cid = "null" ;//卡片消息id，TODO
+    private String cid;//卡片消息id，TODO
     @JsonProperty(value = "user_name")
-    private String userName = "null";
+    private String userName;
     @JsonProperty(value = "user_avatar")
-    private String userAvatarUrl = "";
-    private String title = "(没有标题)";
-    private String text = "";
-    private Long timestamp = 0L;
+    private String userAvatarUrl;
+    private String title;
+    private String text;
+    private Long timestamp;
     ////////////////////////////////////////////////////////
 
     public String getText() {
@@ -50,6 +51,7 @@ public class CardBO implements Serializable {//数据传输层用
             return userName.trim();
         }
     }
+
 
     public String getTimestamp() {
         return String.valueOf(timestamp);

@@ -1,7 +1,7 @@
 package com.xytong.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xytong.model.DTO.AccessRequestDTO;
+import com.xytong.model.dto.AccessRequestDTO;
 import com.xytong.service.FileService;
 import com.xytong.service.UserService;
 import com.xytong.utils.SecurityUtils;

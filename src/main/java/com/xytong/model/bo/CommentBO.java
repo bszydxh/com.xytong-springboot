@@ -1,4 +1,4 @@
-package com.xytong.model.BO;
+package com.xytong.model.bo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,8 +8,8 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class CommentBO extends CardBO implements Serializable {
-    Integer floor = -1;
-    Integer likes = 0;
+    Integer floor ;
+    Integer likes;
 
     @Override
     @Deprecated

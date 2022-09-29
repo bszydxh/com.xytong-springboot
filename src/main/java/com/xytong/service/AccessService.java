@@ -1,6 +1,6 @@
 package com.xytong.service;
 
-import com.xytong.model.DTO.AccessRequestDTO;
+import com.xytong.model.dto.AccessRequestDTO;
 
 public interface AccessService {
     String tokenMaker(String username, String password, Long timestamp);

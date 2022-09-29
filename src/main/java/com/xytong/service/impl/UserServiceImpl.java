@@ -2,14 +2,14 @@ package com.xytong.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xytong.model.BO.UserBO;
-import com.xytong.model.PO.UserPO;
+import com.xytong.model.po.UserPO;
 import com.xytong.mapper.UserMapper;
 import com.xytong.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -26,16 +26,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
         if (username == null || password == null) {
             return false;
         }
-        return Objects.equals(findUserByName(username).getPassword(), password);
+
+        boolean result = Objects.equals(findUserByName(username).getPassword(), password);
+        return result;
     }
 
     @Override
+    @NonNull
     public UserPO findUserByName(String username) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
-        queryWrapper.ge("name", username);
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> map = getMap(queryWrapper);
-        UserPO userPO = objectMapper.convertValue(map, UserPO.class);
-        return userPO;
+        Logger logger = LoggerFactory.getLogger(this.getClass());
+        queryWrapper.eq("name", username);
+        UserPO userPO = null;
+        try {
+            userPO = getOne(queryWrapper);
+        } catch (Exception e) {
+            logger.error("Find user error:" + username);
+            e.printStackTrace();
+        }
+        return userPO == null ? new UserPO() : userPO;
     }
+
+    @Override
+    public UserPO findUserById(Integer id) {
+        QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
+        Logger logger = LoggerFactory.getLogger(this.getClass());
+        queryWrapper.eq("id", id);
+        UserPO userPO = null;
+        try {
+            userPO = getOne(queryWrapper);
+        } catch (Exception e) {
+            logger.error("Find id error:" + id);
+            e.printStackTrace();
+        }
+        return userPO == null ? new UserPO() : userPO;
+    }
+
 }

@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xytong.mapper.ForumMapper">
 
-    <resultMap id="BaseResultMap" type="com.xytong.model.PO.ForumPO">
+    <resultMap id="BaseResultMap" type="com.xytong.model.po.ForumPO">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="userFkey" column="user_fkey" jdbcType="INTEGER"/>
         <result property="likes" column="likes" jdbcType="INTEGER"/>

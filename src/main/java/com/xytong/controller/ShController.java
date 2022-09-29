@@ -1,27 +1,22 @@
 package com.xytong.controller;
 
-import com.xytong.model.BO.ShBO;
-import com.xytong.model.DTO.ShPostDTO;
-import com.xytong.model.DTO.ShRequestDTO;
-import com.xytong.model.PO.ShPO;
-import com.xytong.mapper.ShMapper;
-import com.xytong.mapper.UserMapper;
+import com.xytong.model.bo.ShBO;
+import com.xytong.model.dto.ShPostDTO;
+import com.xytong.model.dto.ShRequestDTO;
+import com.xytong.service.SecondhandService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @RestController
 public class ShController {
-    final ShMapper shMapper;
-    final UserMapper userMapper;
+    final SecondhandService shService;
 
-    public ShController(ShMapper shMapper, UserMapper userMapper) {
-        this.shMapper = shMapper;
-        this.userMapper = userMapper;
+    public ShController(SecondhandService shService) {
+        this.shService = shService;
     }
 
     @RequestMapping(value = "/secondhand", produces = "application/json")
@@ -31,35 +26,25 @@ public class ShController {
             shPostDTO.setMode("module error");
             return shPostDTO;
         }
-        switch (shRequestDTO.getMode()) {
-            case ("newest"): {
-                int start = shRequestDTO.getNumStart();
-                int end = shRequestDTO.getNumEnd();
-                int num = shRequestDTO.getNeedNum();
-                if (start > end || end - start != num - 1) {
-                    shPostDTO.setMode("num error");
-                } else {
-                    shPostDTO.setMode(shRequestDTO.getMode());
-                    shPostDTO.setNumStart(start);
-                    shPostDTO.setNeedNum(num);
-                    shPostDTO.setNumEnd(end);
-                    shPostDTO.setTimestamp(System.currentTimeMillis());
-                    List<ShBO> shList = new ArrayList<>();
-                    List<ShPO> shPOList = shMapper.selectList(null);
-                    for (ShPO shPO : shPOList) {
-                        int uid = shPO.getUserFkey();
-                        shList.add(new ShBO(shPO, userMapper.selectById(uid)));
-                    }
-                    shPostDTO.setShData(shList);
-                }
-                break;
-            }
-            default: {
+
+        int start = shRequestDTO.getNumStart();
+        int end = shRequestDTO.getNumEnd();
+        int num = shRequestDTO.getNeedNum();
+        if (start > end || end - start != num - 1) {
+            shPostDTO.setMode("num error");
+        } else {
+            shPostDTO.setMode(shRequestDTO.getMode());
+            shPostDTO.setNumStart(start);
+            shPostDTO.setNeedNum(num);
+            shPostDTO.setNumEnd(end);
+            shPostDTO.setTimestamp(System.currentTimeMillis());
+            try {
+                List<ShBO> shList = shService.getShList(shRequestDTO.getMode(), start, end);
+                shPostDTO.setShData(shList);
+            } catch (Exception e) {
                 shPostDTO.setMode("mode error");
             }
         }
-
-
         return shPostDTO;
     }
 }

@@ -1,23 +1,28 @@
-package com.xytong.model.BO;
+package com.xytong.model.bo;
 
+import com.xytong.model.po.UserPO;
 import lombok.Data;
 
 import java.io.Serializable;
+
 @Data
 public class UserBO implements Serializable {
-    enum SEX {
-        female,
-        male
-    }
+    private String name;
+    private String id;
+    private String phoneNumber;
+    private Integer sex;
+    private Long birthday;
+    private String email;
+    private String password;
+    private String userAvatarUrl;
 
-    private String name = "null";
-    private String id = "null";
-    private String phoneNumber = "null";
-    private int sex = -1;
-    private Long birthday = -1L;
-    private String email = "null";
-    private String password = "null";
-    private String userAvatarUrl = null;
+    public static UserBO init(UserPO userPO) {
+        if (userPO == null) {
+            return null;
+        }
+        UserBO userBO = new UserBO();
+        return userBO;
+    }
 
     public String getUserAvatarUrl() {
         return userAvatarUrl;
@@ -47,24 +52,8 @@ public class UserBO implements Serializable {
         return phoneNumber;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
-    }
-
-    public String getSexString() {
-        String str = "未知";
-        switch (sex) {
-            case -1:
-                str = "未知";
-                break;
-            case 0:
-                str = "女";
-                break;
-            case 1:
-                str = "男";
-                break;
-        }
-        return str;
     }
 
     public void setId(String id) {
@@ -95,7 +84,7 @@ public class UserBO implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

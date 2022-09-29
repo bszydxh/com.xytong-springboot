@@ -1,7 +1,6 @@
-package com.xytong.model.PO;
+package com.xytong.model.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xytong.model.BO.ReBO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
