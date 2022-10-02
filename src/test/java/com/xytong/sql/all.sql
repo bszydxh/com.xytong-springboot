@@ -1,19 +1,3 @@
-/*
- 使用测试前务必构建该数据库
- Navicat Premium Data Transfer
- Source Server         : xytong
- Source Server Type    : MySQL
- Source Server Version : 80030
- Source Host           : localhost:3306
- Source Schema         : db
-
- Target Server Type    : MySQL
- Target Server Version : 80030
- File Encoding         : 65001
-
- Date: 26/09/2022 22:44:14
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

@@ -7,6 +7,7 @@ import com.xytong.model.dto.UserRequestDTO;
 import com.xytong.service.UserService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,6 +20,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", produces = "application/json")
+    @ResponseBody
     public UserPostDTO userRequestMapping(@RequestBody UserRequestDTO userRequestDTO) {
         UserPostDTO userPostDTO = new UserPostDTO();
         String username = userRequestDTO.getUsername();

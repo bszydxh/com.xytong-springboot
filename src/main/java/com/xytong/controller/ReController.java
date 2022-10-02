@@ -8,6 +8,7 @@ import com.xytong.mapper.ReMapper;
 import com.xytong.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class ReController {
     }
 
     @RequestMapping(value = "/run_errands", produces = "application/json")
+    @ResponseBody
     public RePostDTO reData(@RequestBody ReRequestDTO reRequestDTO) {
         RePostDTO rePostDTO = new RePostDTO();
         if (!Objects.equals(reRequestDTO.getModule(), "run_errands")) {

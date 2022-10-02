@@ -6,6 +6,7 @@ import com.xytong.model.dto.ShRequestDTO;
 import com.xytong.service.SecondhandService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class ShController {
     }
 
     @RequestMapping(value = "/secondhand", produces = "application/json")
+    @ResponseBody
     public ShPostDTO shData(@RequestBody ShRequestDTO shRequestDTO) {
         ShPostDTO shPostDTO = new ShPostDTO();
         if (!Objects.equals(shRequestDTO.getModule(), "secondhand")) {

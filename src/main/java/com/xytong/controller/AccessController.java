@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
@@ -23,9 +24,9 @@ public class AccessController {
     }
 
     @RequestMapping(value = "/access", produces = "application/json")
+    @ResponseBody
     public AccessPostDTO accessRequestMapping(@RequestBody AccessRequestDTO accessRequestDTO) {
         AccessPostDTO accessPostDTO = new AccessPostDTO();
-        Logger logger = LoggerFactory.getLogger(this.getClass());
         if (accessRequestDTO.getToken() == null || Objects.equals(accessRequestDTO.getToken(), "")) {//如果传入值没有token
             if (userService.checkUser(accessRequestDTO.getUsername(), accessRequestDTO.getPassword())) {//进入密码鉴权
                 accessPostDTO.setToken(accessService.tokenMaker(

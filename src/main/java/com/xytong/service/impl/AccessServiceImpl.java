@@ -20,12 +20,12 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     public String tokenMaker(String username, String password, Long timestamp) {
         String token = "";
         ObjectMapper postMapper = new ObjectMapper();
-        AccessRequestDTO accessRequestDTO = new AccessRequestDTO();
-        accessRequestDTO.setUsername(username);
-        accessRequestDTO.setPassword(password);
-        accessRequestDTO.setTimestamp(timestamp);
+        AccessRequestDTO TokenBO = new AccessRequestDTO();
+        TokenBO.setUsername(username);
+        TokenBO.setPassword(password);
+        TokenBO.setTimestamp(timestamp);
         try {
-            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(accessRequestDTO),
+            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(TokenBO),
                     fileService.readFile("classpath:access/rsa_token.pub"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,8 +34,8 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     }
 
     public boolean tokenChecker(String token) {
-        AccessRequestDTO accessRequestDTO = tokenParser(token);
-        return userService.checkUser(accessRequestDTO.getUsername(), accessRequestDTO.getPassword());
+        AccessRequestDTO TokenBO = tokenParser(token);
+        return userService.checkUser(TokenBO.getUsername(), TokenBO.getPassword());
     }
 
 
@@ -45,10 +45,10 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
             try {
                 String jsonStr = SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token"));
                 ObjectMapper objectMapper = new ObjectMapper();
-                AccessRequestDTO accessRequestDTO = objectMapper.readValue(jsonStr, AccessRequestDTO.class);
+                AccessRequestDTO TokenBO = objectMapper.readValue(jsonStr, AccessRequestDTO.class);
                 return tokenMaker(
-                        accessRequestDTO.getUsername(),
-                        accessRequestDTO.getPassword(),
+                        TokenBO.getUsername(),
+                        TokenBO.getPassword(),
                         System.currentTimeMillis()
                 );
             } catch (Exception e) {

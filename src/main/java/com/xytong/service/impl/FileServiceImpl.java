@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 @Service
 public class FileServiceImpl implements FileService {
-    final
-    ResourceLoader resourceLoader;
+    final ResourceLoader resourceLoader;
 
     public FileServiceImpl(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;

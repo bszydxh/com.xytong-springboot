@@ -2,14 +2,13 @@ package com.xytong.serviceTest;
 
 import com.xytong.model.po.UserPO;
 import com.xytong.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@Slf4j
 @SpringBootTest
 public class UserServiceTest {
     @Autowired
@@ -31,24 +30,22 @@ public class UserServiceTest {
 
     @Test
     public void findUserByNameTest() {
-        Logger logger = LoggerFactory.getLogger(this.getClass());
         UserPO userPO = userService.findUserByName("bszydxh");
-        logger.info(userPO.toString());
+        log.info(userPO.toString());
         assertEquals("bszydxh", userPO.getName());
         UserPO userPO2 = userService.findUserByName("xzx");
-        logger.info(userPO.toString());
+        log.info(userPO.toString());
         assertEquals("xzx", userPO2.getName());
         assertNotNull(userPO2.getPassword());
         assertNotNull(userPO.getPassword());
     }
     @Test
     public void findUserByIdTest() {
-        Logger logger = LoggerFactory.getLogger(this.getClass());
         UserPO userPO = userService.findUserById(1);
-        logger.info(userPO.toString());
+        log.info(userPO.toString());
         assertEquals("bszydxh", userPO.getName());
         UserPO userPO2 = userService.findUserById(2);
-        logger.info(userPO.toString());
+        log.info(userPO.toString());
         assertEquals("xzx", userPO2.getName());
         assertNotNull(userPO2.getPassword());
         assertNotNull(userPO.getPassword());

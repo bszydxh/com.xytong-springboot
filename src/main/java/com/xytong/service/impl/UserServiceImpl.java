@@ -35,13 +35,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
     @NonNull
     public UserPO findUserByName(String username) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
-        Logger logger = LoggerFactory.getLogger(this.getClass());
         queryWrapper.eq("name", username);
         UserPO userPO = null;
         try {
             userPO = getOne(queryWrapper);
         } catch (Exception e) {
-            logger.error("Find user error:" + username);
+            log.error("Find user error:" + username);
             e.printStackTrace();
         }
         return userPO == null ? new UserPO() : userPO;
@@ -50,13 +49,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
     @Override
     public UserPO findUserById(Integer id) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
-        Logger logger = LoggerFactory.getLogger(this.getClass());
         queryWrapper.eq("id", id);
         UserPO userPO = null;
         try {
             userPO = getOne(queryWrapper);
         } catch (Exception e) {
-            logger.error("Find id error:" + id);
+            log.error("Find id error:" + id);
             e.printStackTrace();
         }
         return userPO == null ? new UserPO() : userPO;

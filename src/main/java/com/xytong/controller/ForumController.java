@@ -8,6 +8,7 @@ import com.xytong.model.dto.ForumRequestDTO;
 import com.xytong.service.ForumService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ForumController {
     final ForumService forumService;
 
     @RequestMapping(value = "/forums", produces = "application/json")
+    @ResponseBody
     public ForumPostDTO forumData(@RequestBody ForumRequestDTO forumRequestDTO) {
         ForumPostDTO forumPostDTO = new ForumPostDTO();
         if (!Objects.equals(forumRequestDTO.getModule(), "forums")) {

@@ -8,12 +8,13 @@
 
 ## model层
 
-[相关阅读](https://pic1.zhimg.com/v2-24e3ed681c02b6434681719753c53b40_r.jpg)
+![相关阅读](https://pic1.zhimg.com/v2-24e3ed681c02b6434681719753c53b40_r.jpg)
 
 - BO（Business Object）业务对象
     - CardBO
     - CommentBO
     - ForumBO
+    - TokenBO
     - ReBO
     - ShBO
     - UserBO
