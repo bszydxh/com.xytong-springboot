@@ -135,5 +135,12 @@ if need_setup_mysql:
         print(e)
         print("数据库已存在")
     print("正在导入模板数据")
-    os.system(f"mysql -h{mysql_database_host} -p{mysql_database_port} -u{mysql_user_name} -p{mysql_pwd} {mysql_database_name} <  src/test/java/com/xytong/sql/all.sql")
+    cursor.execute(f"use {mysql_database_name}")
+    with open(file='src/test/java/com/xytong/sql/all.sql',mode='r+',encoding="utf-8") as f:
+        sql_list = f.read().split(';')[:-1]  # sql文件最后一行加上;
+        sql_list = [x.replace('\n', ' ') if '\n' in x else x for x in sql_list]  # 将每段sql里的换行符改成空格
+    ##执行sql语句，使用循环执行sql语句
+    for sql_item  in sql_list:
+        cursor.execute(sql_item)
+    # os.system(f"mysql -h{mysql_database_host} -p{mysql_database_port} -u{mysql_user_name} -p{mysql_pwd} {mysql_database_name} <  src/test/java/com/xytong/sql/all.sql")
 print("配置完毕")

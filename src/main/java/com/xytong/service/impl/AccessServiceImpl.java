@@ -5,8 +5,9 @@ import com.xytong.model.dto.AccessRequestDTO;
 import com.xytong.service.FileService;
 import com.xytong.service.UserService;
 import com.xytong.utils.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 public class AccessServiceImpl implements com.xytong.service.AccessService {
     final FileService fileService;
@@ -28,7 +29,7 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
             token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(TokenBO),
                     fileService.readFile("classpath:access/rsa_token.pub"));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("制作token失败");
         }
         return token;
     }
@@ -52,7 +53,7 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
                         System.currentTimeMillis()
                 );
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("检测到非法token");
             }
         }
         return null;
@@ -66,7 +67,7 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
                     SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token")),
                     AccessRequestDTO.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("检测到非法token");
         }
         return new AccessRequestDTO();
     }
