@@ -6,18 +6,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `forum`;
 CREATE TABLE `forum`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_fkey` int NOT NULL,
-  `likes` int NULL DEFAULT NULL,
-  `comments` int NULL DEFAULT NULL,
-  `forwarding` int NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE,
-  INDEX `user_fkey`(`user_fkey`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `user_fkey` int NOT NULL,
+                          `likes` int NULL DEFAULT NULL,
+                          `comments` int NULL DEFAULT NULL,
+                          `forwarding` int NULL DEFAULT NULL,
+                          `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                          `text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+                          `timestamp` timestamp NULL DEFAULT NULL,
+                          PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of forum
@@ -33,15 +31,15 @@ INSERT INTO `forum` VALUES (5, 1, 5, 5, 5, 'test5', 'test5', '2022-09-03 22:54:1
 -- ----------------------------
 DROP TABLE IF EXISTS `re`;
 CREATE TABLE `re`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_fkey` int NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  `price` decimal(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+                       `id` int NOT NULL AUTO_INCREMENT,
+                       `user_fkey` int NOT NULL,
+                       `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                       `text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+                       `timestamp` timestamp NULL DEFAULT NULL,
+                       `price` decimal(10, 2) NULL DEFAULT NULL,
+                       PRIMARY KEY (`id`) USING BTREE,
+                       INDEX `id`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of re
@@ -57,15 +55,15 @@ INSERT INTO `re` VALUES (5, 1, 'test5', 'test5', '2022-09-03 22:54:11', 5.55);
 -- ----------------------------
 DROP TABLE IF EXISTS `sh`;
 CREATE TABLE `sh`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_fkey` int NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  `price` decimal(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+                       `id` int NOT NULL AUTO_INCREMENT,
+                       `user_fkey` int NOT NULL,
+                       `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                       `text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+                       `timestamp` timestamp NULL DEFAULT NULL,
+                       `price` decimal(10, 2) NULL DEFAULT NULL,
+                       PRIMARY KEY (`id`) USING BTREE,
+                       INDEX `id`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sh
@@ -81,22 +79,18 @@ INSERT INTO `sh` VALUES (5, 1, 'test5', 'test5', '2022-09-03 22:54:11', 5.55);
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `create_timestamp` timestamp NOT NULL,
-  `is_admin` enum('N','Y') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'N',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `signature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `gender` enum('unknown','male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'unknown',
-  `birthday_timestamp` timestamp NULL DEFAULT NULL,
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`id`, `name`, `phone`) USING BTREE,
-  INDEX `id`(`id`, `create_timestamp`, `name`, `gender`, `birthday_timestamp`, `phone`, `email`) USING BTREE,
-  INDEX `id_2`(`id`, `name`) USING BTREE,
-  INDEX `id_3`(`id`) USING BTREE,
-  INDEX `phone`(`phone`) USING BTREE
+                         `id` int NOT NULL AUTO_INCREMENT,
+                         `create_timestamp` timestamp NOT NULL,
+                         `is_admin` enum('N','Y') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'N',
+                         `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                         `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                         `signature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                         `gender` enum('unknown','male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'unknown',
+                         `birthday_timestamp` timestamp NULL DEFAULT NULL,
+                         `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                         `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                         `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                         PRIMARY KEY (`id`, `name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

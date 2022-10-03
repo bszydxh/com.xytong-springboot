@@ -127,7 +127,8 @@ if need_setup_mysql:
                          port=int(mysql_database_port),
                          user=mysql_user_name,
                          password=mysql_pwd,
-                         database="")
+                         database="",
+                         charset="utf8")
     cursor = db.cursor()
     try:
         cursor.execute(f"create database {mysql_database_name}")
@@ -137,10 +138,26 @@ if need_setup_mysql:
     print("正在导入模板数据")
     cursor.execute(f"use {mysql_database_name}")
     with open(file='src/test/java/com/xytong/sql/all.sql',mode='r+',encoding="utf-8") as f:
-        sql_list = f.read().split(';')[:-1]  # sql文件最后一行加上;
+        data = f.read()
+        lines = data.splitlines()
+        sql_data = ''
+	# 将--注释开头的全部过滤，将空白行过滤
+        for line in lines:
+            if len(line) == 0:
+                continue
+            elif line.startswith("--"):
+                continue
+            else:
+                sql_data += line
+        sql_list = sql_data.split(';')[:-1]
         sql_list = [x.replace('\n', ' ') if '\n' in x else x for x in sql_list]  # 将每段sql里的换行符改成空格
     ##执行sql语句，使用循环执行sql语句
-    for sql_item  in sql_list:
-        cursor.execute(sql_item)
+    for sql_item in sql_list:
+        print("================================================================\n"+sql_item)
+        try:
+            print(cursor.execute(sql_item))
+        except Exception as e:
+            print(e)
+    db.commit()
     # os.system(f"mysql -h{mysql_database_host} -p{mysql_database_port} -u{mysql_user_name} -p{mysql_pwd} {mysql_database_name} <  src/test/java/com/xytong/sql/all.sql")
 print("配置完毕")
