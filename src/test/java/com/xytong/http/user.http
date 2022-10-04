@@ -1,0 +1,30 @@
+### 本地正确测试user
+POST http://localhost:80/user
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "token": "{{token}}",
+  "username": "{{name}}",
+  "mode": ""
+}
+### 本地正确匿名测试user
+POST http://localhost:80/user
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "token": "",
+  "username": "{{name}}",
+  "mode": ""
+}
+### 本地正确管理员测试user
+POST http://localhost:80/user
+Content-Type: application/json
+
+{
+  "timestamp": "123231232131",
+  "token": "{{super_token}}",
+  "username": "{{name}}",
+  "mode": ""
+}

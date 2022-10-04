@@ -25,7 +25,7 @@ public class ForumController {
 
     @RequestMapping(value = "/forums", produces = "application/json")
     @ResponseBody
-    public ForumPostDTO forumData(@RequestBody ForumRequestDTO forumRequestDTO) {
+    public ForumPostDTO getForumList(@RequestBody ForumRequestDTO forumRequestDTO) {
         ForumPostDTO forumPostDTO = new ForumPostDTO();
         if (!Objects.equals(forumRequestDTO.getModule(), "forums")) {
             forumPostDTO.setMode("module error");

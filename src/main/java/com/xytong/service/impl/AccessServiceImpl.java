@@ -1,12 +1,14 @@
 package com.xytong.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xytong.model.bo.TokenBO;
 import com.xytong.model.dto.AccessRequestDTO;
 import com.xytong.service.FileService;
 import com.xytong.service.UserService;
 import com.xytong.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 @Slf4j
 @Service
 public class AccessServiceImpl implements com.xytong.service.AccessService {
@@ -21,12 +23,12 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     public String tokenMaker(String username, String password, Long timestamp) {
         String token = "";
         ObjectMapper postMapper = new ObjectMapper();
-        AccessRequestDTO TokenBO = new AccessRequestDTO();
-        TokenBO.setUsername(username);
-        TokenBO.setPassword(password);
-        TokenBO.setTimestamp(timestamp);
+        TokenBO tokenBO = new TokenBO();
+        tokenBO.setUsername(username);
+        tokenBO.setPassword(password);
+        tokenBO.setTimestamp(timestamp);
         try {
-            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(TokenBO),
+            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(tokenBO),
                     fileService.readFile("classpath:access/rsa_token.pub"));
         } catch (Exception e) {
             log.error("制作token失败");
@@ -35,8 +37,11 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
     }
 
     public boolean tokenChecker(String token) {
-        AccessRequestDTO TokenBO = tokenParser(token);
-        return userService.checkUser(TokenBO.getUsername(), TokenBO.getPassword());
+        TokenBO tokenBO = tokenParser(token);
+        if (tokenBO == null) {
+            return false;
+        }
+        return userService.checkUser(tokenBO.getUsername(), tokenBO.getPassword());
     }
 
 
@@ -53,23 +58,26 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
                         System.currentTimeMillis()
                 );
             } catch (Exception e) {
-                log.error("检测到非法token");
+                log.error("token更新失败");
             }
         }
         return null;
     }
 
     @Override
-    public AccessRequestDTO tokenParser(String token) {
+    public TokenBO tokenParser(String token) {
+        if (token == null || token.equals("")) {
+            return null;
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(
                     SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token")),
-                    AccessRequestDTO.class);
+                    TokenBO.class);
         } catch (Exception e) {
             log.error("检测到非法token");
         }
-        return new AccessRequestDTO();
+        return null;
     }
 
 

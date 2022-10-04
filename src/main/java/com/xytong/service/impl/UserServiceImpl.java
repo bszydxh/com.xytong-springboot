@@ -22,17 +22,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
         implements UserService {
 
     @Override
-    public boolean checkUser(String username, String password) {
-        if (username == null || password == null) {
+    public boolean checkUser(String username, String pwd) {
+        if (username == null || pwd == null) {
             return false;
         }
-
-        boolean result = Objects.equals(findUserByName(username).getPassword(), password);
-        return result;
+        UserPO userPO = findUserByName(username);
+        if (userPO == null) {
+            return false;
+        }
+        return Objects.equals(userPO.getPassword(), pwd);
     }
 
     @Override
-    @NonNull
     public UserPO findUserByName(String username) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name", username);
@@ -43,7 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
             log.error("Find user error:" + username);
             e.printStackTrace();
         }
-        return userPO == null ? new UserPO() : userPO;
+        return userPO;
     }
 
     @Override

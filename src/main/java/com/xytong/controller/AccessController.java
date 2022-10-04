@@ -1,11 +1,10 @@
 package com.xytong.controller;
 
+import com.xytong.model.bo.TokenBO;
 import com.xytong.model.dto.AccessPostDTO;
 import com.xytong.model.dto.AccessRequestDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +24,7 @@ public class AccessController {
 
     @RequestMapping(value = "/access", produces = "application/json")
     @ResponseBody
-    public AccessPostDTO accessRequestMapping(@RequestBody AccessRequestDTO accessRequestDTO) {
+    public AccessPostDTO getToken(@RequestBody AccessRequestDTO accessRequestDTO) {
         AccessPostDTO accessPostDTO = new AccessPostDTO();
         if (accessRequestDTO.getToken() == null || Objects.equals(accessRequestDTO.getToken(), "")) {//如果传入值没有token
             if (userService.checkUser(accessRequestDTO.getUsername(), accessRequestDTO.getPassword())) {//进入密码鉴权
@@ -40,9 +39,9 @@ public class AccessController {
             accessPostDTO.setUsername(accessRequestDTO.getUsername());
             accessPostDTO.setTimestamp(System.currentTimeMillis());
         } else {
-            AccessRequestDTO accessRequestDTO_token = accessService.tokenParser(accessRequestDTO.getToken());
+            TokenBO tokenBO = accessService.tokenParser(accessRequestDTO.getToken());
             accessPostDTO.setToken(accessService.tokenRenewer(accessRequestDTO.getToken()));
-            accessPostDTO.setUsername(accessRequestDTO_token.getUsername());
+            accessPostDTO.setUsername(tokenBO.getUsername());
             accessPostDTO.setTimestamp(System.currentTimeMillis());
         }
         return accessPostDTO;

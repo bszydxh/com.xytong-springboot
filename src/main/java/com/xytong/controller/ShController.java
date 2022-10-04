@@ -22,7 +22,7 @@ public class ShController {
 
     @RequestMapping(value = "/secondhand", produces = "application/json")
     @ResponseBody
-    public ShPostDTO shData(@RequestBody ShRequestDTO shRequestDTO) {
+    public ShPostDTO getShList(@RequestBody ShRequestDTO shRequestDTO) {
         ShPostDTO shPostDTO = new ShPostDTO();
         if (!Objects.equals(shRequestDTO.getModule(), "secondhand")) {
             shPostDTO.setMode("module error");

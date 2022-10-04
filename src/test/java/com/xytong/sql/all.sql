@@ -98,6 +98,6 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (1, '2022-09-03 00:41:36', 'N', 'bszydxh', 'https://qlogo4.store.qq.com/qzone/2733879291/2733879291/100?1656158377', '在知识的海洋随波逐流', 'male', '2022-02-03 00:41:48', '18243998035', '2733879291@qq.com', '227695cd8ea3b7194e9c2cbd9eba4342');
 INSERT INTO `user` VALUES (2, '2022-09-03 22:58:33', 'N', 'xzx', 'https://qlogo1.store.qq.com/qzone/1472135712/1472135712/100?1624526244', '索尼大法好', 'male', NULL, '18605586653', '147235712@qq.com', '8eab34801b8f05644302ecacb5eadc49');
-INSERT INTO `user` VALUES (3, '2022-09-26 16:35:27', 'N', 'xzx2', 'https://qlogo1.store.qq.com/qzone/1472135712/1472135712/100?1624526244', NULL, 'female', '2022-09-26 16:34:47', '13630773737', '1234123411@qq.com', '456');
+INSERT INTO `user` VALUES (3, '2022-09-26 16:35:27', 'Y', 'xzx2', 'https://qlogo1.store.qq.com/qzone/1472135712/1472135712/100?1624526244', NULL, 'female', '2022-09-26 16:34:47', '13630773737', '1234123411@qq.com', '456');
 
 SET FOREIGN_KEY_CHECKS = 1;

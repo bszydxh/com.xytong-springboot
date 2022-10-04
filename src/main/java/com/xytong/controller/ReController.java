@@ -27,7 +27,7 @@ public class ReController {
 
     @RequestMapping(value = "/run_errands", produces = "application/json")
     @ResponseBody
-    public RePostDTO reData(@RequestBody ReRequestDTO reRequestDTO) {
+    public RePostDTO getReList(@RequestBody ReRequestDTO reRequestDTO) {
         RePostDTO rePostDTO = new RePostDTO();
         if (!Objects.equals(reRequestDTO.getModule(), "run_errands")) {
             rePostDTO.setMode("module error");
