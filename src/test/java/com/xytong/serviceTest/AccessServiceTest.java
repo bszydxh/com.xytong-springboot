@@ -25,12 +25,12 @@ public class AccessServiceTest {
     @Autowired
     FileService fileService;
 
-//    final String userNameTest = "bszydxh";
-//
-//    final String pwdTest = "227695cd8ea3b7194e9c2cbd9eba4342";
-    final String userNameTest = "xzx2";
+    final String userNameTest = "bszydxh";
 
-    final String pwdTest = "456";
+    final String pwdTest = "227695cd8ea3b7194e9c2cbd9eba4342";
+//    final String userNameTest = "xzx2";
+//
+//    final String pwdTest = "456";
     String readFile(String url) {
         return fileService.readFile(url);
     }
