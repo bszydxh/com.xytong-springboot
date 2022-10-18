@@ -1,8 +1,8 @@
 package com.xytong.controller;
 
 import com.xytong.model.bo.ShBO;
-import com.xytong.model.dto.ShPostDTO;
-import com.xytong.model.dto.ShRequestDTO;
+import com.xytong.model.dto.sh.ShPostDTO;
+import com.xytong.model.dto.sh.ShRequestDTO;
 import com.xytong.service.SecondhandService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,6 @@ public class ShController {
             shPostDTO.setMode("module error");
             return shPostDTO;
         }
-
         int start = shRequestDTO.getNumStart();
         int end = shRequestDTO.getNumEnd();
         int num = shRequestDTO.getNeedNum();

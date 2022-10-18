@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
     }
 
     @Override
-    public UserPO findUserById(Integer id) {
+    public UserPO findUserById(Long id) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
         UserPO userPO = null;

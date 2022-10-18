@@ -1,13 +1,11 @@
-package com.xytong.model.dto;
+package com.xytong.model.dto.forum;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xytong.model.bo.ShBO;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class ShPostDTO {
+public class ForumGetRequestDTO {
+    String module;
     String mode;
     @JsonProperty(value = "num_start")
     int numStart;
@@ -16,9 +14,4 @@ public class ShPostDTO {
     @JsonProperty(value = "num_end")
     int numEnd;
     long timestamp;
-    @JsonProperty(value = "sh_data")
-    List<ShBO> shData;
-    public String getTimestamp() {
-        return String.valueOf(timestamp);
-    }
 }

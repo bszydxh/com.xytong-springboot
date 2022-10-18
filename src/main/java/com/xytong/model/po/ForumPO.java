@@ -1,5 +1,7 @@
 package com.xytong.model.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -7,8 +9,9 @@ import java.util.Date;
 
 @TableName("forum")
 public class ForumPO implements Serializable {//面向数据库
-    private Integer id;
-    private Integer userFkey;
+    @TableId(type= IdType.ASSIGN_ID)
+    private Long id;
+    private Long userFkey;
     private Integer likes;
     private Integer comments;
     private Integer forwarding;
@@ -16,16 +19,16 @@ public class ForumPO implements Serializable {//面向数据库
     private String text;
     private Date timestamp;
     private static final long serialVersionUID = 1L;
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Integer getUserFkey() {
+    public Long getUserFkey() {
         return userFkey;
     }
-    public void setUserFkey(Integer userFkey) {
+    public void setUserFkey(Long userFkey) {
         this.userFkey = userFkey;
     }
     public Integer getLikes() {

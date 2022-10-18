@@ -13,4 +13,5 @@ import java.util.List;
 */
 public interface ForumService extends IService<ForumPO> {
     List<ForumBO> getForumList(String mode, int start, int end);
+    Boolean addForum(ForumBO forumBO);
 }

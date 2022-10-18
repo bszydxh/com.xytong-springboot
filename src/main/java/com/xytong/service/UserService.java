@@ -11,6 +11,6 @@ import com.xytong.model.po.UserPO;
 public interface UserService extends IService<UserPO> {
     boolean checkUser(String username, String password);
     UserPO findUserByName(String username);
-    UserPO findUserById(Integer id);
+    UserPO findUserById(Long id);
 
 }

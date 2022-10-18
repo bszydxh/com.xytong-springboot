@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class CardBO implements Serializable {//数据传输层用
     @Getter(AccessLevel.NONE)
     @JsonIgnore
-    private Integer id;//主键
+    private Long id;//主键
     @JsonIgnore
     private String uid;//用户id，TODO
     @JsonIgnore

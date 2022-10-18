@@ -2,8 +2,8 @@ package com.xytong.controller;
 
 import com.xytong.model.bo.ReBO;
 import com.xytong.model.po.RePO;
-import com.xytong.model.dto.RePostDTO;
-import com.xytong.model.dto.ReRequestDTO;
+import com.xytong.model.dto.re.RePostDTO;
+import com.xytong.model.dto.re.ReRequestDTO;
 import com.xytong.mapper.ReMapper;
 import com.xytong.mapper.UserMapper;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,7 +49,7 @@ public class ReController {
                     List<ReBO> reList = new ArrayList<>();
                     List<RePO> rePOList = reMapper.selectList(null);
                     for (RePO rePO : rePOList) {
-                        int uid = rePO.getUserFkey();
+                        Long uid = rePO.getUserFkey();
                         reList.add(ReBO.init(rePO, userMapper.selectById(uid)));
                     }
                     rePostDTO.setReData(reList);

@@ -5,8 +5,8 @@
 <mapper namespace="com.xytong.mapper.ForumMapper">
 
     <resultMap id="BaseResultMap" type="com.xytong.model.po.ForumPO">
-        <id property="id" column="id" jdbcType="INTEGER"/>
-        <result property="userFkey" column="user_fkey" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userFkey" column="user_fkey" jdbcType="BIGINT"/>
         <result property="likes" column="likes" jdbcType="INTEGER"/>
         <result property="comments" column="comments" jdbcType="INTEGER"/>
         <result property="forwarding" column="forwarding" jdbcType="INTEGER"/>

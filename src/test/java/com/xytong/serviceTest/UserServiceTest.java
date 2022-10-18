@@ -41,10 +41,10 @@ public class UserServiceTest {
     }
     @Test
     public void findUserByIdTest() {
-        UserPO userPO = userService.findUserById(1);
+        UserPO userPO = userService.findUserById(1L);
         log.info(userPO.toString());
         assertEquals("bszydxh", userPO.getName());
-        UserPO userPO2 = userService.findUserById(2);
+        UserPO userPO2 = userService.findUserById(2L);
         log.info(userPO.toString());
         assertEquals("xzx", userPO2.getName());
         assertNotNull(userPO2.getPassword());

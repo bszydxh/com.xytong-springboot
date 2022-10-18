@@ -2,8 +2,8 @@ package com.xytong.controller;
 
 
 import com.xytong.model.bo.UserBO;
-import com.xytong.model.dto.UserPostDTO;
-import com.xytong.model.dto.UserRequestDTO;
+import com.xytong.model.dto.user.UserPostDTO;
+import com.xytong.model.dto.user.UserRequestDTO;
 import com.xytong.model.po.UserPO;
 import com.xytong.service.AccessService;
 import com.xytong.service.UserService;

@@ -1,8 +1,8 @@
 package com.xytong.controller;
 
 import com.xytong.model.bo.TokenBO;
-import com.xytong.model.dto.AccessPostDTO;
-import com.xytong.model.dto.AccessRequestDTO;
+import com.xytong.model.dto.access.AccessPostDTO;
+import com.xytong.model.dto.access.AccessRequestDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.UserService;
 import lombok.extern.slf4j.Slf4j;

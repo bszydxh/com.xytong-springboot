@@ -1,13 +1,13 @@
-package com.xytong.model.dto;
+package com.xytong.model.dto.forum;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xytong.model.bo.ReBO;
+import com.xytong.model.bo.ForumBO;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class RePostDTO {
+public class ForumGetPostDTO {
     String mode;
     @JsonProperty(value = "num_start")
     int numStart;
@@ -16,15 +16,15 @@ public class RePostDTO {
     @JsonProperty(value = "num_end")
     int numEnd;
     long timestamp;
-    @JsonProperty(value = "re_data")
-    List<ReBO> reData;
+    @JsonProperty(value = "forum_data")
+    List<ForumBO> forumData;
 
-    public void setReData(List<ReBO> reData) {
-        this.reData = reData;
+    public void setForumData(List<ForumBO> forumData) {
+        this.forumData = forumData;
     }
 
-    public List<ReBO> getReData() {
-        return reData;
+    public List<ForumBO> getForumData() {
+        return forumData;
     }
 
     public String getTimestamp() {

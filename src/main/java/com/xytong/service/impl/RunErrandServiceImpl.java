@@ -36,7 +36,7 @@ public class RunErrandServiceImpl extends ServiceImpl<ReMapper, RePO>
             case "newest": {
                 List<RePO> forumPOList = list();
                 for (RePO rePO : forumPOList) {
-                    int uid = rePO.getUserFkey();
+                    Long uid = rePO.getUserFkey();
                     reList.add(ReBO.init(rePO, userService.findUserById(uid)));
                 }
             }

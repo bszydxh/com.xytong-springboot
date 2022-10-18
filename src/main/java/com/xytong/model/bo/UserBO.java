@@ -21,14 +21,14 @@ public class UserBO implements Serializable {
             return null;
         }
         UserBO userBO = new UserBO();
-       userBO.setName(userPO.getName());
-       userBO.setPhone(userPO.getPhone());
-       userBO.setGender((String) userPO.getGender());
-       userBO.setBirthday(userPO.getBirthdayTimestamp().getTime());
-       userBO.setEmail(userPO.getEmail());
-       userBO.setPassword(userPO.getPassword());
-       userBO.setUserAvatar(userPO.getAvatar());
-       userBO.setSignature(userPO.getSignature());
+        userBO.setName(userPO.getName());
+        userBO.setPhone(userPO.getPhone());
+        userBO.setGender((String) userPO.getGender());
+        userBO.setBirthday(userPO.getBirthdayTimestamp() == null ? 0 : userPO.getBirthdayTimestamp().getTime()); //发生了空指针！多重调用api务必小心
+        userBO.setEmail(userPO.getEmail());
+        userBO.setPassword(userPO.getPassword());
+        userBO.setUserAvatar(userPO.getAvatar());
+        userBO.setSignature(userPO.getSignature());
         return userBO;
     }
 

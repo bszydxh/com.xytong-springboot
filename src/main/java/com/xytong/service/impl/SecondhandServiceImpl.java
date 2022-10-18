@@ -35,7 +35,7 @@ public class SecondhandServiceImpl extends ServiceImpl<ShMapper, ShPO>
             case "newest": {
                 List<ShPO> shPOList = list();
                 for (ShPO forumPO : shPOList) {
-                    int uid = forumPO.getUserFkey();
+                    Long uid = forumPO.getUserFkey();
                     shList.add(ShBO.init(forumPO, userService.findUserById(uid)));
                 }
             }

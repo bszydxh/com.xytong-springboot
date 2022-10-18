@@ -5,8 +5,8 @@
 <mapper namespace="com.xytong.mapper.ShMapper">
 
     <resultMap id="BaseResultMap" type="com.xytong.model.po.ShPO">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="userFkey" column="user_fkey" jdbcType="INTEGER"/>
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userFkey" column="user_fkey" jdbcType="BIGINT"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="text" column="text" jdbcType="VARCHAR"/>
             <result property="timestamp" column="timestamp" jdbcType="TIMESTAMP"/>
