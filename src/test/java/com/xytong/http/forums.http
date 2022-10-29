@@ -8,10 +8,21 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }
 
+### 本地正确测试forums/v1
+POST http://localhost:80/forums/v1/get
+Content-Type: application/json
 
+{
+  "module": "forums",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": "{{timestamp}}"
+}
 
 ### 本地数量错误测试forums
 POST http://localhost:80/forums
@@ -23,7 +34,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 1,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }
 
 
@@ -37,10 +48,11 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }
+
 ### 本地模块错误测试forums
-POST http://localhost:80/secondhand
+POST http://localhost:80/forums
 Content-Type: application/json
 
 {
@@ -49,5 +61,18 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
+}
+
+### 添加成功测试
+POST http://localhost:80/forums/v1/add
+Content-Type: application/json
+
+{
+  "module": "forums",
+  "token": "{{token}}",
+  "username":"{{name}}",
+  "text": "test",
+  "timestamp": "{{timestamp}}",
+  "title": "test"
 }

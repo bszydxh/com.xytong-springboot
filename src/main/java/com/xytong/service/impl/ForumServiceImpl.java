@@ -1,21 +1,19 @@
 package com.xytong.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xytong.factory.PO2BOFactory;
 import com.xytong.mapper.ForumMapper;
 import com.xytong.model.bo.ForumBO;
+import com.xytong.model.bo.UserBO;
 import com.xytong.model.po.ForumPO;
-import com.xytong.model.po.UserPO;
 import com.xytong.service.ForumService;
 import com.xytong.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,18 +32,24 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
         this.userService = userService;
     }
 
+    @NotNull
     @Override
-    public List<ForumBO> getForumList(String mode, int start, int end) {
+    public List<ForumBO> getForumList(String mode, Long timestamp, int start, int end) {
         if (start > end) {
             throw new IllegalStateException("Unexpected value: " + start + end);
         }
         List<ForumBO> forumList = new ArrayList<>();
         switch (mode) {
             case "newest": {
-                List<ForumPO> forumPOList = list();
+                QueryWrapper<ForumPO> wrapper = new QueryWrapper<>();
+                Date date = new Date(timestamp);
+                //过滤新数据
+                wrapper.le("timestamp", date);
+                wrapper.last("ORDER BY `id` DESC LIMIT " + start + "," + (end - start + 1));
+                List<ForumPO> forumPOList = list(wrapper);
                 for (ForumPO forumPO : forumPOList) {
                     Long uid = forumPO.getUserFkey();
-                    forumList.add(ForumBO.init(forumPO, userService.findUserById(uid)));
+                    forumList.add(PO2BOFactory.getForumBO(forumPO, userService.findUserById(uid)));
                 }
             }
             break;
@@ -61,13 +65,13 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
             return false;
         }
         try {
-            ForumPO forumPO = new ForumPO();
-            UserPO userPO = userService.findUserByName(forumBO.getUserName());
-            if (userPO == null) {
-                log.error("not a valid date");
+            UserBO userBO = userService.findUserByName(forumBO.getUserName());
+            if (userBO == null) {
+                log.error("not a valid user");
                 return false;
             }
-            forumPO.setUserFkey(userPO.getId());
+            ForumPO forumPO = new ForumPO();
+            forumPO.setUserFkey(userBO.getId());
             forumPO.setLikes(forumBO.getLikes());
             forumPO.setComments(forumBO.getComments());
             forumPO.setForwarding(forumBO.getForwarding());
@@ -75,7 +79,7 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
             forumPO.setText(forumBO.getText());
             Date date = null;
             try {
-                date =new Date(Long.parseLong(forumBO.getTimestamp()));
+                date = new Date(Long.parseLong(forumBO.getTimestamp()));
                 forumPO.setTimestamp(date);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,7 +89,6 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
         } catch (Exception e) {
             log.error("save error");
             return false;
-
         }
         return true;
     }

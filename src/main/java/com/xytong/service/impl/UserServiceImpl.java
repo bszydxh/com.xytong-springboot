@@ -2,6 +2,8 @@ package com.xytong.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xytong.factory.PO2BOFactory;
+import com.xytong.model.bo.UserBO;
 import com.xytong.model.po.UserPO;
 import com.xytong.mapper.UserMapper;
 import com.xytong.service.UserService;
@@ -26,15 +28,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
         if (username == null || pwd == null) {
             return false;
         }
-        UserPO userPO = findUserByName(username);
-        if (userPO == null) {
+        UserBO userBO = findUserByName(username);
+        if (userBO == null) {
             return false;
         }
-        return Objects.equals(userPO.getPassword(), pwd);
+        return Objects.equals(userBO.getPassword(), pwd);
     }
 
     @Override
-    public UserPO findUserByName(String username) {
+    public UserBO findUserByName(String username) {
+        if (username == null) {
+            return null;
+        }
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name", username);
         UserPO userPO = null;
@@ -44,11 +49,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
             log.error("Find user error:" + username);
             e.printStackTrace();
         }
-        return userPO;
+        return PO2BOFactory.getUserBO(userPO);
     }
 
     @Override
-    public UserPO findUserById(Long id) {
+    public UserBO findUserById(Long id) {
+        if (id == null) {
+            return null;
+        }
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
         UserPO userPO = null;
@@ -58,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
             log.error("Find id error:" + id);
             e.printStackTrace();
         }
-        return userPO == null ? new UserPO() : userPO;
+        return PO2BOFactory.getUserBO(userPO);
     }
 
 }

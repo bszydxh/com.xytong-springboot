@@ -1,5 +1,7 @@
 package com.xytong.model.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,11 +11,13 @@ import java.util.Date;
 /**
  * @TableName user
  */
+ 
 @TableName("user")
 public class UserPO implements Serializable {
     /**
      *
      */
+    @TableId(type= IdType.ASSIGN_ID)
     private Long id;
 
     /**

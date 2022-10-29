@@ -1,11 +1,14 @@
 package com.xytong.controller;
 
+import com.xytong.factory.BO2DTOFactory;
 import com.xytong.model.bo.ForumBO;
-import com.xytong.model.dto.forum.ForumAddPostDTO;
+import com.xytong.model.dto.forum.ForumAddResponseDTO;
 import com.xytong.model.dto.forum.ForumAddRequestDTO;
-import com.xytong.model.dto.forum.ForumGetPostDTO;
+import com.xytong.model.dto.forum.ForumGetResponseDTO;
 import com.xytong.model.dto.forum.ForumGetRequestDTO;
+import com.xytong.service.AccessService;
 import com.xytong.service.ForumService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,50 +17,91 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * @author bszydxh
+ */
 @RestController
+@Slf4j
 public class ForumController {
 
-    public ForumController(ForumService forumService) {
+    public ForumController(ForumService forumService, AccessService accessService) {
         this.forumService = forumService;
+        this.accessService = accessService;
     }
 
     final ForumService forumService;
 
+    final AccessService accessService;
+
+    public static final String FORUM_MODULE_NAME = "forums";
 
     @RequestMapping(value = "/forums", produces = "application/json")
     @ResponseBody
-    public ForumGetPostDTO getForumList(@RequestBody ForumGetRequestDTO forumGetRequestDTO) {
-        ForumGetPostDTO forumGetPostDTO = new ForumGetPostDTO();
-        if (!Objects.equals(forumGetRequestDTO.getModule(), "forums")) {
-            forumGetPostDTO.setMode("module error");
-            return forumGetPostDTO;
+    public ForumGetResponseDTO getForumList(@RequestBody ForumGetRequestDTO forumGetRequestDTO) {
+        if (!Objects.equals(forumGetRequestDTO.getModule(), FORUM_MODULE_NAME)) {
+            return BO2DTOFactory.getGetPostDTO("module error", ForumGetResponseDTO.class);
         }
-        int start = forumGetRequestDTO.getNumStart();
-        int end = forumGetRequestDTO.getNumEnd();
-        int num = forumGetRequestDTO.getNeedNum();
+        Integer start = forumGetRequestDTO.getNumStart();
+        Integer end = forumGetRequestDTO.getNumEnd();
+        Integer num = forumGetRequestDTO.getNeedNum();
+        if (start == null || end == null || num == null) {
+            return BO2DTOFactory.getGetPostDTO("interface error", ForumGetResponseDTO.class);
+        }
         if (start > end || end - start != num - 1) {
-            forumGetPostDTO.setMode("num error");
+            return BO2DTOFactory.getGetPostDTO("num error", ForumGetResponseDTO.class);
         } else {
-            forumGetPostDTO.setMode(forumGetRequestDTO.getMode());
-            forumGetPostDTO.setNumStart(start);
-            forumGetPostDTO.setNeedNum(num);
-            forumGetPostDTO.setNumEnd(end);
-            forumGetPostDTO.setTimestamp(System.currentTimeMillis());
             try {
-                List<ForumBO> forumList = forumService.getForumList(forumGetRequestDTO.getMode(), start, end);
-                forumGetPostDTO.setForumData(forumList);
+                List<ForumBO> forumList = forumService.getForumList(
+                        forumGetRequestDTO.getMode(),
+                        forumGetRequestDTO.getTimestamp(),
+                        start,
+                        end);
+                return BO2DTOFactory.getGetPostDTO(
+                        forumGetRequestDTO.getMode(),
+                        forumGetRequestDTO.getTimestamp(),
+                        start,
+                        start + forumList.size() - 1,
+                        forumList,
+                        ForumGetResponseDTO.class);
             } catch (Exception e) {
-                forumGetPostDTO.setMode("mode error");
+                return BO2DTOFactory.getGetPostDTO("mode error", ForumGetResponseDTO.class);
             }
         }
-        return forumGetPostDTO;
     }
 
-    @RequestMapping(value = "/forums/add", produces = "application/json")
+    @RequestMapping(value = "/forums/v1/get", produces = "application/json")
     @ResponseBody
-    public ForumAddPostDTO addForumList(@RequestBody ForumAddRequestDTO forumRequestDTO) {
-        ForumAddPostDTO forumAddPostDTO = new ForumAddPostDTO();
+    public ForumGetResponseDTO getForumList2(@RequestBody ForumGetRequestDTO forumGetRequestDTO) {
+        return getForumList(forumGetRequestDTO);
+    }
 
-        return forumAddPostDTO;
+    @RequestMapping(value = "/forums/v1/add", produces = "application/json")
+    @ResponseBody
+    public ForumAddResponseDTO addForumList(@RequestBody ForumAddRequestDTO forumAddRequestDTO) {
+        ForumAddResponseDTO forumAddResponseDTO = new ForumAddResponseDTO();
+        forumAddResponseDTO.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        if (!Objects.equals(forumAddRequestDTO.getModule(), FORUM_MODULE_NAME)) {
+            forumAddResponseDTO.setMode("module error");
+            return forumAddResponseDTO;
+        }
+        if (!accessService.tokenCheckerWithUsername(forumAddRequestDTO.getToken(), forumAddRequestDTO.getUsername())) {
+            forumAddResponseDTO.setMode("token error");
+            return forumAddResponseDTO;
+        }
+        ForumBO forumBO = new ForumBO();
+        forumBO.setLikes(0);
+        forumBO.setComments(0);
+        forumBO.setForwarding(0);
+        forumBO.setText(forumAddRequestDTO.getText());
+        forumBO.setTimestamp(System.currentTimeMillis());
+        forumBO.setTitle(forumAddRequestDTO.getTitle());
+        forumBO.setUserName(forumAddRequestDTO.getUsername());
+        if (forumService.addForum(forumBO)) {
+            forumAddResponseDTO.setMode("add ok");
+        } else {
+            forumAddResponseDTO.setMode("add error");
+        }
+        return forumAddResponseDTO;
     }
 }

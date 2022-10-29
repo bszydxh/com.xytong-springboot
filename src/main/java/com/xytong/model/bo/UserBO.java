@@ -1,12 +1,17 @@
 package com.xytong.model.bo;
 
-import com.xytong.model.po.UserPO;
 import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author bszydxh
+ */
+ 
 @Data
 public class UserBO implements Serializable {
+    private Long id;
+    private Boolean admin;
     private String name;
     private String phone;
     private String gender;
@@ -15,21 +20,5 @@ public class UserBO implements Serializable {
     private String password;
     private String userAvatar;
     private String signature;
-
-    public static UserBO init(UserPO userPO) {
-        if (userPO == null) {
-            return null;
-        }
-        UserBO userBO = new UserBO();
-        userBO.setName(userPO.getName());
-        userBO.setPhone(userPO.getPhone());
-        userBO.setGender((String) userPO.getGender());
-        userBO.setBirthday(userPO.getBirthdayTimestamp() == null ? 0 : userPO.getBirthdayTimestamp().getTime()); //发生了空指针！多重调用api务必小心
-        userBO.setEmail(userPO.getEmail());
-        userBO.setPassword(userPO.getPassword());
-        userBO.setUserAvatar(userPO.getAvatar());
-        userBO.setSignature(userPO.getSignature());
-        return userBO;
-    }
 
 }

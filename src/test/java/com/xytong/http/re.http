@@ -8,7 +8,19 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
+}
+### 本地正确测试run_errands v1
+POST http://localhost:80/run_errands/v1/get
+Content-Type: application/json
+
+{
+  "module": "run_errands",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": "{{timestamp}}"
 }
 
 
@@ -23,7 +35,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 1,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }
 
 
@@ -37,5 +49,19 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
+}
+
+### 正确添加测试
+POST http://localhost:80/run_errands/v1/add
+Content-Type: application/json
+
+{
+  "module": "run_errands",
+  "token": "{{token}}",
+  "username":"{{name}}",
+  "price": "{{price}}",
+  "text": "test",
+  "timestamp": "{{timestamp}}",
+  "title": "test"
 }

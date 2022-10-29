@@ -1,5 +1,7 @@
 package com.xytong.model.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -10,11 +12,13 @@ import java.util.Date;
  * 
  * @TableName run_errand
  */
+ 
 @TableName("re")
 public class RePO implements Serializable {
     /**
      * 
      */
+    @TableId(type= IdType.ASSIGN_ID)
     private Long id;
 
     /**

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xytong.mapper.CommentMapper">
+
+    <resultMap id="BaseResultMap" type="com.xytong.model.po.CommentPO">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="cardFkey" column="card_fkey" jdbcType="BIGINT"/>
+            <result property="userFkey" column="user_fkey" jdbcType="BIGINT"/>
+            <result property="replyFkey" column="reply_fkey" jdbcType="BIGINT"/>
+            <result property="text" column="text" jdbcType="VARCHAR"/>
+            <result property="visibility" column="visibility" jdbcType="OTHER"/>
+            <result property="likes" column="likes" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,card_fkey,user_fkey,
+        reply_fkey,text,visibility,
+        likes
+    </sql>
+</mapper>

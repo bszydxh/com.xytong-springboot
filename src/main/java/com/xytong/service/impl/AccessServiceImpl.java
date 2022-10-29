@@ -2,16 +2,20 @@ package com.xytong.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xytong.model.bo.TokenBO;
+import com.xytong.model.bo.UserBO;
 import com.xytong.model.dto.access.AccessRequestDTO;
+import com.xytong.service.AccessService;
 import com.xytong.service.FileService;
 import com.xytong.service.UserService;
 import com.xytong.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Slf4j
 @Service
-public class AccessServiceImpl implements com.xytong.service.AccessService {
+public class AccessServiceImpl implements AccessService {
     final FileService fileService;
     final UserService userService;
 
@@ -44,6 +48,24 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
         return userService.checkUser(tokenBO.getUsername(), tokenBO.getPassword());
     }
 
+    @Override
+    public boolean tokenCheckerWithUsername(String token, String username) {
+        if (!tokenChecker(token)) {
+            return false;
+        }
+        TokenBO tokenBO = tokenParser(token);
+        UserBO userBO = userService.findUserByName(tokenBO.getUsername());
+        if (userBO == null) {
+            log.error("token 含有非法用户，疑似密钥泄露！");
+            return false;
+        }
+        if (userBO.getAdmin().equals(true)) {
+            log.warn("Admin pass");
+            return true;
+        }
+        return Objects.equals(userBO.getName(), username);
+    }
+
 
     @Override
     public String tokenRenewer(String token) {
@@ -66,7 +88,7 @@ public class AccessServiceImpl implements com.xytong.service.AccessService {
 
     @Override
     public TokenBO tokenParser(String token) {
-        if (token == null || token.equals("")) {
+        if (token == null || "".equals(token)) {
             return null;
         }
         ObjectMapper objectMapper = new ObjectMapper();

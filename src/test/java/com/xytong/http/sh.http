@@ -8,9 +8,21 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }
 
+### 本地正确测试secondhand v1
+POST http://localhost:80/secondhand/v1/get
+Content-Type: application/json
+
+{
+  "module": "secondhand",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": "{{timestamp}}"
+}
 
 
 ### 本地数量错误测试secondhand
@@ -23,7 +35,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 1,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }
 
 
@@ -37,5 +49,5 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": 1650098900
+  "timestamp": "{{timestamp}}"
 }

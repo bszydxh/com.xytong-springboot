@@ -7,6 +7,7 @@
     <resultMap id="BaseResultMap" type="com.xytong.model.po.ShPO">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userFkey" column="user_fkey" jdbcType="BIGINT"/>
+            <result property="imageUrl" column="image_url" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="text" column="text" jdbcType="VARCHAR"/>
             <result property="timestamp" column="timestamp" jdbcType="TIMESTAMP"/>
@@ -14,7 +15,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_fkey,title,
+        id,user_fkey,image_url,title,
         text,timestamp,price
     </sql>
 </mapper>

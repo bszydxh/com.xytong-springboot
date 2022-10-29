@@ -4,10 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-
+/**
+ * @author bszydxh
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CommentBO extends CardBO implements Serializable {
+public class CommentBO extends BbsBO implements Serializable {
     Integer floor ;
     Integer likes;
 

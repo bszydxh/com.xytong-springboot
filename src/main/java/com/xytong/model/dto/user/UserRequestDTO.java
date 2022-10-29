@@ -2,6 +2,7 @@ package com.xytong.model.dto.user;
 
 import lombok.Data;
 
+ 
 @Data
 public class UserRequestDTO{
     String mode;
