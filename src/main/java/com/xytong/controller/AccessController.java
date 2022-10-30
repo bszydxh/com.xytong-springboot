@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
+
 /**
  * @author bszydxh
  */
@@ -26,6 +27,13 @@ public class AccessController {
         this.userService = userService;
     }
 
+    /**
+     * 二合一接口 负责用户token校验+换取新token
+     * 超级用户鉴权不在这里
+     *
+     * @param accessRequestDTO 传入单token或者姓名+密码
+     * @return 返回token值
+     */
     @RequestMapping(value = "/access", produces = "application/json")
     @ResponseBody
     public AccessResponseDTO getToken(@RequestBody AccessRequestDTO accessRequestDTO) {
@@ -36,7 +44,7 @@ public class AccessController {
                         accessRequestDTO.getUsername(),
                         accessRequestDTO.getPassword(),
                         System.currentTimeMillis()));
-                accessResponseDTO.setMode("");
+                accessResponseDTO.setMode("check ok");
             } else {
                 accessResponseDTO.setMode("username or password error");
             }
@@ -46,6 +54,7 @@ public class AccessController {
             TokenBO tokenBO = accessService.tokenParser(accessRequestDTO.getToken());
             if (tokenBO != null) {
                 accessResponseDTO.setToken(accessService.tokenRenewer(accessRequestDTO.getToken()));
+                accessResponseDTO.setMode("get ok");
                 accessResponseDTO.setUsername(tokenBO.getUsername());
                 accessResponseDTO.setTimestamp(System.currentTimeMillis());
             } else {
@@ -53,5 +62,17 @@ public class AccessController {
             }
         }
         return accessResponseDTO;
+    }
+
+    @RequestMapping(value = "/access/v1/check", produces = "application/json")
+    @ResponseBody
+    public AccessResponseDTO getToken2(@RequestBody AccessRequestDTO accessRequestDTO) {
+        return getToken(accessRequestDTO);
+    }
+
+    @RequestMapping(value = "/access/v1/signup", produces = "application/json")
+    @ResponseBody
+    public AccessResponseDTO signup(@RequestBody AccessRequestDTO accessRequestDTO) {
+        return null;
     }
 }

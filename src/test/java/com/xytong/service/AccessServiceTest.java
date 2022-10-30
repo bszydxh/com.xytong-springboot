@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
-
 public class AccessServiceTest {
     @Autowired
     AccessService accessService;

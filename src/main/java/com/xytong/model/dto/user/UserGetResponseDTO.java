@@ -4,7 +4,7 @@ import lombok.Data;
 
  
 @Data
-public class UserResponseDTO {
+public class UserGetResponseDTO {
     String mode;
     String username;
     String avatar;

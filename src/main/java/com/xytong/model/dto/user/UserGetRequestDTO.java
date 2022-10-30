@@ -4,7 +4,7 @@ import lombok.Data;
 
  
 @Data
-public class UserRequestDTO{
+public class UserGetRequestDTO {
     String mode;
     String token;
     String username;

@@ -14,8 +14,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 @Slf4j
+@SpringBootTest
 class ReServiceTest {
     @Autowired
     ReService reService;

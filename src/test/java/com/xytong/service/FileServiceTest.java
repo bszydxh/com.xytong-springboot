@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
 @Slf4j
+@SpringBootTest
 public class FileServiceTest {
     @Autowired
     FileService fileService;
