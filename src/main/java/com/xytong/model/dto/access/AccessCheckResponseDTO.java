@@ -7,7 +7,7 @@ import lombok.Data;
  * @author bszydxh
  */
 @Data
-public class AccessResponseDTO {
+public class AccessCheckResponseDTO {
     String mode;
     String username;
     String token;

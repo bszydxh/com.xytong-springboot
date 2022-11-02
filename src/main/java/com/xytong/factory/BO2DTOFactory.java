@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Slf4j
 public class BO2DTOFactory {
-    public static <T, S extends BbsGetDTO> S getGetPostDTO(String mode, Integer start, Integer end, List<T> list, Class<S> returnValueType) {
+    public static <T, S extends BbsGetDTO> S getBbsGetResponseDTO(String mode, Integer start, Integer end, List<T> list, Class<S> returnValueType) {
         S getPostDTO = null;
         try {
             getPostDTO = returnValueType.getConstructor(new Class[]{}).newInstance();
@@ -28,7 +28,7 @@ public class BO2DTOFactory {
         return getPostDTO;
     }
 
-    public static <T, S extends BbsGetDTO> S getGetPostDTO(String mode, Long timestamp, Integer start, Integer end, List<T> list, Class<S> returnValueType) {
+    public static <T, S extends BbsGetDTO> S getBbsGetResponseDTO(String mode, Long timestamp, Integer start, Integer end, List<T> list, Class<S> returnValueType) {
         S getPostDTO = null;
         try {
             getPostDTO = returnValueType.getConstructor(new Class[]{}).newInstance();
@@ -45,7 +45,7 @@ public class BO2DTOFactory {
         return getPostDTO;
     }
 
-    public static <S extends BbsGetDTO> S getGetPostDTO(String mode, Class<S> cls) {
+    public static <S extends BbsGetDTO> S getBbsGetResponseDTO(String mode, Class<S> cls) {
         S getPostDTO = null;
         try {
             getPostDTO = cls.getConstructor(new Class[]{}).newInstance();

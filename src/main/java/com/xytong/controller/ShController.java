@@ -34,16 +34,16 @@ public class ShController {
     @ResponseBody
     public ShGetResponseDTO getShList(@RequestBody ShGetRequestDTO shGetRequestDTO) {
         if (!Objects.equals(shGetRequestDTO.getModule(), SH_MODULE_NAME)) {
-            return BO2DTOFactory.getGetPostDTO("module error", ShGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("module error", ShGetResponseDTO.class);
         }
         Integer start = shGetRequestDTO.getNumStart();
         Integer end = shGetRequestDTO.getNumEnd();
         Integer num = shGetRequestDTO.getNeedNum();
         if (start == null || end == null || num == null) {
-            return BO2DTOFactory.getGetPostDTO("interface error", ShGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("interface error", ShGetResponseDTO.class);
         }
         if (start > end || end - start != num - 1) {
-            return BO2DTOFactory.getGetPostDTO("num error", ShGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("num error", ShGetResponseDTO.class);
         } else {
             try {
                 List<ShBO> shList = shService.getShList(
@@ -51,7 +51,7 @@ public class ShController {
                         shGetRequestDTO.getTimestamp(),
                         start,
                         end);
-                return BO2DTOFactory.getGetPostDTO(
+                return BO2DTOFactory.getBbsGetResponseDTO(
                         shGetRequestDTO.getMode(),
                         shGetRequestDTO.getTimestamp(),
                         start,
@@ -59,7 +59,7 @@ public class ShController {
                         shList,
                         ShGetResponseDTO.class);
             } catch (Exception e) {
-                return BO2DTOFactory.getGetPostDTO("mode error", ShGetResponseDTO.class);
+                return BO2DTOFactory.getBbsGetResponseDTO("mode error", ShGetResponseDTO.class);
             }
         }
     }

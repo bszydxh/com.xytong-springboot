@@ -1,7 +1,7 @@
 package com.xytong.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xytong.model.dto.access.AccessRequestDTO;
+import com.xytong.model.dto.access.AccessCheckRequestDTO;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -35,9 +35,9 @@ public class AccessServiceTest {
         String json = rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token"));
         log.info(json);
         ObjectMapper objectMapper = new ObjectMapper();
-        AccessRequestDTO accessRequestDTO = objectMapper.readValue(json, AccessRequestDTO.class);
-        assertEquals(userNameTest, accessRequestDTO.getUsername());
-        assertEquals(pwdTest, accessRequestDTO.getPassword());
+        AccessCheckRequestDTO accessCheckRequestDTO = objectMapper.readValue(json, AccessCheckRequestDTO.class);
+        assertEquals(userNameTest, accessCheckRequestDTO.getUsername());
+        assertEquals(pwdTest, accessCheckRequestDTO.getPassword());
     }
 
     @Test
@@ -78,8 +78,8 @@ public class AccessServiceTest {
         assertNull(illegalToken);
         String json = rsaDecrypt(newToken, fileService.readFile("classpath:access/rsa_token"));
         ObjectMapper mapper = new ObjectMapper();
-        AccessRequestDTO accessRequestDTO = mapper.readValue(json, AccessRequestDTO.class);
-        assertEquals(userNameTest, accessRequestDTO.getUsername());
+        AccessCheckRequestDTO accessCheckRequestDTO = mapper.readValue(json, AccessCheckRequestDTO.class);
+        assertEquals(userNameTest, accessCheckRequestDTO.getUsername());
     }
 
     @Test

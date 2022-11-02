@@ -7,10 +7,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 
- 
+
 @TableName("forum")
 public class ForumPO implements Serializable {//面向数据库
-    @TableId(type= IdType.ASSIGN_ID)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     private Long userFkey;
     private Integer likes;
@@ -20,51 +20,67 @@ public class ForumPO implements Serializable {//面向数据库
     private String text;
     private Date timestamp;
     private static final long serialVersionUID = 1L;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public Long getUserFkey() {
         return userFkey;
     }
+
     public void setUserFkey(Long userFkey) {
         this.userFkey = userFkey;
     }
+
     public Integer getLikes() {
         return likes;
     }
+
     public void setLikes(Integer likes) {
         this.likes = likes;
     }
+
     public Integer getComments() {
         return comments;
     }
+
     public void setComments(Integer comments) {
         this.comments = comments;
     }
+
     public Integer getForwarding() {
         return forwarding;
     }
+
     public void setForwarding(Integer forwarding) {
         this.forwarding = forwarding;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getText() {
         return text;
     }
+
     public void setText(String text) {
         this.text = text;
     }
+
     public Date getTimestamp() {
         return timestamp;
     }
+
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
@@ -82,13 +98,13 @@ public class ForumPO implements Serializable {//面向数据库
         }
         ForumPO other = (ForumPO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserFkey() == null ? other.getUserFkey() == null : this.getUserFkey().equals(other.getUserFkey()))
-            && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
-            && (this.getComments() == null ? other.getComments() == null : this.getComments().equals(other.getComments()))
-            && (this.getForwarding() == null ? other.getForwarding() == null : this.getForwarding().equals(other.getForwarding()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getText() == null ? other.getText() == null : this.getText().equals(other.getText()))
-            && (this.getTimestamp() == null ? other.getTimestamp() == null : this.getTimestamp().equals(other.getTimestamp()));
+                && (this.getUserFkey() == null ? other.getUserFkey() == null : this.getUserFkey().equals(other.getUserFkey()))
+                && (this.getLikes() == null ? other.getLikes() == null : this.getLikes().equals(other.getLikes()))
+                && (this.getComments() == null ? other.getComments() == null : this.getComments().equals(other.getComments()))
+                && (this.getForwarding() == null ? other.getForwarding() == null : this.getForwarding().equals(other.getForwarding()))
+                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+                && (this.getText() == null ? other.getText() == null : this.getText().equals(other.getText()))
+                && (this.getTimestamp() == null ? other.getTimestamp() == null : this.getTimestamp().equals(other.getTimestamp()));
     }
 
     @Override

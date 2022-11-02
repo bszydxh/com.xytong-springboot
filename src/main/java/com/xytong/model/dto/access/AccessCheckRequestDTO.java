@@ -7,7 +7,7 @@ import lombok.Data;
  */
 
 @Data
-public class AccessRequestDTO {
+public class AccessCheckRequestDTO {
     String mode;
     String username;
     String password;

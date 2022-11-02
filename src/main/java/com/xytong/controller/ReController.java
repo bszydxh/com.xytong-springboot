@@ -37,16 +37,16 @@ public class ReController {
     @ResponseBody
     public ReGetResponseDTO getReList(@RequestBody ReGetRequestDTO reGetRequestDTO) {
         if (!Objects.equals(reGetRequestDTO.getModule(), RE_MODULE_NAME)) {
-            return BO2DTOFactory.getGetPostDTO("module error", ReGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("module error", ReGetResponseDTO.class);
         }
         Integer start = reGetRequestDTO.getNumStart();
         Integer end = reGetRequestDTO.getNumEnd();
         Integer num = reGetRequestDTO.getNeedNum();
         if (start == null || end == null || num == null) {
-            return BO2DTOFactory.getGetPostDTO("interface error", ReGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("interface error", ReGetResponseDTO.class);
         }
         if (start > end || end - start != num - 1) {
-            return BO2DTOFactory.getGetPostDTO("num error", ReGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("num error", ReGetResponseDTO.class);
         } else {
             try {
                 List<ReBO> reList = reService.getReList(
@@ -54,7 +54,7 @@ public class ReController {
                         reGetRequestDTO.getTimestamp(),
                         start,
                         end);
-                return BO2DTOFactory.getGetPostDTO(
+                return BO2DTOFactory.getBbsGetResponseDTO(
                         reGetRequestDTO.getMode(),
                         reGetRequestDTO.getTimestamp(),
                         start,
@@ -62,7 +62,7 @@ public class ReController {
                         reList,
                         ReGetResponseDTO.class);
             } catch (Exception e) {
-                return BO2DTOFactory.getGetPostDTO("mode error", ReGetResponseDTO.class);
+                return BO2DTOFactory.getBbsGetResponseDTO("mode error", ReGetResponseDTO.class);
             }
         }
     }

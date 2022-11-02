@@ -1,11 +1,8 @@
 package com.xytong.model.bo;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 
 import java.io.Serializable;
 
@@ -16,13 +13,7 @@ import java.io.Serializable;
 
 @Data
 public class BbsBO implements Serializable {
-    @Getter(AccessLevel.NONE)
-    @JsonIgnore
-    private Long id;//主键
-    @JsonIgnore
-    private String uid;//用户id，TODO
-    @JsonIgnore
-    private String cid;//卡片消息id，TODO
+    private Long cid;//卡片消息id
     @JsonProperty(value = "user_name")
     private String userName;
     @JsonProperty(value = "user_avatar")

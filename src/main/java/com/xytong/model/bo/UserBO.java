@@ -10,6 +10,10 @@ import java.io.Serializable;
  
 @Data
 public class UserBO implements Serializable {
+    public static final String GENDER_NORMAL = "unknown";
+    public static final String GENDER_MALE = "male";
+    public static final String GENDER_FEMALE = "female";
+    public static final String GENDER_UNKNOWN = "unknown";
     private Long id;
     private Boolean admin;
     private String name;
@@ -20,5 +24,4 @@ public class UserBO implements Serializable {
     private String password;
     private String userAvatar;
     private String signature;
-
 }

@@ -56,7 +56,6 @@ public class CaptchaServiceImpl extends ServiceImpl<CaptchaMapper, CaptchaPO>
         QueryWrapper<CaptchaPO> wrapper = new QueryWrapper<>();
         Date date = new Date(timestamp);
         //过滤新数据
-        wrapper.le("timestamp", date);
         wrapper.eq("email", to);
         wrapper.last("ORDER BY `id` DESC LIMIT " + 1);
         CaptchaPO captchaPO = getOne(wrapper);

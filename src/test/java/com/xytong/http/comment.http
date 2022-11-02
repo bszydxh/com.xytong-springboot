@@ -1,0 +1,13 @@
+### 本地正确测试comment
+POST http://localhost:80/comment/v1/get
+Content-Type: application/json
+
+{
+  "cid": 1587386242887917569,
+  "module": "forums",
+  "mode": "newest",
+  "need_num": 10,
+  "num_start": 0,
+  "num_end": 9,
+  "timestamp": "{{timestamp}}"
+}

@@ -3,15 +3,13 @@ package com.xytong.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xytong.factory.PO2BOFactory;
+import com.xytong.mapper.UserMapper;
 import com.xytong.model.bo.UserBO;
 import com.xytong.model.po.UserPO;
-import com.xytong.mapper.UserMapper;
 import com.xytong.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -26,6 +24,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
     @Override
     public boolean checkUser(String username, String pwd) {
         if (username == null || pwd == null) {
+            return false;
+        }
+        if ("".equals(username.trim()) || "".equals(pwd.trim())) {
             return false;
         }
         UserBO userBO = findUserByName(username);
@@ -69,4 +70,38 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO>
         return PO2BOFactory.getUserBO(userPO);
     }
 
+    @Override
+    public UserBO findUserByEmail(String email) {
+        if (email == null) {
+            return null;
+        }
+        QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", email);
+        UserPO userPO = null;
+        try {
+            userPO = getOne(queryWrapper);
+        } catch (Exception e) {
+            log.error("Find user error:" + email);
+            e.printStackTrace();
+        }
+        return PO2BOFactory.getUserBO(userPO);
+    }
+
+    @Override
+    public boolean addUser(UserBO userBO) {
+        if (userBO == null) {
+            return false;
+        }
+        UserPO userPO = new UserPO();
+        userPO.setName(userBO.getName());
+        userPO.setPhone(userBO.getPhone());
+        userPO.setCreateTimestamp(new Date(System.currentTimeMillis()));
+        userPO.setIsAdmin(userBO.getAdmin() ? "Y" : "N");
+        userPO.setAvatar(userBO.getUserAvatar());
+        userPO.setSignature(userBO.getSignature());
+        userPO.setGender(userBO.getGender());
+        userPO.setEmail(userBO.getEmail());
+        userPO.setPassword(userBO.getPassword());
+        return save(userPO);
+    }
 }

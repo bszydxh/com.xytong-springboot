@@ -40,16 +40,16 @@ public class ForumController {
     @ResponseBody
     public ForumGetResponseDTO getForumList(@RequestBody ForumGetRequestDTO forumGetRequestDTO) {
         if (!Objects.equals(forumGetRequestDTO.getModule(), FORUM_MODULE_NAME)) {
-            return BO2DTOFactory.getGetPostDTO("module error", ForumGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("module error", ForumGetResponseDTO.class);
         }
         Integer start = forumGetRequestDTO.getNumStart();
         Integer end = forumGetRequestDTO.getNumEnd();
         Integer num = forumGetRequestDTO.getNeedNum();
         if (start == null || end == null || num == null) {
-            return BO2DTOFactory.getGetPostDTO("interface error", ForumGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("interface error", ForumGetResponseDTO.class);
         }
         if (start > end || end - start != num - 1) {
-            return BO2DTOFactory.getGetPostDTO("num error", ForumGetResponseDTO.class);
+            return BO2DTOFactory.getBbsGetResponseDTO("num error", ForumGetResponseDTO.class);
         } else {
             try {
                 List<ForumBO> forumList = forumService.getForumList(
@@ -57,7 +57,7 @@ public class ForumController {
                         forumGetRequestDTO.getTimestamp(),
                         start,
                         end);
-                return BO2DTOFactory.getGetPostDTO(
+                return BO2DTOFactory.getBbsGetResponseDTO(
                         forumGetRequestDTO.getMode(),
                         forumGetRequestDTO.getTimestamp(),
                         start,
@@ -65,7 +65,7 @@ public class ForumController {
                         forumList,
                         ForumGetResponseDTO.class);
             } catch (Exception e) {
-                return BO2DTOFactory.getGetPostDTO("mode error", ForumGetResponseDTO.class);
+                return BO2DTOFactory.getBbsGetResponseDTO("mode error", ForumGetResponseDTO.class);
             }
         }
     }

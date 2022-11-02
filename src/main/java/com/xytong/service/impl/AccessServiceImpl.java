@@ -3,7 +3,7 @@ package com.xytong.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xytong.model.bo.TokenBO;
 import com.xytong.model.bo.UserBO;
-import com.xytong.model.dto.access.AccessRequestDTO;
+import com.xytong.model.dto.access.AccessCheckRequestDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.FileService;
 import com.xytong.service.UserService;
@@ -73,7 +73,7 @@ public class AccessServiceImpl implements AccessService {
             try {
                 String jsonStr = SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token"));
                 ObjectMapper objectMapper = new ObjectMapper();
-                AccessRequestDTO TokenBO = objectMapper.readValue(jsonStr, AccessRequestDTO.class);
+                AccessCheckRequestDTO TokenBO = objectMapper.readValue(jsonStr, AccessCheckRequestDTO.class);
                 return tokenMaker(
                         TokenBO.getUsername(),
                         TokenBO.getPassword(),

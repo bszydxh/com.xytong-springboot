@@ -21,13 +21,12 @@ public class CaptchaController {
     @ResponseBody
     public CaptchaSendResponseDTO sendEmail(@RequestBody CaptchaSendRequestDTO captchaSendRequestDTO) {
         CaptchaSendResponseDTO captchaSendResponseDTO = new CaptchaSendResponseDTO();
+        captchaSendResponseDTO.setTimestamp(System.currentTimeMillis());
         if (captchaSendRequestDTO.getTimestamp() == null) {
-            captchaSendResponseDTO.setTimestamp(System.currentTimeMillis());
             captchaSendResponseDTO.setMode("timestamp error");
             return captchaSendResponseDTO;
         }
         if (captchaSendRequestDTO.getEmail() == null) {
-            captchaSendResponseDTO.setTimestamp(System.currentTimeMillis());
             captchaSendResponseDTO.setMode("email error");
             return captchaSendResponseDTO;
         }
@@ -35,11 +34,9 @@ public class CaptchaController {
                 CaptchaUtils.getCaptchaCode(7),
                 captchaSendRequestDTO.getEmail(),
                 captchaSendRequestDTO.getTimestamp()
-        )){
-            captchaSendResponseDTO.setTimestamp(System.currentTimeMillis());
+        )) {
             captchaSendResponseDTO.setMode("send ok");
-        }else  {
-            captchaSendResponseDTO.setTimestamp(System.currentTimeMillis());
+        } else {
             captchaSendResponseDTO.setMode("send error");
         }
         return captchaSendResponseDTO;

@@ -1,41 +1,64 @@
 ### 本地正确测试access
-POST http://localhost:80/access
+POST http://localhost:80/access/v1/check
 Content-Type: application/json
 
 {
-  "timestamp": "123231232131",
+  "timestamp": "{{timestamp}}",
   "token":"",
   "username": "{{name}}",
   "password": "{{password}}"
 }
 
 ### 本地不匹配测试access
-POST http://localhost:80/access
+POST http://localhost:80/access/v1/check
 Content-Type: application/json
 
 {
-  "timestamp": "123231232131",
+  "timestamp": "{{timestamp}}",
   "username": "{{name}}",
   "password": "-1"
 }
 
 ### 姓名null测试
-POST http://localhost:80/access
+POST http://localhost:80/access/v1/check
 Content-Type: application/json
 
 {
-  "timestamp": "123231232131",
+  "timestamp": "{{timestamp}}",
   "username": null,
   "password": "-1"
 }
 
 ### 换token成功测试
-POST http://localhost:80/access
+POST http://localhost:80/access/v1/check
 Content-Type: application/json
 
 {
-  "timestamp": "123231232131",
+  "timestamp": "{{timestamp}}",
   "token": "{{token}}",
   "username": null,
   "password": "-1"
+}
+
+### 注册成功测试
+POST http://localhost:80/access/v1/signup
+Content-Type: application/json
+
+{
+  "timestamp": "{{timestamp}}",
+  "username": "xytong_test",
+  "password": "xytong_test",
+  "email": "xytong_test@example.com",
+  "captchaCode": "xytong_test"
+}
+### 验证码错误测试
+POST http://localhost:80/access/v1/signup
+Content-Type: application/json
+
+{
+  "timestamp": "{{timestamp}}",
+  "username": "xytong_test",
+  "password": "xytong_test",
+  "email": "xytong_test@example.com",
+  "captchaCode": "xytong_test_illegal"
 }

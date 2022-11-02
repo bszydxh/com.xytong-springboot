@@ -16,4 +16,13 @@ public interface UserService extends IService<UserPO> {
 
     UserBO findUserById(Long id);
 
+    UserBO findUserByEmail(String email);
+
+    /**
+     * 只负责添加，不负责校验
+     *
+     * @param userBO userBO
+     * @return 添加结果
+     */
+    boolean addUser(UserBO userBO);
 }
