@@ -5,7 +5,9 @@ import com.xytong.model.bo.CommentBO;
 import com.xytong.model.dto.BbsGetDTO;
 
 import java.util.List;
-
+/**
+ * @author bszydxh
+ */
 public class CommentGetResponseDTO implements BbsGetDTO {
     String mode;
     @JsonProperty(value = "num_start")

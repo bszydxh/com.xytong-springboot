@@ -1,12 +1,11 @@
 package com.xytong.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xytong.model.bo.BbsBO;
-import com.xytong.model.bo.ForumBO;
-import lombok.Data;
 
 import java.util.List;
-
+/**
+ * @author bszydxh
+ */
 public interface BbsGetDTO {
     void setData(List data);
 

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author bszydxh
+ */
 @Controller
 public class CaptchaController {
     final CaptchaService captchaService;

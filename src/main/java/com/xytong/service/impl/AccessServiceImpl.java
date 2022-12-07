@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * @author bszydxh
+ * 对于token校验分发等一系列实现
+ * 2022-11-1 22:54:29
+ */
 @Slf4j
 @Service
 public class AccessServiceImpl implements AccessService {

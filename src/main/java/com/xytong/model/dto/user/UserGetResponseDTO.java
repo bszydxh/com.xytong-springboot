@@ -2,7 +2,9 @@ package com.xytong.model.dto.user;
 
 import lombok.Data;
 
- 
+/**
+ * @author bszydxh
+ */
 @Data
 public class UserGetResponseDTO {
     String mode;

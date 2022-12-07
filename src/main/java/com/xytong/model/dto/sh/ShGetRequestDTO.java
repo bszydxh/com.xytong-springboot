@@ -3,7 +3,9 @@ package com.xytong.model.dto.sh;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
- 
+/**
+ * @author bszydxh
+ */
 @Data
 public class ShGetRequestDTO {
     String module;

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 
 
 /**
-* @author bszydxh
+* @author auto_generator
 * @description 针对表【forum】的数据库操作Mapper
 * @createDate 2022-09-03 01:13:25
-* @Entity generator.domain.Forum
+* @Entity com.xytong.model.po.ForumPO
 */
 @Mapper
 @Repository

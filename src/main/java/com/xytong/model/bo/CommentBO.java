@@ -12,8 +12,6 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class CommentBO extends BbsBO implements Serializable {
-
-
     Integer floor;
     @JsonIgnore
     String module;

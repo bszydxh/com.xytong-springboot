@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * @author auto_generator
  * @TableName captcha
  */
 @TableName("captcha")

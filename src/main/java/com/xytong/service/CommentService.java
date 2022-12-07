@@ -12,6 +12,7 @@ import java.util.List;
  * @description 针对表【comment】的数据库操作Service
  * @createDate 2022-10-26 22:54:29
  */
+
 public interface CommentService extends IService<CommentPO> {
     @NotNull
     List<CommentBO> getCommentList(Long cid, String module, String mode, Long timestamp, int start, int end);

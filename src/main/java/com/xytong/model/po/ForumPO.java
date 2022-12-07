@@ -7,7 +7,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * @author auto_generator
+ * @TableName forum
+ */
 @TableName("forum")
 public class ForumPO implements Serializable {//面向数据库
     @TableId(type = IdType.ASSIGN_ID)

@@ -6,7 +6,9 @@ import com.xytong.model.dto.BbsGetDTO;
 
 import java.util.List;
 
-
+/**
+ * @author bszydxh
+ */
 public class ForumGetResponseDTO implements BbsGetDTO {
     String mode;
     @JsonProperty(value = "num_start")

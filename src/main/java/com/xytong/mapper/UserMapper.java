@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
-* @author bszydxh
+* @author auto_generator
 * @description 针对表【user】的数据库操作Mapper
 * @createDate 2022-09-08 18:36:30
-* @Entity com.xytong.data.domain.User
+* @Entity com.xytong.model.po.UserPO
 */
 @Mapper
 @Repository

@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
-* @author bszydxh
-* @description 针对表【run_errand】的数据库操作Mapper
+* @author auto_generator
+* @description 针对表【re】的数据库操作Mapper
 * @createDate 2022-09-05 21:07:29
-* @Entity generator.domain.RunErrand
+* @Entity com.xytong.model.po.RePO
 */
 @Mapper
 @Repository

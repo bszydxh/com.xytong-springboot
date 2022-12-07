@@ -1,0 +1,8 @@
+### 注册成功测试
+POST http://localhost:80/captcha/v1/send
+Content-Type: application/json
+
+{
+  "timestamp": "{{timestamp}}",
+  "email": "xytong_test@example.com"
+}

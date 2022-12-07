@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
-* @author bszydxh
+* @author auto_generator
 * @description 针对表【comment】的数据库操作Mapper
 * @createDate 2022-10-26 22:54:29
 * @Entity com.xytong.model.po.CommentPO

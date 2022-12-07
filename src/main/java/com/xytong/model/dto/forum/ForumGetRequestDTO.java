@@ -3,7 +3,9 @@ package com.xytong.model.dto.forum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
- 
+/**
+ * @author bszydxh
+ */
 @Data
 public class ForumGetRequestDTO {
     String module;

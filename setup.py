@@ -1,5 +1,5 @@
-from http import server
 import os
+
 print("欢迎使用xytong项目构建构建工具")
 print("================================================================")
 need_setup_properties = True
@@ -15,7 +15,7 @@ while True:
         break
     else:
         print("输入有误 请重新输入")
-if(need_setup_rsa):
+if need_setup_rsa:
     try:
         import rsa  # 导入模块
     except Exception as e:
@@ -51,8 +51,12 @@ if(need_setup_rsa):
     prifile.write(str2)
     prifile.close()
     print("创建 PKCS#1 成功")
-    os.system("openssl pkcs8 -topk8 -inform PEM -in ./src/main/resources/access/rsa_token_temp -outform pem -nocrypt -out ./src/main/resources/access/rsa_token")
-    os.system("openssl rsa -in ./src/main/resources/access/rsa_token_temp -pubout -out ./src/main/resources/access/rsa_token.pub")
+    os.system(
+        "openssl pkcs8 -topk8 -inform PEM -in ./src/main/resources/access/rsa_token_temp -outform pem -nocrypt -out "
+        "./src/main/resources/access/rsa_token")
+    os.system(
+        "openssl rsa -in ./src/main/resources/access/rsa_token_temp -pubout -out "
+        "./src/main/resources/access/rsa_token.pub")
     print("创建 PKCS#8 成功")
     os.remove('src/main/resources/access/rsa_token.pub_temp')
     os.remove('src/main/resources/access/rsa_token_temp')
@@ -137,11 +141,11 @@ if need_setup_mysql:
         print("数据库已存在")
     print("正在导入模板数据")
     cursor.execute(f"use {mysql_database_name}")
-    with open(file='src/test/java/com/xytong/sql/all.sql',mode='r+',encoding="utf-8") as f:
+    with open(file='src/test/java/com/xytong/sql/all.sql', mode='r+', encoding="utf-8") as f:
         data = f.read()
         lines = data.splitlines()
         sql_data = ''
-	# 将--注释开头的全部过滤，将空白行过滤
+        # 将--注释开头的全部过滤，将空白行过滤
         for line in lines:
             if len(line) == 0:
                 continue
@@ -151,13 +155,14 @@ if need_setup_mysql:
                 sql_data += line
         sql_list = sql_data.split(';')[:-1]
         sql_list = [x.replace('\n', ' ') if '\n' in x else x for x in sql_list]  # 将每段sql里的换行符改成空格
-    ##执行sql语句，使用循环执行sql语句
+    # 执行sql语句，使用循环执行sql语句
     for sql_item in sql_list:
-        print("================================================================\n"+sql_item)
+        print("================================================================\n" + sql_item)
         try:
             print(cursor.execute(sql_item))
         except Exception as e:
             print(e)
     db.commit()
-    # os.system(f"mysql -h{mysql_database_host} -p{mysql_database_port} -u{mysql_user_name} -p{mysql_pwd} {mysql_database_name} <  src/test/java/com/xytong/sql/all.sql")
+    # os.system(f"mysql -h{mysql_database_host} -p{mysql_database_port} -u{mysql_user_name} -p{mysql_pwd} {
+    # mysql_database_name} <  src/test/java/com/xytong/sql/all.sql")
 print("配置完毕")

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
- 
+/**
+ * @author bszydxh
+ */
 @Data
 public class ReGetRequestDTO {
     String module;

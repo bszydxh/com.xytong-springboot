@@ -7,7 +7,9 @@ import lombok.Data;
 
 import java.util.List;
 
-
+/**
+ * @author bszydxh
+ */
 @Data
 public class ShGetResponseDTO implements BbsGetDTO {
     String mode;

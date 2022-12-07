@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 工厂类进行解耦,本应该使用BeanUtils解耦的，陈年老屎山
  * 主要负责对po进行装箱（转bo）
- *
  * @author bszydxh
  */
 @Slf4j

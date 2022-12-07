@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @TableName secondhand
+ * @author auto_generator
+ * @TableName sh
  */
  
 @TableName("sh")

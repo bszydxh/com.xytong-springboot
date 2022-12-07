@@ -1,8 +1,6 @@
 package com.xytong.utils;
 
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
@@ -14,7 +12,10 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
- 
+/**
+ * @author bszydxh
+ */
+
 public class SecurityUtils {
     public static String rsaEncrypt(String str, String publicKey) throws Exception {
         publicKey = publicKey.replace("-----BEGIN PUBLIC KEY-----","");

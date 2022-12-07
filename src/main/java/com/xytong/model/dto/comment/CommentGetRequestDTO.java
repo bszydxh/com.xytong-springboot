@@ -2,7 +2,9 @@ package com.xytong.model.dto.comment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
+/**
+ * @author bszydxh
+ */
 @Data
 public class CommentGetRequestDTO {
     String module;

@@ -1,6 +1,9 @@
 package com.xytong.utils;
 
 import java.util.Random;
+/**
+ * @author bszydxh
+ */
 
 public class CaptchaUtils {
     private static char randomChar() {

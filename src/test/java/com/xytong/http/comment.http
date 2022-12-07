@@ -1,4 +1,4 @@
-### 本地正确测试comment
+### 本地正确测试comment获取
 POST http://localhost:80/comment/v1/get
 Content-Type: application/json
 
@@ -10,4 +10,16 @@ Content-Type: application/json
   "num_start": 0,
   "num_end": 9,
   "timestamp": "{{timestamp}}"
+}
+### 本地正确测试comment提交
+POST http://localhost:80/comment/v1/add
+Content-Type: application/json
+
+{
+  "module": "forums",
+  "cid": 1588439703469469698,
+  "timestamp": "{{timestamp}}",
+  "username": "{{name}}",
+  "text": "test",
+  "token": "{{token}}"
 }

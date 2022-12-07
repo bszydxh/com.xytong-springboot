@@ -1,5 +1,5 @@
 ### 本地正确测试run_errands
-POST http://localhost:80/run_errands
+POST http://localhost:80/run_errands/v1/get
 Content-Type: application/json
 
 {
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 
 ### 本地数量错误测试run_errands
-POST http://localhost:80/run_errands
+POST http://localhost:80/run_errands/v1/get
 Content-Type: application/json
 
 {
@@ -40,7 +40,7 @@ Content-Type: application/json
 
 
 ### 本地模式错误测试run_errands
-POST http://localhost:80/run_errands
+POST http://localhost:80/run_errands/v1/get
 Content-Type: application/json
 
 {

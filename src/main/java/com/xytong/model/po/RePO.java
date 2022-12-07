@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 
- * @TableName run_errand
+ * @author auto_generator
+ * @TableName re
  */
  
 @TableName("re")

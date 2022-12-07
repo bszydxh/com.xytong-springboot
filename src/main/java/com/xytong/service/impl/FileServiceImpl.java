@@ -6,6 +6,10 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+/**
+ * @author bszydxh
+ */
+
 @Service
 public class FileServiceImpl implements FileService {
     final ResourceLoader resourceLoader;

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+/**
+ * @author bszydxh
+ */
 
 @Slf4j
 @Service

@@ -9,7 +9,8 @@ import com.xytong.model.po.ShPO;
 
 /**
  * @author bszydxh
- * 理论上反向转换非常少，先预留方法
+ * @deprecated 预留方法 TODO
+ * 反向转换在添加的时候有用
  */
 @Deprecated
 public class BO2POFactory {

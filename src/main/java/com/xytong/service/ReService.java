@@ -1,7 +1,6 @@
 package com.xytong.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xytong.model.bo.ForumBO;
 import com.xytong.model.bo.ReBO;
 import com.xytong.model.po.RePO;
 
@@ -17,4 +16,5 @@ public interface ReService extends IService<RePO> {
     List<ReBO> getReList(String mode, Long timestamp, int start, int end);
 
     Boolean addRe(ReBO reBO);
+
 }

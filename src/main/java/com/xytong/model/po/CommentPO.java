@@ -9,48 +9,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * @author auto_generator
  * @TableName comment
  */
 @TableName("comment")
 @Data
 public class CommentPO implements Serializable {
-    /**
-     *
-     */
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
-    /**
-     *
-     */
     private Long cardFkey;
-    /**
-     *
-     */
+
     private Object cardFtable;
-    /**
-     *
-     */
+
     private Long userFkey;
 
-    /**
-     *
-     */
     private Long replyFkey;
 
-    /**
-     *
-     */
     private String text;
 
-    /**
-     *
-     */
     private Object visibility;
-
-    /**
-     *
-     */
     private Integer likes;
 
     private Integer floor;
