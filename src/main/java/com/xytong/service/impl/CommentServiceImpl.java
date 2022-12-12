@@ -11,6 +11,7 @@ import com.xytong.model.po.ForumPO;
 import com.xytong.model.po.RePO;
 import com.xytong.model.po.ShPO;
 import com.xytong.service.*;
+import com.xytong.utils.NameUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import static com.xytong.controller.ForumController.FORUM_MODULE_NAME;
 import static com.xytong.controller.ReController.RE_MODULE_NAME;
 import static com.xytong.controller.ShController.SH_MODULE_NAME;
-import static com.xytong.model.bo.ForumBO.FORUM_TABLE_NAME;
-import static com.xytong.model.bo.ReBO.RE_TABLE_NAME;
-import static com.xytong.model.bo.ShBO.SH_TABLE_NAME;
 
 /**
  * @author bszydxh
@@ -61,13 +58,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
                 QueryWrapper<CommentPO> wrapper = new QueryWrapper<>();
                 Date date = new Date(timestamp);
                 wrapper.eq("card_fkey", cid);
-                if (Objects.equals(module, SH_MODULE_NAME)) {
-                    wrapper.eq("card_ftable", SH_TABLE_NAME);
-                } else if ((Objects.equals(module, RE_MODULE_NAME))) {
-                    wrapper.eq("card_ftable", RE_TABLE_NAME);
-                } else if ((Objects.equals(module, FORUM_MODULE_NAME))) {
-                    wrapper.eq("card_ftable", FORUM_TABLE_NAME);
-                }
+                log.error(module+":"+NameUtils.Module2Table(module));
+                wrapper.eq("card_ftable", NameUtils.Module2Table(module));
                 //过滤新数据
                 wrapper.le("timestamp", date);
                 wrapper.last("ORDER BY `id` DESC LIMIT " + start + "," + (end - start + 1));
@@ -97,13 +89,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
             }
             String module = commentBO.getModule();
             Long uid = commentBO.getCid();
-            String table_name = "";
+            String table_name = NameUtils.Module2Table(module);
             switch (module) {
                 case SH_MODULE_NAME:
                     QueryWrapper<ShPO> shPOQueryWrapper = new QueryWrapper<>();
                     shPOQueryWrapper.eq("id", uid);
                     ShPO shPO = shService.getOne(shPOQueryWrapper);
-                    table_name = SH_TABLE_NAME;
                     if (shPO == null) {
                         log.error("not a valid sh id");
                         return false;
@@ -113,7 +104,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
                     QueryWrapper<RePO> rePOQueryWrapper = new QueryWrapper<>();
                     rePOQueryWrapper.eq("id", uid);
                     RePO rePO = reService.getOne(rePOQueryWrapper);
-                    table_name = RE_TABLE_NAME;
                     if (rePO == null) {
                         log.error("not a valid re id");
                         return false;
@@ -123,14 +113,15 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
                     QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
                     forumPOQueryWrapper.eq("id", uid);
                     ForumPO forumPO = forumService.getOne(forumPOQueryWrapper);
-                    table_name = FORUM_TABLE_NAME;
                     if (forumPO == null) {
                         log.error("not a valid forum id");
                         return false;
                     }
+                    forumPO.setComments(forumPO.getComments() + 1);
+                    forumService.updateById(forumPO);
                     break;
                 default:
-                    log.error("not a valid tablr");
+                    log.error("not a valid table");
                     return false;
 
             }

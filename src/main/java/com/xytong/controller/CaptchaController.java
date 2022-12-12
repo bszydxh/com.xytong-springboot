@@ -20,7 +20,9 @@ public class CaptchaController {
         this.captchaService = captchaService;
     }
 
-    @RequestMapping(value = "/captcha/v1/send", produces = "application/json")
+    public static final String CAPTCHA_MODULE_NAME = "captcha";
+
+    @RequestMapping(value = "/" + CAPTCHA_MODULE_NAME + "/v1/send", produces = "application/json")
     @ResponseBody
     public CaptchaSendResponseDTO sendEmail(@RequestBody CaptchaSendRequestDTO captchaSendRequestDTO) {
         CaptchaSendResponseDTO captchaSendResponseDTO = new CaptchaSendResponseDTO();

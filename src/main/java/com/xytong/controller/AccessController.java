@@ -27,6 +27,7 @@ public class AccessController {
     final AccessService accessService;
     final UserService userService;
     final CaptchaService captchaService;
+    public static final String ACCESS_MODULE_NAME = "access";
 
     public AccessController(AccessService accessService, UserService userService, CaptchaService captchaService) {
         this.accessService = accessService;
@@ -41,7 +42,7 @@ public class AccessController {
      * @param accessCheckRequestDTO 传入单token或者姓名+密码
      * @return 返回token值
      */
-    @RequestMapping(value = "/access", produces = "application/json")
+    @RequestMapping(value = "/"+ACCESS_MODULE_NAME, produces = "application/json")
     @ResponseBody
     public AccessCheckResponseDTO getToken(@NotNull @RequestBody AccessCheckRequestDTO accessCheckRequestDTO) {
         AccessCheckResponseDTO accessCheckResponseDTO = new AccessCheckResponseDTO();
@@ -73,13 +74,13 @@ public class AccessController {
         return accessCheckResponseDTO;
     }
 
-    @RequestMapping(value = "/access/v1/check", produces = "application/json")
+    @RequestMapping(value = "/"+ACCESS_MODULE_NAME+"/v1/check", produces = "application/json")
     @ResponseBody
     public AccessCheckResponseDTO getToken2(@RequestBody AccessCheckRequestDTO accessCheckRequestDTO) {
         return getToken(accessCheckRequestDTO);
     }
 
-    @RequestMapping(value = "/access/v1/signup", produces = "application/json")
+    @RequestMapping(value = "/"+ACCESS_MODULE_NAME+"/v1/signup", produces = "application/json")
     @ResponseBody
     public AccessSignupResponseDTO signup(@NotNull @RequestBody AccessSignupRequestDTO accessSignupRequestDTO) {
         AccessSignupResponseDTO accessSignupResponseDTO = new AccessSignupResponseDTO();

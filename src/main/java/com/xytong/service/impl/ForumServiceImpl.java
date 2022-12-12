@@ -92,5 +92,6 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
         }
         return true;
     }
+
 }
 

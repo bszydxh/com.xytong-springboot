@@ -33,7 +33,7 @@ public class ReController {
         this.accessService = accessService;
     }
 
-    @RequestMapping(value = "/run_errands", produces = "application/json")
+    @RequestMapping(value = "/"+RE_MODULE_NAME, produces = "application/json")
     @ResponseBody
     public ReGetResponseDTO getReList(@RequestBody ReGetRequestDTO reGetRequestDTO) {
         if (!Objects.equals(reGetRequestDTO.getModule(), RE_MODULE_NAME)) {
@@ -67,13 +67,13 @@ public class ReController {
         }
     }
 
-    @RequestMapping(value = "/run_errands/v1/get", produces = "application/json")
+    @RequestMapping(value = "/"+RE_MODULE_NAME+"/v1/get", produces = "application/json")
     @ResponseBody
     public ReGetResponseDTO getReList2(@RequestBody ReGetRequestDTO reGetRequestDTO) {
         return getReList(reGetRequestDTO);
     }
 
-    @RequestMapping(value = "/run_errands/v1/add", produces = "application/json")
+    @RequestMapping(value = "/"+RE_MODULE_NAME+"/v1/add", produces = "application/json")
     @ResponseBody
     public ReAddResponseDTO addReList(@RequestBody ReAddRequestDTO reAddRequestDTO) {
         ReAddResponseDTO reAddResponseDTO = new ReAddResponseDTO();

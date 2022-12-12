@@ -30,7 +30,7 @@ public class ShController {
         this.accessService = accessService;
     }
 
-    @RequestMapping(value = "/secondhand", produces = "application/json")
+    @RequestMapping(value = "/"+SH_MODULE_NAME, produces = "application/json")
     @ResponseBody
     public ShGetResponseDTO getShList(@RequestBody ShGetRequestDTO shGetRequestDTO) {
         if (!Objects.equals(shGetRequestDTO.getModule(), SH_MODULE_NAME)) {
@@ -64,13 +64,13 @@ public class ShController {
         }
     }
 
-    @RequestMapping(value = "/secondhand/v1/get", produces = "application/json")
+    @RequestMapping(value = "/"+SH_MODULE_NAME+"/v1/get", produces = "application/json")
     @ResponseBody
     public ShGetResponseDTO getShList2(@RequestBody ShGetRequestDTO shGetRequestDTO) {
         return getShList(shGetRequestDTO);
     }
 
-    @RequestMapping(value = "/secondhand/v1/add", produces = "application/json")
+    @RequestMapping(value = "/"+SH_MODULE_NAME+"/v1/add", produces = "application/json")
     @ResponseBody
     public ShAddResponseDTO addShList(@RequestBody ShAddRequestDTO shAddRequestDTO) {
         ShAddResponseDTO shAddResponseDTO = new ShAddResponseDTO();

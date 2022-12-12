@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xytong.mapper.LikeMapper">
+
+    <resultMap id="BaseResultMap" type="com.xytong.model.po.LikePO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="cardFkey" column="card_fkey" jdbcType="BIGINT"/>
+        <result property="cardFtable" column="card_ftable" jdbcType="OTHER"/>
+        <result property="userFkey" column="user_fkey" jdbcType="BIGINT"/>
+        <result property="timestamp" column="timestamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,card_fkey,cardFtable,user_fkey,timestamp
+    </sql>
+</mapper>

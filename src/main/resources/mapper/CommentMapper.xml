@@ -18,8 +18,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,card_fkey,user_fkey,
+        id,card_fkey,card_ftable,user_fkey,
         reply_fkey,text,visibility,
-        likes
+        likes,floor,timestamp
     </sql>
 </mapper>

@@ -25,8 +25,8 @@ public class UserController {
         this.userService = userService;
         this.accessService = accessService;
     }
-
-    @RequestMapping(value = "/user/v1/get", produces = "application/json")
+    public static final String USER_MODULE_NAME = "user";
+    @RequestMapping(value = "/"+USER_MODULE_NAME+"/v1/get", produces = "application/json")
 
     @ResponseBody
     public UserGetResponseDTO getUser(@RequestBody UserGetRequestDTO userGetRequestDTO) {

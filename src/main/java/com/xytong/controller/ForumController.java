@@ -36,7 +36,7 @@ public class ForumController {
 
     public static final String FORUM_MODULE_NAME = "forums";
 
-    @RequestMapping(value = "/forums", produces = "application/json")
+    @RequestMapping(value = "/" + FORUM_MODULE_NAME, produces = "application/json")
     @ResponseBody
     public ForumGetResponseDTO getForumList(@RequestBody ForumGetRequestDTO forumGetRequestDTO) {
         if (!Objects.equals(forumGetRequestDTO.getModule(), FORUM_MODULE_NAME)) {
@@ -70,13 +70,13 @@ public class ForumController {
         }
     }
 
-    @RequestMapping(value = "/forums/v1/get", produces = "application/json")
+    @RequestMapping(value = "/"+FORUM_MODULE_NAME+"/v1/get", produces = "application/json")
     @ResponseBody
     public ForumGetResponseDTO getForumList2(@RequestBody ForumGetRequestDTO forumGetRequestDTO) {
         return getForumList(forumGetRequestDTO);
     }
 
-    @RequestMapping(value = "/forums/v1/add", produces = "application/json")
+    @RequestMapping(value = "/"+FORUM_MODULE_NAME+"/v1/add", produces = "application/json")
     @ResponseBody
     public ForumAddResponseDTO addForumList(@RequestBody ForumAddRequestDTO forumAddRequestDTO) {
         ForumAddResponseDTO forumAddResponseDTO = new ForumAddResponseDTO();

@@ -91,7 +91,6 @@ public class CommentController {
         commentBO.setUserName(commentAddRequestDTO.getUsername());
         commentBO.setText(commentAddRequestDTO.getText());
         commentBO.setTimestamp(Long.valueOf(commentAddRequestDTO.getTimestamp()));
-
         if (commentService.addComment(commentBO)) {
             commentAddResponseDTO.setMode("add ok");
         } else {
