@@ -13,6 +13,14 @@ import java.util.List;
  * @createDate 2022-09-03 01:13:25
  */
 public interface ForumService extends IService<ForumPO> {
+    interface CommentChanger {
+        Integer updateComment(Integer comments);
+    }
+    interface LikeChanger {
+        Integer updateLike(Integer likes);
+    }
+
+    ;
 
     /**
      * @param mode      查询模式
@@ -25,4 +33,10 @@ public interface ForumService extends IService<ForumPO> {
     List<ForumBO> getForumList(String mode, Long timestamp, int start, int end);
 
     Boolean addForum(ForumBO forumBO);
+
+    Boolean checkUid(Long uid);
+
+    Boolean changeLike(Long uid,LikeChanger likeChanger);
+
+    Boolean changeComment(Long uid, CommentChanger commentChanger);
 }

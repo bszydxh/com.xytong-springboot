@@ -88,4 +88,16 @@ public class ReServiceImpl extends ServiceImpl<ReMapper, RePO>
         return true;
     }
 
+    @Override
+    public Boolean checkUid(Long uid) {
+        QueryWrapper<RePO> rePOQueryWrapper = new QueryWrapper<>();
+        rePOQueryWrapper.eq("id", uid);
+        RePO rePO = getOne(rePOQueryWrapper);
+        if (rePO == null) {
+            log.error("not a valid re id");
+            return false;
+        }
+        return true;
+    }
+
 }

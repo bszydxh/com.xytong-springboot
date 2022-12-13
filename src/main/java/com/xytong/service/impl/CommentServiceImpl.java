@@ -58,7 +58,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
                 QueryWrapper<CommentPO> wrapper = new QueryWrapper<>();
                 Date date = new Date(timestamp);
                 wrapper.eq("card_fkey", cid);
-                log.error(module+":"+NameUtils.Module2Table(module));
                 wrapper.eq("card_ftable", NameUtils.Module2Table(module));
                 //过滤新数据
                 wrapper.le("timestamp", date);
@@ -92,33 +91,20 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
             String table_name = NameUtils.Module2Table(module);
             switch (module) {
                 case SH_MODULE_NAME:
-                    QueryWrapper<ShPO> shPOQueryWrapper = new QueryWrapper<>();
-                    shPOQueryWrapper.eq("id", uid);
-                    ShPO shPO = shService.getOne(shPOQueryWrapper);
-                    if (shPO == null) {
-                        log.error("not a valid sh id");
+                    if (!shService.checkUid(uid)) {
                         return false;
                     }
                     break;
                 case RE_MODULE_NAME:
-                    QueryWrapper<RePO> rePOQueryWrapper = new QueryWrapper<>();
-                    rePOQueryWrapper.eq("id", uid);
-                    RePO rePO = reService.getOne(rePOQueryWrapper);
-                    if (rePO == null) {
-                        log.error("not a valid re id");
+                    if (!reService.checkUid(uid)) {
                         return false;
                     }
                     break;
                 case FORUM_MODULE_NAME:
-                    QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
-                    forumPOQueryWrapper.eq("id", uid);
-                    ForumPO forumPO = forumService.getOne(forumPOQueryWrapper);
-                    if (forumPO == null) {
-                        log.error("not a valid forum id");
+                    if (!forumService.checkUid(uid)) {
                         return false;
                     }
-                    forumPO.setComments(forumPO.getComments() + 1);
-                    forumService.updateById(forumPO);
+                    forumService.changeComment(uid, (comments -> comments + 1));
                     break;
                 default:
                     log.error("not a valid table");

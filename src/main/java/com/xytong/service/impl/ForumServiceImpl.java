@@ -93,5 +93,46 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
         return true;
     }
 
+    @Override
+    public Boolean checkUid(Long uid) {
+        QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
+        forumPOQueryWrapper.eq("id", uid);
+        ForumPO forumPO = getOne(forumPOQueryWrapper);
+        if (forumPO == null) {
+            log.error("not a valid forum id");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean changeLike(Long uid, LikeChanger likeChanger) {
+        try {
+            QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
+            forumPOQueryWrapper.eq("id", uid);
+            ForumPO forumPO = getOne(forumPOQueryWrapper);
+            forumPO.setLikes(likeChanger.updateLike(forumPO.getLikes()));
+            updateById(forumPO);
+        } catch (Exception e) {
+            log.error("change like error");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean changeComment(Long uid, CommentChanger commentChanger) {
+        try {
+            QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
+            forumPOQueryWrapper.eq("id", uid);
+            ForumPO forumPO = getOne(forumPOQueryWrapper);
+            forumPO.setComments(commentChanger.updateComment(forumPO.getComments()));
+            updateById(forumPO);
+        } catch (Exception e) {
+            log.error("change comment error");
+            return false;
+        }
+        return true;
+    }
 }
 

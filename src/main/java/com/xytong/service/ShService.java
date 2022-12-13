@@ -16,4 +16,6 @@ public interface ShService extends IService<ShPO> {
     List<ShBO> getShList(String mode, Long timestamp, int start, int end);
 
     Boolean addSh(ShBO shBO);
+
+    Boolean checkUid(Long uid);
 }

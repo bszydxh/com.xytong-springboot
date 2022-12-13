@@ -17,4 +17,5 @@ public interface ReService extends IService<RePO> {
 
     Boolean addRe(ReBO reBO);
 
+    Boolean checkUid(Long uid);
 }

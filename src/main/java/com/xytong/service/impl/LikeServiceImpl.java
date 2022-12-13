@@ -35,7 +35,7 @@ public class LikeServiceImpl extends ServiceImpl<LikeMapper, LikePO>
             log.warn("likeBO null! check the code!");
             return false;
         }
-        //输入拦截交由controller层，service层对bo是信任状态
+        //好像之前都是不信任状态，照旧
         LikePO likePO = new LikePO();
         if (likeBO.getCid() == null) {
             log.warn("cid null");

@@ -90,4 +90,16 @@ public class ShServiceImpl extends ServiceImpl<ShMapper, ShPO>
         }
         return true;
     }
+
+    @Override
+    public Boolean checkUid(Long uid) {
+        QueryWrapper<ShPO> shPOQueryWrapper = new QueryWrapper<>();
+        shPOQueryWrapper.eq("id", uid);
+        ShPO shPO = getOne(shPOQueryWrapper);
+        if (shPO == null) {
+            log.error("not a valid sh id");
+            return false;
+        }
+        return true;
+    }
 }

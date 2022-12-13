@@ -1,6 +1,7 @@
 package com.xytong.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 
 import static com.xytong.controller.CaptchaController.CAPTCHA_MODULE_NAME;
 import static com.xytong.controller.CommentController.COMMENT_MODULE_NAME;
@@ -35,5 +36,4 @@ public class NameUtils {
                 return null;
         }
     }
-
 }
