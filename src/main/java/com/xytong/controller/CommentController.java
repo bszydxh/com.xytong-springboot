@@ -8,6 +8,7 @@ import com.xytong.model.dto.comment.CommentGetRequestDTO;
 import com.xytong.model.dto.comment.CommentGetResponseDTO;
 import com.xytong.service.AccessService;
 import com.xytong.service.CommentService;
+import com.xytong.utils.NameUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class CommentController {
     @RequestMapping(value = "/" + COMMENT_MODULE_NAME, produces = "application/json")
     @ResponseBody
     public CommentGetResponseDTO getCommentList(@RequestBody CommentGetRequestDTO commentGetRequestDTO) {
-        if (commentGetRequestDTO.getModule() == null) {
+        if (commentGetRequestDTO.getModule() == null || NameUtils.module2Table(commentGetRequestDTO.getModule()) == null) {
             return BO2DTOFactory.getBbsGetResponseDTO("module error", CommentGetResponseDTO.class);
         }
         Integer start = commentGetRequestDTO.getNumStart();
@@ -81,6 +82,11 @@ public class CommentController {
         commentAddResponseDTO.setTimestamp(System.currentTimeMillis());
         if (!accessService.tokenCheckerWithUsername(commentAddRequestDTO.getToken(), commentAddRequestDTO.getUsername())) {
             commentAddResponseDTO.setMode("token error");
+            return commentAddResponseDTO;
+        }
+        if (commentAddRequestDTO.getModule() == null ||
+                NameUtils.module2Table(commentAddRequestDTO.getModule()) == null) {
+            commentAddResponseDTO.setMode("module error");
             return commentAddResponseDTO;
         }
         CommentBO commentBO = new CommentBO();

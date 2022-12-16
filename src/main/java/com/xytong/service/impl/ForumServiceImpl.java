@@ -94,9 +94,9 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
     }
 
     @Override
-    public Boolean checkUid(Long uid) {
+    public Boolean checkCid(Long cid) {
         QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
-        forumPOQueryWrapper.eq("id", uid);
+        forumPOQueryWrapper.eq("id", cid);
         ForumPO forumPO = getOne(forumPOQueryWrapper);
         if (forumPO == null) {
             log.error("not a valid forum id");

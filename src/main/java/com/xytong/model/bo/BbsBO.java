@@ -3,6 +3,7 @@ package com.xytong.model.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
 
 @Data
 public class BbsBO implements Serializable {
+    
     private Long cid;//卡片消息id
     @JsonProperty(value = "user_name")
     private String userName;

@@ -19,4 +19,6 @@ public interface CommentService extends IService<CommentPO> {
 
     Boolean addComment(CommentBO commentBO);
 
+    Boolean checkCid(Long cid);
+
 }

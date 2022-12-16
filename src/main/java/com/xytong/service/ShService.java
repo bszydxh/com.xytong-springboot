@@ -1,7 +1,6 @@
 package com.xytong.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xytong.model.bo.ReBO;
 import com.xytong.model.bo.ShBO;
 import com.xytong.model.po.ShPO;
 
@@ -17,5 +16,5 @@ public interface ShService extends IService<ShPO> {
 
     Boolean addSh(ShBO shBO);
 
-    Boolean checkUid(Long uid);
+    Boolean checkCid(Long cid);
 }

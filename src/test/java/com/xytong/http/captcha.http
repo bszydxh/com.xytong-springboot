@@ -3,6 +3,6 @@ POST http://localhost:80/captcha/v1/send
 Content-Type: application/json
 
 {
-  "timestamp": "{{timestamp}}",
+  "timestamp": "{{$timestamp}}000",
   "email": "xytong_test@example.com"
 }

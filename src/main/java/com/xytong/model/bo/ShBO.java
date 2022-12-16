@@ -3,14 +3,15 @@ package com.xytong.model.bo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serializable;
 
 /**
  * @author bszydxh
  */
-
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Data
 public class ShBO extends BbsBO implements Serializable {
     public static final String SH_TABLE_NAME = "sh";

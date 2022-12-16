@@ -3,7 +3,7 @@ POST http://localhost:80/access/v1/check
 Content-Type: application/json
 
 {
-  "timestamp": "{{timestamp}}",
+  "timestamp": "{{$timestamp}}000",
   "token":"",
   "username": "{{name}}",
   "password": "{{password}}"
@@ -14,7 +14,7 @@ POST http://localhost:80/access/v1/check
 Content-Type: application/json
 
 {
-  "timestamp": "{{timestamp}}",
+  "timestamp": "{{$timestamp}}000",
   "username": "{{name}}",
   "password": "-1"
 }

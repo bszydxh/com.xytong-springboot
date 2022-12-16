@@ -8,7 +8,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 ### 本地正确测试run_errands v1
 POST http://localhost:80/run_errands/v1/get
@@ -20,7 +20,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 
@@ -35,7 +35,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 1,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 

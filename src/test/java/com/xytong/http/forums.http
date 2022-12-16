@@ -8,7 +8,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 ### 本地正确测试forums/v1
@@ -21,7 +21,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 ### 本地数量错误测试forums
@@ -34,7 +34,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 1,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 
@@ -48,7 +48,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 ### 本地模块错误测试forums
@@ -61,7 +61,7 @@ Content-Type: application/json
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 
 ### 添加成功测试
@@ -73,6 +73,6 @@ Content-Type: application/json
   "token": "{{token}}",
   "username":"{{name}}",
   "text": "test",
-  "timestamp": "{{timestamp}}",
+  "timestamp": "{{$timestamp}}000",
   "title": "test"
 }

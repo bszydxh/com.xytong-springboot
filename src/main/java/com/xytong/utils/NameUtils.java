@@ -1,7 +1,6 @@
 package com.xytong.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 
 import static com.xytong.controller.CaptchaController.CAPTCHA_MODULE_NAME;
 import static com.xytong.controller.CommentController.COMMENT_MODULE_NAME;
@@ -13,7 +12,7 @@ import static com.xytong.controller.UserController.USER_MODULE_NAME;
 
 @Slf4j
 public class NameUtils {
-    public static String Module2Table(String module) {
+    public static String module2Table(String module) {
         if (module == null) {
             return null;
         }

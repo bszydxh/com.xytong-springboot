@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import static com.xytong.utils.SecurityUtils.*;
 import static com.xytong.utils.SecurityUtils.md5Salt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +28,7 @@ public class SecurityUtilsTest {
     String readFile(String url) {
         return fileService.readFile(url);
     }
+
     @Test
     public void rsaTest() {
         try {

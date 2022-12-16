@@ -34,7 +34,7 @@ public interface ForumService extends IService<ForumPO> {
 
     Boolean addForum(ForumBO forumBO);
 
-    Boolean checkUid(Long uid);
+    Boolean checkCid(Long cid);
 
     Boolean changeLike(Long uid,LikeChanger likeChanger);
 

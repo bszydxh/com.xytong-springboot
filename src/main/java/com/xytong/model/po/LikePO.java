@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.Date;
 
-@TableName("like")
+@TableName("likes")
 public class LikePO {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
@@ -20,9 +20,6 @@ public class LikePO {
     private Date timestamp;
 
     private static final long serialVersionUID = 1L;
-
-    public LikePO() {
-    }
 
     public Long getId() {
         return this.id;

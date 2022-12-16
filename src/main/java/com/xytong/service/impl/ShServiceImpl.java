@@ -92,9 +92,9 @@ public class ShServiceImpl extends ServiceImpl<ShMapper, ShPO>
     }
 
     @Override
-    public Boolean checkUid(Long uid) {
+    public Boolean checkCid(Long cid) {
         QueryWrapper<ShPO> shPOQueryWrapper = new QueryWrapper<>();
-        shPOQueryWrapper.eq("id", uid);
+        shPOQueryWrapper.eq("id", cid);
         ShPO shPO = getOne(shPOQueryWrapper);
         if (shPO == null) {
             log.error("not a valid sh id");

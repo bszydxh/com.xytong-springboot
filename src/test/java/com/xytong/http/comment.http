@@ -3,13 +3,13 @@ POST http://localhost:80/comment/v1/get
 Content-Type: application/json
 
 {
-  "cid": 1587386242887917569,
+  "cid": 1600311344222822401,
   "module": "forums",
   "mode": "newest",
   "need_num": 10,
   "num_start": 0,
   "num_end": 9,
-  "timestamp": "{{timestamp}}"
+  "timestamp": "{{$timestamp}}000"
 }
 ### 本地正确测试comment提交
 POST http://localhost:80/comment/v1/add
@@ -18,7 +18,7 @@ Content-Type: application/json
 {
   "module": "forums",
   "cid": 1588439703469469698,
-  "timestamp": "{{timestamp}}",
+  "timestamp": "{{$timestamp}}000",
   "username": "{{name}}",
   "text": "test",
   "token": "{{token}}"

@@ -7,11 +7,9 @@ import com.xytong.mapper.CommentMapper;
 import com.xytong.model.bo.CommentBO;
 import com.xytong.model.bo.UserBO;
 import com.xytong.model.po.CommentPO;
-import com.xytong.model.po.ForumPO;
-import com.xytong.model.po.RePO;
-import com.xytong.model.po.ShPO;
 import com.xytong.service.*;
 import com.xytong.utils.NameUtils;
+import com.xytong.utils.CidUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -21,8 +19,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.xytong.controller.ForumController.FORUM_MODULE_NAME;
-import static com.xytong.controller.ReController.RE_MODULE_NAME;
-import static com.xytong.controller.ShController.SH_MODULE_NAME;
 
 /**
  * @author bszydxh
@@ -58,7 +54,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
                 QueryWrapper<CommentPO> wrapper = new QueryWrapper<>();
                 Date date = new Date(timestamp);
                 wrapper.eq("card_fkey", cid);
-                wrapper.eq("card_ftable", NameUtils.Module2Table(module));
+                wrapper.eq("card_ftable", NameUtils.module2Table(module));
                 //过滤新数据
                 wrapper.le("timestamp", date);
                 wrapper.last("ORDER BY `id` DESC LIMIT " + start + "," + (end - start + 1));
@@ -88,28 +84,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
             }
             String module = commentBO.getModule();
             Long uid = commentBO.getCid();
-            String table_name = NameUtils.Module2Table(module);
-            switch (module) {
-                case SH_MODULE_NAME:
-                    if (!shService.checkUid(uid)) {
-                        return false;
-                    }
-                    break;
-                case RE_MODULE_NAME:
-                    if (!reService.checkUid(uid)) {
-                        return false;
-                    }
-                    break;
-                case FORUM_MODULE_NAME:
-                    if (!forumService.checkUid(uid)) {
-                        return false;
-                    }
-                    forumService.changeComment(uid, (comments -> comments + 1));
-                    break;
-                default:
-                    log.error("not a valid table");
-                    return false;
-
+            String table_name = NameUtils.module2Table(module);
+            if (!CidUtils.isCidValid(module, uid)) {
+                return false;
+            }
+            if (FORUM_MODULE_NAME.equals(module)) {
+                forumService.changeComment(uid, (comments -> comments + 1));
             }
             CommentPO commentPO = new CommentPO();
             commentPO.setCardFkey(uid);
@@ -132,6 +112,18 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
         } catch (Exception e) {
             e.printStackTrace();
             log.error("save error");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean checkCid(Long cid) {
+        QueryWrapper<CommentPO> commentPOQueryWrapper = new QueryWrapper<>();
+        commentPOQueryWrapper.eq("id", cid);
+        CommentPO commentPO = getOne(commentPOQueryWrapper);
+        if (commentPO == null) {
+            log.error("not a valid comment id");
             return false;
         }
         return true;
