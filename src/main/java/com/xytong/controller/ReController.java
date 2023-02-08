@@ -35,7 +35,7 @@ public class ReController {
 
     @RequestMapping(value = "/"+RE_MODULE_NAME, produces = "application/json")
     @ResponseBody
-    public ReGetResponseDTO getReList(@RequestBody ReGetRequestDTO reGetRequestDTO) {
+    public ReGetResponseDTO getReList( @RequestBody ReGetRequestDTO reGetRequestDTO) {
         if (!Objects.equals(reGetRequestDTO.getModule(), RE_MODULE_NAME)) {
             return BO2DTOFactory.getBbsGetResponseDTO("module error", ReGetResponseDTO.class);
         }

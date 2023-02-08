@@ -83,12 +83,25 @@ if need_setup_properties:
     mysql_database_name = input("请输入服务连接的指定数据库:")
     mysql_user_name = input("请输入mysql用户名:")
     mysql_pwd = input("请输入mysql密码:")
+    mail_host = input("请输入邮件stmp服务器（例如：stmp.qq.com）:")
+    mail_port = input("请输入邮件服务端口:")
+    mail_user = input("请输入邮件服务用户名:")
+    mail_pwd = input("请输入邮件服务密码:")
+    mail_form = input("请输入邮件发送者:")
+    image_file_path = input("请输入图片访问地址映射（例如：root/xytong/image/）\n（文件夹需存在）:")
     str1 = str(f"server.port={server_port}\n" +
                f"spring.datasource.url=jdbc:mysql://{mysql_database_host}:{mysql_database_port}/{mysql_database_name}\n" +
                f"spring.datasource.username={mysql_user_name}\n" +
                f"spring.datasource.password={mysql_pwd}\n" +
                f"spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\n" +
-               f"spring.jackson.time-zone=GMT+8")
+               f"spring.jackson.time-zone=GMT+8\n" +
+               f"spring.mail.host={mail_host}\n" +
+               f"spring.mail.port={mail_port}\n" +
+               f"spring.mail.username={mail_user}\n" +
+               f"spring.mail.password={mail_pwd}\n" +
+               f"spring.mail.from={mail_form}\n" +
+               f"file.image.path={image_file_path}\n" +
+               f"file.image.path.relative=/image/**")
     file = open('src/main/resources/application.properties', 'w+')
     file.write(str1)
 while True:
