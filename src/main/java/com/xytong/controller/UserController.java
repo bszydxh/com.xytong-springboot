@@ -27,7 +27,6 @@ public class UserController {
     }
     public static final String USER_MODULE_NAME = "user";
     @RequestMapping(value = "/"+USER_MODULE_NAME+"/v1/get", produces = "application/json")
-
     @ResponseBody
     public UserGetResponseDTO getUser(@RequestBody UserGetRequestDTO userGetRequestDTO) {
         UserGetResponseDTO userGetResponseDTO = new UserGetResponseDTO();

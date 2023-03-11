@@ -1,5 +1,6 @@
 package com.xytong.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -15,11 +16,12 @@ import java.security.spec.X509EncodedKeySpec;
 /**
  * @author bszydxh
  */
-
+@Slf4j
 public class SecurityUtils {
+    //默认pkcs#8加密
     public static String rsaEncrypt(String str, String publicKey) throws Exception {
-        publicKey = publicKey.replace("-----BEGIN PUBLIC KEY-----","");
-        publicKey = publicKey.replace("-----END PUBLIC KEY-----","");
+        publicKey = publicKey.replace("-----BEGIN PUBLIC KEY-----", "");
+        publicKey = publicKey.replace("-----END PUBLIC KEY-----", "");
         publicKey = publicKey.strip();
         //base64编码的公钥
         byte[] decoded = Base64.decodeBase64(publicKey);
@@ -31,8 +33,8 @@ public class SecurityUtils {
     }
 
     public static String rsaDecrypt(String str, String privateKey) throws Exception {
-        privateKey = privateKey.replace("-----BEGIN PRIVATE KEY-----","");
-        privateKey = privateKey.replace("-----END PRIVATE KEY-----","");
+        privateKey = privateKey.replace("-----BEGIN PRIVATE KEY-----", "");
+        privateKey = privateKey.replace("-----END PRIVATE KEY-----", "");
         privateKey = privateKey.strip();
         //64位解码加密后的字符串
         byte[] inputByte = Base64.decodeBase64(str.getBytes(StandardCharsets.UTF_8));
