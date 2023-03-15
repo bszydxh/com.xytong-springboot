@@ -60,7 +60,7 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
     }
 
     @Override
-    public Boolean addForum(ForumBO forumBO) {
+    public boolean addForum(ForumBO forumBO) {
         if (forumBO == null) {
             return false;
         }
@@ -94,7 +94,7 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
     }
 
     @Override
-    public Boolean checkCid(Long cid) {
+    public boolean checkCid(Long cid) {
         QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
         forumPOQueryWrapper.eq("id", cid);
         ForumPO forumPO = getOne(forumPOQueryWrapper);
@@ -106,7 +106,7 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
     }
 
     @Override
-    public Boolean changeLike(Long uid, LikeChanger likeChanger) {
+    public boolean changeLike(Long uid, LikeChanger likeChanger) {
         try {
             QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
             forumPOQueryWrapper.eq("id", uid);
@@ -121,7 +121,7 @@ public class ForumServiceImpl extends ServiceImpl<ForumMapper, ForumPO>
     }
 
     @Override
-    public Boolean changeComment(Long uid, CommentChanger commentChanger) {
+    public boolean changeComment(Long uid, CommentChanger commentChanger) {
         try {
             QueryWrapper<ForumPO> forumPOQueryWrapper = new QueryWrapper<>();
             forumPOQueryWrapper.eq("id", uid);

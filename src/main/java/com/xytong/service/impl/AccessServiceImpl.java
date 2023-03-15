@@ -17,12 +17,17 @@ import java.util.Objects;
  * @author bszydxh
  * 对于token校验分发等一系列实现
  * 2022-11-1 22:54:29
+ * TODO 优化鉴权体验，鉴权时不能鉴一次遍历一次用户表，对于加密过后的密钥解密后符合基本状态的应予以放行
+ * TODO 还是性能问题RSA太慢了！！！高并发时的性能瓶颈
  */
 @Slf4j
 @Service
 public class AccessServiceImpl implements AccessService {
     final FileService fileService;
     final UserService userService;
+
+    String rsa_pub;
+    String rsa_private;
 
     public AccessServiceImpl(FileService fileService, UserService userService) {
         this.fileService = fileService;
@@ -36,29 +41,34 @@ public class AccessServiceImpl implements AccessService {
         tokenBO.setUsername(username);
         tokenBO.setPassword(password);
         tokenBO.setTimestamp(timestamp);
+        if (rsa_pub == null) {
+            rsa_pub = fileService.readFile("classpath:access/rsa_token.pub");
+        }
         try {
-            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(tokenBO),
-                    fileService.readFile("classpath:access/rsa_token.pub"));
+            token = SecurityUtils.rsaEncrypt(postMapper.writeValueAsString(tokenBO), rsa_pub);
         } catch (Exception e) {
             log.error("制作token失败");
         }
         return token;
     }
 
+    /**
+     * 检验token合法性
+     */
     public boolean tokenChecker(String token) {
         TokenBO tokenBO = tokenParser(token);
         if (tokenBO == null) {
             return false;
         }
-        return userService.checkUser(tokenBO.getUsername(), tokenBO.getPassword());
+        return true;
     }
 
     @Override
     public boolean tokenCheckerWithUsername(String token, String username) {
-        if (!tokenChecker(token)) {
+        TokenBO tokenBO = tokenParser(token);
+        if (tokenBO == null) {
             return false;
         }
-        TokenBO tokenBO = tokenParser(token);
         UserBO userBO = userService.findUserByName(tokenBO.getUsername());
         if (userBO == null) {
             log.error("token 含有非法用户，疑似密钥泄露！");
@@ -68,7 +78,7 @@ public class AccessServiceImpl implements AccessService {
             log.warn("Admin pass");
             return true;
         }
-        return Objects.equals(userBO.getName(), username);
+        return Objects.equals(tokenBO.getUsername(), username);
     }
 
 
@@ -76,7 +86,10 @@ public class AccessServiceImpl implements AccessService {
     public String tokenRenewer(String token) {
         if (tokenChecker(token)) {
             try {
-                String jsonStr = SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token"));
+                if (rsa_private == null) {
+                    rsa_private = fileService.readFile("classpath:access/rsa_token");
+                }
+                String jsonStr = SecurityUtils.rsaDecrypt(token, rsa_private);
                 ObjectMapper objectMapper = new ObjectMapper();
                 AccessCheckRequestDTO TokenBO = objectMapper.readValue(jsonStr, AccessCheckRequestDTO.class);
                 return tokenMaker(
@@ -93,14 +106,16 @@ public class AccessServiceImpl implements AccessService {
 
     @Override
     public TokenBO tokenParser(String token) {
-        if (token == null || "".equals(token)) {
+        if (token == null || "".equals(token.trim())) {
             return null;
         }
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.readValue(
-                    SecurityUtils.rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token")),
-                    TokenBO.class);
+            if (rsa_private == null) {
+                log.info("create");
+                rsa_private = fileService.readFile("classpath:access/rsa_token");
+            }
+            return objectMapper.readValue(SecurityUtils.rsaDecrypt(token, rsa_private), TokenBO.class);
         } catch (Exception e) {
             log.error("检测到非法token");
         }

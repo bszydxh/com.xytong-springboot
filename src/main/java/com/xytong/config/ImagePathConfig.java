@@ -4,6 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+/**
+ * @author bszydxh
+ * 图片映射config
+ */
 @Configuration
 public class ImagePathConfig implements WebMvcConfigurer {
     @Value("${file.image.path}")

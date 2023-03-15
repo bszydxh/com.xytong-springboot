@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.xytong.model.bo.LikeBO;
 import lombok.extern.slf4j.Slf4j;
 import org.intellij.lang.annotations.JdkConstants;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,9 +38,15 @@ public class LikeServiceTest {
         log.info("uid:" + uid);
         likeBO.setUid(uid);
         likeBO.setCid(cid);
-        likeBO.setTimestamp(System.currentTimeMillis());
         assertTrue(likeService.addLike(likeBO));
         assertTrue(likeService.deleteLike(likeBO));
+        assertFalse(likeService.deleteLike(likeBO));
+        assertTrue(likeService.addLike(likeBO));
+        assertFalse(likeService.addLike(likeBO));
+    }
 
+    @Test
+    void likeSaveTest() {
+        likeService.transLikedFromRedis2DB();
     }
 }

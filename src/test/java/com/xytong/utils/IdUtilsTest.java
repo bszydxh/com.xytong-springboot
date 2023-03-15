@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Slf4j
-public class CidUtilsTest {
+public class IdUtilsTest {
     @Test
     void isCidValidTest() {
-        assertTrue(CidUtils.isCidValid(FORUM_MODULE_NAME,1601129887294103553L));
+        assertTrue(IdUtils.isCidValid(FORUM_MODULE_NAME,1601129887294103553L));
     }
 }

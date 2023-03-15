@@ -7,5 +7,12 @@ public class LikeBO {
     String module;
     Long uid;
     Long cid;
-    Long timestamp;
+
+    public static LikeBO init(String module, Long cid, Long uid) {
+       LikeBO likeBO = new LikeBO();
+       likeBO.setUid(uid);
+       likeBO.setCid(cid);
+       likeBO.setModule(module);
+       return likeBO;
+    }
 }

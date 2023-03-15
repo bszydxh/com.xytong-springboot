@@ -57,7 +57,7 @@ public class ReServiceImpl extends ServiceImpl<ReMapper, RePO>
     }
 
     @Override
-    public Boolean addRe(ReBO reBO) {
+    public boolean addRe(ReBO reBO) {
         if (reBO == null) {
             return false;
         }
@@ -89,7 +89,7 @@ public class ReServiceImpl extends ServiceImpl<ReMapper, RePO>
     }
 
     @Override
-    public Boolean checkCid(Long cid) {
+    public boolean checkCid(Long cid) {
         QueryWrapper<RePO> rePOQueryWrapper = new QueryWrapper<>();
         rePOQueryWrapper.eq("id", cid);
         RePO rePO = getOne(rePOQueryWrapper);

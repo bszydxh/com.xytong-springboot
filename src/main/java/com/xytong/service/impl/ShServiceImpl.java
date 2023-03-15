@@ -6,7 +6,6 @@ import com.xytong.factory.PO2BOFactory;
 import com.xytong.model.bo.ShBO;
 import com.xytong.model.bo.UserBO;
 import com.xytong.model.po.ShPO;
-import com.xytong.model.po.ShPO;
 import com.xytong.mapper.ShMapper;
 import com.xytong.service.ShService;
 import com.xytong.service.UserService;
@@ -58,7 +57,7 @@ public class ShServiceImpl extends ServiceImpl<ShMapper, ShPO>
     }
 
     @Override
-    public Boolean addSh(ShBO shBO) {
+    public boolean addSh(ShBO shBO) {
         if (shBO == null) {
             return false;
         }
@@ -91,8 +90,9 @@ public class ShServiceImpl extends ServiceImpl<ShMapper, ShPO>
         return true;
     }
 
+
     @Override
-    public Boolean checkCid(Long cid) {
+    public boolean checkCid(Long cid) {
         QueryWrapper<ShPO> shPOQueryWrapper = new QueryWrapper<>();
         shPOQueryWrapper.eq("id", cid);
         ShPO shPO = getOne(shPOQueryWrapper);

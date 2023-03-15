@@ -9,7 +9,7 @@ import com.xytong.model.bo.UserBO;
 import com.xytong.model.po.CommentPO;
 import com.xytong.service.*;
 import com.xytong.utils.NameUtils;
-import com.xytong.utils.CidUtils;
+import com.xytong.utils.IdUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -72,7 +72,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
     }
 
     @Override
-    public Boolean addComment(CommentBO commentBO) {
+    public boolean addComment(CommentBO commentBO) {
         if (commentBO == null) {
             return false;
         }
@@ -85,7 +85,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
             String module = commentBO.getModule();
             Long uid = commentBO.getCid();
             String table_name = NameUtils.module2Table(module);
-            if (!CidUtils.isCidValid(module, uid)) {
+            if (!IdUtils.isCidValid(module, uid)) {
                 return false;
             }
             if (FORUM_MODULE_NAME.equals(module)) {
@@ -118,7 +118,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentPO>
     }
 
     @Override
-    public Boolean checkCid(Long cid) {
+    public boolean checkCid(Long cid) {
         QueryWrapper<CommentPO> commentPOQueryWrapper = new QueryWrapper<>();
         commentPOQueryWrapper.eq("id", cid);
         CommentPO commentPO = getOne(commentPOQueryWrapper);

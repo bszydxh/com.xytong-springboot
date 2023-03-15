@@ -32,11 +32,11 @@ public interface ForumService extends IService<ForumPO> {
     @NotNull
     List<ForumBO> getForumList(String mode, Long timestamp, int start, int end);
 
-    Boolean addForum(ForumBO forumBO);
+    boolean addForum(ForumBO forumBO);
 
-    Boolean checkCid(Long cid);
+    boolean checkCid(Long cid);
 
-    Boolean changeLike(Long uid,LikeChanger likeChanger);
+    boolean changeLike(Long uid, LikeChanger likeChanger);
 
-    Boolean changeComment(Long uid, CommentChanger commentChanger);
+    boolean changeComment(Long uid, CommentChanger commentChanger);
 }

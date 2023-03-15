@@ -12,7 +12,7 @@ import static com.xytong.controller.ReController.RE_MODULE_NAME;
 import static com.xytong.controller.ShController.SH_MODULE_NAME;
 
 @Slf4j
-public class CidUtils {
+public class IdUtils {
     public static Boolean isCidValid(String module, Long cid) {
         if (module == null || "".equals(module.trim())) {
             log.warn("module null");
@@ -51,4 +51,6 @@ public class CidUtils {
         log.error("not a valid table or cid");
         return false;
     }
+
+
 }

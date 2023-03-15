@@ -14,7 +14,7 @@ import java.util.List;
 public interface ShService extends IService<ShPO> {
     List<ShBO> getShList(String mode, Long timestamp, int start, int end);
 
-    Boolean addSh(ShBO shBO);
+    boolean addSh(ShBO shBO);
 
-    Boolean checkCid(Long cid);
+    boolean checkCid(Long cid);
 }

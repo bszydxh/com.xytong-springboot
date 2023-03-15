@@ -15,7 +15,7 @@ public interface ReService extends IService<RePO> {
 
     List<ReBO> getReList(String mode, Long timestamp, int start, int end);
 
-    Boolean addRe(ReBO reBO);
+    boolean addRe(ReBO reBO);
 
-    Boolean checkCid(Long cid);
+    boolean checkCid(Long cid);
 }

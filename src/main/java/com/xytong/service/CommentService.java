@@ -17,8 +17,8 @@ public interface CommentService extends IService<CommentPO> {
     @NotNull
     List<CommentBO> getCommentList(Long cid, String module, String mode, Long timestamp, int start, int end);
 
-    Boolean addComment(CommentBO commentBO);
+    boolean addComment(CommentBO commentBO);
 
-    Boolean checkCid(Long cid);
+    boolean checkCid(Long cid);
 
 }

@@ -45,7 +45,7 @@ public class AccessServiceTest {
         String token = accessService.tokenMaker(userNameTest, pwdTest, System.currentTimeMillis());
         log.info(token);
         assertTrue(accessService.tokenChecker(token));
-        String token_illegal = accessService.tokenMaker(userNameTest + "_illegal", pwdTest, System.currentTimeMillis());
+        String token_illegal = accessService.tokenMaker(userNameTest + "_illegal", pwdTest, System.currentTimeMillis());//这是假设用户拿到了服务器公钥？
         log.info(token_illegal);
         assertFalse(accessService.tokenChecker(token_illegal));
     }
