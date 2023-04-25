@@ -27,9 +27,10 @@ public class CommentBO extends BbsBO implements Serializable {
     }
 
     @Override
-    @Deprecated
     @JsonIgnore
+    @Deprecated
     public void setTitle(String title) {
+        //防止外部调用
     }
 
     public Integer getFloor() {

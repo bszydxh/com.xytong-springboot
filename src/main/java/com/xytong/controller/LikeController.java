@@ -48,9 +48,8 @@ public class LikeController {
             return likeAddResponseDTO;
         }
         if (NameUtils.module2Table(likeAddRequestDTO.getModule()) == null) {
-            if(!likeAddRequestDTO.getModule().equals(COMMENT_MODULE_NAME)&&
-                    !likeAddRequestDTO.getModule().equals(FORUM_MODULE_NAME))
-            {
+            if (!(likeAddRequestDTO.getModule().equals(COMMENT_MODULE_NAME) ||
+                    likeAddRequestDTO.getModule().equals(FORUM_MODULE_NAME))) {
                 likeAddResponseDTO.setMsg("module error");
                 return likeAddResponseDTO;
             }
@@ -67,9 +66,10 @@ public class LikeController {
         }
         return likeAddResponseDTO;
     }
+
     @RequestMapping(value = "/" + LIKE_MODULE_NAME + "/v1/delete", produces = "application/json")
     @ResponseBody
-    public LikeDeleteResponseDTO addLike(@RequestBody LikeDeleteRequestDTO likeDeleteRequestDTO) {
+    public LikeDeleteResponseDTO deleteLike(@RequestBody LikeDeleteRequestDTO likeDeleteRequestDTO) {
         LikeDeleteResponseDTO likeDeleteResponseDTO = new LikeDeleteResponseDTO();
         likeDeleteResponseDTO.setTimestamp(System.currentTimeMillis());
         if (!accessService.tokenCheckerWithUsername(likeDeleteRequestDTO.getToken(), likeDeleteRequestDTO.getUsername())) {
@@ -81,9 +81,8 @@ public class LikeController {
             return likeDeleteResponseDTO;
         }
         if (NameUtils.module2Table(likeDeleteRequestDTO.getModule()) == null) {
-            if(!likeDeleteRequestDTO.getModule().equals(COMMENT_MODULE_NAME)&&
-                    !likeDeleteRequestDTO.getModule().equals(FORUM_MODULE_NAME))
-            {
+            if (!likeDeleteRequestDTO.getModule().equals(COMMENT_MODULE_NAME) &&
+                    !likeDeleteRequestDTO.getModule().equals(FORUM_MODULE_NAME)) {
                 likeDeleteResponseDTO.setMsg("module error");
                 return likeDeleteResponseDTO;
             }
@@ -93,11 +92,11 @@ public class LikeController {
         likeBO.setModule(likeDeleteRequestDTO.getModule());
         likeBO.setUid(userService.findUserByName(likeDeleteRequestDTO.getUsername()).getId());
         likeBO.setCid(Long.valueOf(likeDeleteRequestDTO.getCid()));
-//        if (likeService.deleteLike(likeBO)) {
-//            likeDeleteResponseDTO.setMsg("delete ok");
-//        } else {
-//            likeDeleteResponseDTO.setMsg("delete error");
-//        }
+        if (likeService.deleteLike(likeBO)) {
+            likeDeleteResponseDTO.setMsg("delete ok");
+        } else {
+            likeDeleteResponseDTO.setMsg("delete error");
+        }
         return likeDeleteResponseDTO;
     }
 }

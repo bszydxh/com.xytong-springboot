@@ -13,6 +13,10 @@ import static com.xytong.controller.ShController.SH_MODULE_NAME;
 
 @Slf4j
 public class IdUtils {
+    private IdUtils()
+    {
+        throw new UnsupportedOperationException();
+    }
     public static Boolean isCidValid(String module, Long cid) {
         if (module == null || "".equals(module.trim())) {
             log.warn("module null");
@@ -46,6 +50,8 @@ public class IdUtils {
                 if (commentService.checkCid(cid)) {
                     return true;
                 }
+                break;
+            default:
                 break;
         }
         log.error("not a valid table or cid");

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
-public class AccessServiceTest {
+class AccessServiceTest {
     @Autowired
     AccessService accessService;
     @Autowired
@@ -29,7 +29,7 @@ public class AccessServiceTest {
 
 
     @Test
-    public void tokenMakerTest() throws Exception {
+    void tokenMakerTest() throws Exception {
         String token = accessService.tokenMaker(userNameTest, pwdTest, System.currentTimeMillis());
         log.info(token);
         String json = rsaDecrypt(token, fileService.readFile("classpath:access/rsa_token"));
@@ -41,7 +41,7 @@ public class AccessServiceTest {
     }
 
     @Test
-    public void tokenCheckerTest() {
+    void tokenCheckerTest() {
         String token = accessService.tokenMaker(userNameTest, pwdTest, System.currentTimeMillis());
         log.info(token);
         assertTrue(accessService.tokenChecker(token));
@@ -51,7 +51,7 @@ public class AccessServiceTest {
     }
 
     @Test
-    public void tokenCheckWithUserNameTest() {
+    void tokenCheckWithUserNameTest() {
         String token = accessService.tokenMaker(userNameTest, pwdTest, System.currentTimeMillis());
         log.info(token);
         assertTrue(accessService.tokenCheckerWithUsername(token, userNameTest));
@@ -65,7 +65,7 @@ public class AccessServiceTest {
     }
 
     @Test
-    public void tokenRenewerTest() throws Exception {
+    void tokenRenewerTest() throws Exception {
         String oldToken = accessService.tokenMaker(userNameTest, pwdTest,
                 System.currentTimeMillis());
         log.info("oldToken:" + oldToken);
@@ -83,7 +83,7 @@ public class AccessServiceTest {
     }
 
     @Test
-    public void tokenParserTest() {
+    void tokenParserTest() {
         String oldToken = accessService.tokenMaker(userNameTest, pwdTest,
                 System.currentTimeMillis());
         assertEquals(userNameTest, accessService.tokenParser(oldToken).getUsername());

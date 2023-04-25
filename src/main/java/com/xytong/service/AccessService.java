@@ -6,6 +6,11 @@ import com.xytong.model.bo.TokenBO;
  * @author bszydxh
  */
 
+/**
+ * TODO 重构计划
+ * RSA成为性能瓶颈
+ * 加入缓存机制
+ */
 public interface AccessService {
     /**
      * token生成器接口

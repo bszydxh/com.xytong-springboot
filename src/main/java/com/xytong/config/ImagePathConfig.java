@@ -19,6 +19,9 @@ public class ImagePathConfig implements WebMvcConfigurer {
     @Value("${file.image.path.relative}")
     private String fileRelativePath;
 
+    /**
+     * 注意仅能上传固定大小的文件
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(fileRelativePath).
